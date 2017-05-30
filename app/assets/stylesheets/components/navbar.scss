@@ -1,0 +1,20 @@
+nav.nav {
+  height: 100px;
+  padding: 20px;
+}
+
+nav.nav a {
+  color: white!important;
+}
+
+.navbar-nav li.active a{
+  background-color: transparent!important;
+}
+
+.navbar-default {
+  background-color: transparent;
+}
+
+.navbar__link.active {
+  border-bottom: 1px solid white;
+}

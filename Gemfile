@@ -17,7 +17,6 @@ gem 'jbuilder', '~> 2.5'
 # Installed Gems
 
 gem 'bootstrap-sass', '~> 3.3.6'
-gem 'slim'
 gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
 
 # -- END --
