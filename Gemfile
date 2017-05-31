@@ -18,6 +18,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
+gem 'figaro'
+gem 'facebook-messenger'
 
 # -- END --
 
@@ -25,6 +27,11 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+
+  # Installed Gems
+  
+
+  # -- END --
 end
 
 group :development do
