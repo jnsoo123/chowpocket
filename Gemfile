@@ -30,6 +30,7 @@ group :development, :test do
   # Installed Gems
   
   gem 'figaro'
+  gem 'pry-rails'
 
   # -- END --
 end
