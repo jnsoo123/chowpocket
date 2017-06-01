@@ -2,6 +2,13 @@ require 'facebook/messenger'
 
 include Facebook::Messenger
 
+def set_user(id)
+  ChatbotUser.where(facebook_id: id).first_or_create do |user|
+    user.facebook_id = id
+    user.state = 'REGISTRATION_1'
+  end
+end
+
 Facebook::Messenger::Profile.set({
   get_started: {
     payload: 'GET_STARTED_PAYLOAD'
@@ -38,6 +45,8 @@ Facebook::Messenger::Profile.set({
 
 Bot.on :message do |msg|
   fb_id = msg.sender['id']
+
+  @user = set_user(fb_id)
 
   @user = ChatbotUser.where(facebook_id: fb_id).first_or_create do |user|
     user.facebook_id = fb_id
@@ -87,11 +96,7 @@ end
 
 Bot.on :postback do |postback|
   fb_id = postback.sender['id']
-  @user = ChatbotUser.where(facebook_id: fb_id).first_or_create do |user|
-    user.facebook_id = fb_id
-    user.state = 'REGISTRATION_1'
-  end
-
+  @user = set_user fb_id
   case postback.payload
   when 'GET_STARTED_PAYLOAD'
     text = 'We are almost ready to launch! Enter your details below to be one of the first ones in! Sign up now! Please enter your name.'
