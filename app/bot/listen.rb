@@ -44,78 +44,139 @@ Facebook::Messenger::Profile.set({
 }, access_token: ENV['ACCESS_TOKEN'])
 
 Bot.on :message do |msg|
+  puts msg.as_json
   fb_id = msg.sender['id']
 
   @user = set_user(fb_id)
 
-  @user = ChatbotUser.where(facebook_id: fb_id).first_or_create do |user|
-    user.facebook_id = fb_id
-    user.state = 'REGISTRATION_1'
-  end
+  text = []
+  options = {}
 
   case @user.state
   when 'REGISTRATION_1'
-    msg.reply(
-      text: 'We are almost ready to launch! Enter your details below to be one of the first ones in! Sign up now! Please enter your name.',
-    )
+    text.push 'We are almost ready to launch! Enter your details below to be one of the first ones in! Sign up now!'
+    text.push 'Please enter your name.'
     @user.update state: 'REGISTRATION_2'
   when 'REGISTRATION_2'
-    msg.reply(
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'button',
-          text: "Is your name '#{msg.text}'?",
-          buttons: [
-            { type: 'postback', title: 'Yes', payload: 'REGISTRATION_2_YES'},
-            { type: 'postback', title: 'No', payload: 'REGISTRATION_2_NO' }
-          ]
-        }
+    options[:attachment] = {
+      type: 'template',
+      payload: {
+        template_type: 'button',
+        text: "Is your name '#{msg.text}'?",
+        buttons: [
+          { type: 'postback', title: 'Yes', payload: 'REGISTRATION_2_YES'},
+          { type: 'postback', title: 'No', payload: 'REGISTRATION_2_NO' }
+        ]
       }
-    )
+    }
     @user.update name: msg.text
   when 'REGISTRATION_3'
-    msg.reply(
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'button',
-          text: "Is your contact number '#{msg.text}'?",
-          buttons: [
-            { type: 'postback', title: 'Yes', payload: 'REGISTRATION_3_YES'},
-            { type: 'postback', title: 'No', payload: 'REGISTRATION_3_NO' }
-          ]
-        }
+    options[:attachment] = {
+      type: 'template',
+      payload: {
+        template_type: 'button',
+        text: "Is your contact number '#{msg.text}'?",
+        buttons: [
+          { type: 'postback', title: 'Yes', payload: 'REGISTRATION_3_YES'},
+          { type: 'postback', title: 'No', payload: 'REGISTRATION_3_NO' }
+        ]
       }
-    )
+    }
     @user.update contact_number: msg.text
+  when 'REGISTRATION_DONE'
+    if msg.quick_reply.present?
+      case msg.quick_reply
+      when 'ORDER_BREAKFAST'
+        text.push 'Put breakfast menu here'
+      when 'ORDER_LUNCH'
+        text.push 'Put lunch menu here'
+      when 'ORDER_DESSERT'
+        text.push 'Put dessert menu here'
+      when 'ORDER_BEVERAGES'
+        text.push 'Put beverages menu here'
+      end
+    else
+      options = {
+        text: 'What would you like to order?',
+        quick_replies: [
+          {content_type: 'text', title: 'Breakfast', payload: 'ORDER_BREAKFAST'},
+          {content_type: 'text', title: 'Lunch/Dinner', payload: 'ORDER_LUNCH'},
+          {content_type: 'text', title: 'Dessert', payload: 'ORDER_DESSERT'},
+          {content_type: 'text', title: 'Beverages', payload: 'ORDER_BEVERAGES'}
+        ]
+      }
+    end
   else
-    msg.reply(text: 'Hello there!')
+    options = {
+      text: 'What would you like to order?',
+      quick_replies: [
+        {content_type: 'text', title: 'Breakfast', payload: 'ORDER_BREAKFAST'},
+        {content_type: 'text', title: 'Lunch/Dinner', payload: 'ORDER_LUNCH'},
+        {content_type: 'text', title: 'Dessert', payload: 'ORDER_DESSERT'},
+        {content_type: 'text', title: 'Beverages', payload: 'ORDER_BEVERAGES'}
+      ]
+    }
   end
+
+  text.map do |t|
+    msg.reply(text: t)
+  end
+
+  msg.reply(options) if options.present?
 end
 
 Bot.on :postback do |postback|
+  puts postback.as_json
+
   fb_id = postback.sender['id']
   @user = set_user fb_id
+
+  text = []
+  options = {}
+  
   case postback.payload
   when 'GET_STARTED_PAYLOAD'
-    text = 'We are almost ready to launch! Enter your details below to be one of the first ones in! Sign up now! Please enter your name.'
+    text.push 'We are almost ready to launch! Enter your details below to be one of the first ones in! Sign up now!'
+    text.push 'Please enter your name.'
+    @user.update state: 'REGISTRATION_2'
   when 'REGISTRATION_2_YES'
-    text = 'Please enter your contact info.'
+    text.push 'Please enter your contact info.'
     @user.update state: 'REGISTRATION_3'
   when 'REGISTRATION_2_NO'
-    text = 'Please enter your name.'
+    text.push 'Please enter your name.'
   when 'REGISTRATION_3_YES'
-    text = 'Congratulations! You have successfully registered on our store.'
+    text.push 'Congratulations! You have successfully registered on our store.'
+    text.push 'You are ready to order.'
+    options = {
+      text: 'What would you like to order?',
+      quick_replies: [
+        {content_type: 'text', title: 'Breakfast', payload: 'ORDER_BREAKFAST'},
+        {content_type: 'text', title: 'Lunch/Dinner', payload: 'ORDER_LUNCH'},
+        {content_type: 'text', title: 'Dessert', payload: 'ORDER_DESSERT'},
+        {content_type: 'text', title: 'Beverages', payload: 'ORDER_BEVERAGES'}
+      ]
+    }
     @user.update state: 'REGISTRATION_DONE'
   when 'REGISTRATION_3_NO'
-    text = 'Please enter your contact info.'
+    text.push 'Please enter your contact info.'
   when 'RESET_ACCOUNT'
     @user.update name: nil, contact_number: nil, state: 'REGISTRATION_2'
-    text = 'Please enter your name.'
+    text.push 'Please enter your name.'
   else
-    text = 'Hello There!'
+    options = {
+      text: 'What would you like to order?',
+      quick_replies: [
+        {content_type: 'text', title: 'Breakfast', payload: 'ORDER_BREAKFAST'},
+        {content_type: 'text', title: 'Lunch/Dinner', payload: 'ORDER_LUNCH'},
+        {content_type: 'text', title: 'Dessert', payload: 'ORDER_DESSERT'},
+        {content_type: 'text', title: 'Beverages', payload: 'ORDER_BEVERAGES'}
+      ]
+    }
   end
 
-  postback.reply(text: text)
+  text.map do |t|
+    postback.reply(text: t)
+  end
+
+  postback.reply(options) if options.present?
 end
