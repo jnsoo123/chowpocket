@@ -86,23 +86,17 @@ Bot.on :message do |msg|
   when 'REGISTRATION_DONE'
     if msg.quick_reply.present?
       case msg.quick_reply
-      when 'ORDER_BREAKFAST'
-        text.push 'Put breakfast menu here'
-      when 'ORDER_LUNCH'
-        text.push 'Put lunch menu here'
-      when 'ORDER_DESSERT'
-        text.push 'Put dessert menu here'
-      when 'ORDER_BEVERAGES'
-        text.push 'Put beverages menu here'
+      when 'ORDER_HEAVY'
+        text.push 'Put heavy menu here'
+      when 'ORDER_LIGHT'
+        text.push 'Put light menu here'
       end
     else
       options = {
         text: 'What would you like to order?',
         quick_replies: [
-          {content_type: 'text', title: 'Breakfast', payload: 'ORDER_BREAKFAST'},
-          {content_type: 'text', title: 'Lunch/Dinner', payload: 'ORDER_LUNCH'},
-          {content_type: 'text', title: 'Dessert', payload: 'ORDER_DESSERT'},
-          {content_type: 'text', title: 'Beverages', payload: 'ORDER_BEVERAGES'}
+          {content_type: 'text', title: 'Heavy Meal', payload: 'ORDER_HEAVY'},
+          {content_type: 'text', title: 'Light Diet', payload: 'ORDER_LIGHT'},
         ]
       }
     end
@@ -110,10 +104,8 @@ Bot.on :message do |msg|
     options = {
       text: 'What would you like to order?',
       quick_replies: [
-        {content_type: 'text', title: 'Breakfast', payload: 'ORDER_BREAKFAST'},
-        {content_type: 'text', title: 'Lunch/Dinner', payload: 'ORDER_LUNCH'},
-        {content_type: 'text', title: 'Dessert', payload: 'ORDER_DESSERT'},
-        {content_type: 'text', title: 'Beverages', payload: 'ORDER_BEVERAGES'}
+        {content_type: 'text', title: 'Heavy Meal', payload: 'ORDER_HEAVY'},
+        {content_type: 'text', title: 'Light Diet', payload: 'ORDER_LIGHT'},
       ]
     }
   end
@@ -150,10 +142,8 @@ Bot.on :postback do |postback|
     options = {
       text: 'What would you like to order?',
       quick_replies: [
-        {content_type: 'text', title: 'Breakfast', payload: 'ORDER_BREAKFAST'},
-        {content_type: 'text', title: 'Lunch/Dinner', payload: 'ORDER_LUNCH'},
-        {content_type: 'text', title: 'Dessert', payload: 'ORDER_DESSERT'},
-        {content_type: 'text', title: 'Beverages', payload: 'ORDER_BEVERAGES'}
+        {content_type: 'text', title: 'Heavy Meal', payload: 'ORDER_HEAVY'},
+        {content_type: 'text', title: 'Light Diet', payload: 'ORDER_LIGHT'},
       ]
     }
     @user.update state: 'REGISTRATION_DONE'
@@ -166,10 +156,8 @@ Bot.on :postback do |postback|
     options = {
       text: 'What would you like to order?',
       quick_replies: [
-        {content_type: 'text', title: 'Breakfast', payload: 'ORDER_BREAKFAST'},
-        {content_type: 'text', title: 'Lunch/Dinner', payload: 'ORDER_LUNCH'},
-        {content_type: 'text', title: 'Dessert', payload: 'ORDER_DESSERT'},
-        {content_type: 'text', title: 'Beverages', payload: 'ORDER_BEVERAGES'}
+        {content_type: 'text', title: 'Heavy Meal', payload: 'ORDER_HEAVY'},
+        {content_type: 'text', title: 'Light Diet', payload: 'ORDER_LIGHT'},
       ]
     }
   end
