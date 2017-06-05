@@ -20,6 +20,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
 gem 'facebook-messenger'
 gem 'devise'
+gem 'activeadmin', github: 'activeadmin'
+gem 'arctic_admin'
 
 # -- END --
 
