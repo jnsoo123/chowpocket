@@ -1,0 +1,17 @@
+.menu
+  - @menus.each do |menu|
+    .panel.panel-default
+      .panel-body
+        h3.clearfix
+          span.pull-left= menu.name
+          span.pull-right= "₱#{menu.price}"
+        br
+        .pic-here style='height: 300px; background-color: #eee'
+          | pic here
+      .panel-footer
+        .clearfix
+          .pull-left
+            p
+              | Order Counter: 2
+          .pull-right
+            a.btn.btn-success href='#' Order Now

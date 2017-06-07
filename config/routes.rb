@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
+  get '/:name' => 'buildings#show', as: :building_path
+
   devise_for :users
-  mount Facebook::Messenger::Server, at: 'bot'
-  root to: 'home#index'
+  root to: redirect('/JPMorgan')
 end
