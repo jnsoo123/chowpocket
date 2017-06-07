@@ -22,6 +22,8 @@ gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
 gem 'arctic_admin'
 gem 'slim'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 
 # -- END --
 

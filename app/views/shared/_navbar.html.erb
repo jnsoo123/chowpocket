@@ -19,6 +19,10 @@
       <%= link_to 'Admininstrator', admin_root_path %>
       </li>
     <% end %>
+    <li class='navbar__link'>
+
+    <%= link_to "Hi, #{current_user.name.titleize}", nil, disabled: true %>
+    </li>
       <li class="navbar__link">
       <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
       </li>
