@@ -1,0 +1,16 @@
+items = '';
+ <% @cart.line_items.each do |item| %>
+    items += '<tr>';
+    items += '<td>';
+    items += '<%= item.menu.name %>';
+    items += '</td>';
+    items += '<td>';
+    items += '<%= item.quantity %>';
+    items += '</td>';
+    items += '<td>';
+    items += '<%= item.menu.price * item.quantity %>';
+    items += '</td>'
+    items += '</tr>'
+<% end %>
+$('.cart-items').html(items)
+alert('Your cart has been updated.')

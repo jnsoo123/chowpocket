@@ -23,6 +23,9 @@
 
     <%= link_to "Hi, #{current_user.name.titleize}", nil, disabled: true %>
     </li>
+    <li class='navbar__link'>
+      <a href='#cart-modal' type='button' data-toggle='modal' data-target='#cart-modal'>View Cart</a>
+    </li>
       <li class="navbar__link">
       <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
       </li>
