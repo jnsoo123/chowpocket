@@ -12,4 +12,12 @@ class Cart < ApplicationRecord
     end
     current_item
   end 
+
+  def total_price
+    price = line_items.map do |item|
+      item.menu.price * item.quantity
+    end.sum
+
+    "P#{price}"
+  end
 end

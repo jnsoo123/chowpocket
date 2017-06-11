@@ -1,0 +1,5 @@
+- flash.each do |key, content|
+  - unless key == 'timedout'
+    .alert.alert-dismissable class="alert-#{key == 'notice' ? 'success' : 'warning'}"
+      btn.close data-dismiss='alert' type='button' &times;
+      .flash class="flash--#{key}" #{content} 
