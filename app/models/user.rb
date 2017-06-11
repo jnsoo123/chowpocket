@@ -5,7 +5,11 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :trackable, :validatable,
     :omniauthable, :omniauth_providers => [:google_oauth2]
 
-  has_one :cart
+  has_many :carts
+
+  def current_cart
+    carts.unordered.last
+  end
 
   def is_admin?
     role == 'admin'

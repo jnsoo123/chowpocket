@@ -7,10 +7,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_cart
-    @cart = if current_user.cart
-              current_user.cart
-            else
-              Cart.create user: current_user
-            end
+    if user_signed_in?
+      @cart = current_user.current_cart.presence || Cart.create(user: current_user)
+    end
   end
 end

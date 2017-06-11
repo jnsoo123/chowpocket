@@ -14,11 +14,12 @@
               th Quantity
               th Price
           tbody.cart-items
-            - @cart.line_items.each do |item|
-              tr
-                td= item.menu.name
-                td= item.quantity
-                td= item.menu.price * item.quantity
+            - if @cart.present?
+              - @cart.line_items.each do |item|
+                tr
+                  td= item.menu.name
+                  td= item.quantity
+                  td= item.menu.price * item.quantity
       .modal-footer
         button.btn.btn-default data-dismiss='modal'
           | Continue Shopping

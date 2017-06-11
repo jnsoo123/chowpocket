@@ -1,6 +1,7 @@
 class Cart < ApplicationRecord
   belongs_to :user
   has_many :line_items, dependent: :destroy
+  scope :unordered, -> { where(is_ordered: false) }
 
   def add_menu(menu)
     current_item = line_items.find_by_menu_id(menu)
