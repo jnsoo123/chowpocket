@@ -5,7 +5,7 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :trackable, :validatable,
     :omniauthable, :omniauth_providers => [:google_oauth2]
 
-  has_many :carts
+  has_many :carts, dependent: :delete_all
 
   def current_cart
     carts.unordered.last
