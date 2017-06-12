@@ -12,6 +12,6 @@
         .clearfix
           .pull-left
             p
-              | Order Counter: 2
+              = "Order Counter: #{Order.includes(cart: :line_items).where(cart: {line_items: {menu_id: menu.id}}).count}"
           .pull-right
-            a.btn.btn-success href='#' Order Now
+            = link_to 'Order Now', line_items_path(id: menu.id), class: 'btn btn-success', method: :post, remote: true
