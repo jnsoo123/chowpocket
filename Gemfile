@@ -24,7 +24,6 @@ gem 'arctic_admin'
 gem 'slim'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
-gem 'sweet-alert'
 
 # -- END --
 
