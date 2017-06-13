@@ -6,9 +6,49 @@ class Page extends Component{
     super()
   }
 
+  renderMenus(){
+    var renderedMenus = this.props.menus.map((menu, i) => {
+      return(<div key={i} className='building-show-page__menu-item'>
+        <div className='panel panel-default'>
+          <div className='panel-body'>
+            <h3 className='clearfix'>
+              <span className='pull-left'>
+                {menu.name}
+              </span>
+              <span className='pull-right'>
+                {'P'+menu.price}
+              </span>
+            </h3>
+            <br />
+            <div className='building-show-page__menu-item-picture'>
+              pic here
+            </div>
+          </div>
+          <div className='panel-footer'>
+            <div className='clearfix'>
+              <div className='pull-left'>
+                <p>
+                  Order Counter: {menu.count}
+                </p>
+              </div>
+              <div className='pull-right'>
+                <a href='#' className='btn btn-success'>
+                  Order Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>) 
+    })
+
+    return renderedMenus
+  }
+
   render(){
+    console.log(this.props.menus)
     return(<div className='building-show-page__main'>
-      <p>Test hello</p> 
+      {this.renderMenus()}
     </div>)
   }
 }
@@ -19,7 +59,7 @@ const main = {
     if (rootElem) {
       ReactDOM.render(
         <Page
-          
+          menus={jQuery.parseJSON(rootElem.dataset['menus'])}
         />, rootElem
       )
     }

@@ -1,19 +1,19 @@
-.building-show-page
+.building-show-page data-menus='#{@menus.to_json}'
 
-.menu
-  - @menus.each do |menu|
-    .panel.panel-default
-      .panel-body
-        h3.clearfix
-          span.pull-left= menu.name
-          span.pull-right= "₱#{menu.price}"
-        br
-        .pic-here style='height: 300px; background-color: #eee'
-          | pic here
-      .panel-footer
-        .clearfix
-          .pull-left
-            p
-              = "Order Counter: #{Order.includes(cart: :line_items).where(cart: {line_items: {menu_id: menu.id}}).count}"
-          .pull-right
-            = link_to 'Order Now', line_items_path(id: menu.id), class: 'btn btn-success', method: :post, remote: true
+/.menu
+/  - @menus.each do |menu|
+/    .panel.panel-default
+/      .panel-body
+/        h3.clearfix
+/          span.pull-left= menu.name
+/          span.pull-right= "₱#{menu.price}"
+/        br
+/        .pic-here style='height: 300px; background-color: #eee'
+/          | pic here
+/      .panel-footer
+/        .clearfix
+/          .pull-left
+/            p
+/              = "Order Counter: #{Order.includes(cart: :line_items).where(cart: {line_items: {menu_id: menu.id}}).count}"
+/          .pull-right
+/            = link_to 'Order Now', line_items_path(id: menu.id), class: 'btn btn-success', method: :post, remote: true
