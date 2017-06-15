@@ -13,6 +13,13 @@ class ApplicationController < ActionController::Base
   def set_cart
     if user_signed_in?
       @cart = current_user.current_cart.presence || Cart.create(user: current_user)
+      @line_items = @cart.line_items.includes(:menu).collect do |item|
+        {
+          menu: item.menu.name,
+          quantity: item.quantity,
+          price: item.menu.price
+        } 
+      end.to_json
     end
   end
 

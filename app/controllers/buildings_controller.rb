@@ -8,6 +8,7 @@ class BuildingsController < ApplicationController
     menu_order_count = Order.joins(cart: :line_items).group('line_items.menu_id').count
     @menus = Menu.all.collect do |menu|
       { 
+        id:   menu.id,
         name: menu.name, 
         price: menu.price, 
         count: menu_order_count[menu.id] || 0

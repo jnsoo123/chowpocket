@@ -1,4 +1,4 @@
-.building-show-page data-menus='#{@menus.to_json}'
+.building-show-page data-menus='#{@menus.to_json}' data-cart='#{@line_items.presence}' data-total-price='#{@cart.try(:total_price)}'
 
 /.menu
 /  - @menus.each do |menu|
