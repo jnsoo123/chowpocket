@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
-  resources :line_items, only: :create
+  resources :line_items, only: [:create, :update]
   resources :orders, only: :create
+  resources :checkouts, only: :index
 
   get '/:name' => 'buildings#show', as: :building_path
 

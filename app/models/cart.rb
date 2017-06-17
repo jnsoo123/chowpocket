@@ -2,6 +2,7 @@ class Cart < ApplicationRecord
   belongs_to :user
   has_many :line_items, dependent: :destroy
   has_many :orders, dependent: :destroy
+
   scope :unordered, -> { where(is_ordered: false) }
 
   def add_menu(menu)

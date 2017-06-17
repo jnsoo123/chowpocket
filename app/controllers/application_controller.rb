@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
       @cart = current_user.current_cart.presence || Cart.create(user: current_user)
       @line_items = @cart.line_items.includes(:menu).collect do |item|
         {
+          id: item.id,
           menu: item.menu.name,
           quantity: item.quantity,
           price: item.menu.price

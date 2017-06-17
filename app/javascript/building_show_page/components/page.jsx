@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import SweetAlert from 'sweetalert-react'
+import update from 'immutability-helper'
 
 class Page extends Component{
   constructor(props){
@@ -33,12 +34,52 @@ class Page extends Component{
     })
   }
 
+  updateQuantity(item, type, e){
+    e.preventDefault()
+
+    let items = this.state.cart
+    let index = items.indexOf(item)
+    let newQuantity
+    let updatedItem
+
+    switch(type) {
+      case 'add':
+        newQuantity = item.quantity + 1
+        break;
+      case 'minus':
+        newQuantity = item.quantity - 1
+        break;
+    }
+
+    $.ajax({
+      url: `/line_items/${item.id}`,
+      method: 'PATCH',
+      data: { 
+        line_items: { 
+          quantity: newQuantity 
+        } 
+      },
+      success: (response) => {
+        this.setState({
+          cart: response.items,
+          totalPrice: response.total_price
+        }) 
+      }
+    })
+  }
+
   renderCartItems(){
     let views = this.state.cart.map((item, i) => {
       return(<tr key={i}>
         <td>{item.menu}</td>
         <td>{item.quantity}</td>
-        <td>{item.price}</td>
+        <td>
+          <div className='btn-group'>
+            <button onClick={this.updateQuantity.bind(this, item, 'add')} className='btn btn-xs btn-success'>+ Add</button>
+            { item.quantity > 0 ? <button onClick={this.updateQuantity.bind(this, item, 'minus')} className='btn btn-xs btn-danger'>- Minus</button> : '' }
+          </div>
+        </td>
+        <td>P{item.price * item.quantity}</td>
       </tr>) 
     })
 
@@ -54,16 +95,17 @@ class Page extends Component{
               <tr>
                 <th>Name</th>
                 <th>Quantity</th>
+                <th></th>
                 <th>Price</th>
               </tr>
             </thead>
             <tbody className='cart-items'>
               {this.renderCartItems()}
               <tr>
-                <td colSpan='3'></td>
+                <td colSpan='4' style={{borderBottom: '1px solid black'}}></td>
               </tr>
               <tr>
-                <td colSpan='2'>Total Price</td>
+                <td colSpan='3'>Total Price</td>
                 <td>{this.state.totalPrice}</td>
               </tr>
             </tbody>
@@ -73,14 +115,16 @@ class Page extends Component{
           <button className='btn btn-default' data-dismiss='modal'>
             Continue Shopping
           </button>
-          <a href='#' className='btn btn-primary'>
+          <a href='/checkouts' className='btn btn-primary'>
             Contine to Checkout Page
           </a>
         </div>
       </div>)
     } else {
-      return(<div> 
-        Please order first.
+      return(<div className='modal-body'> 
+        <h3 className='text-center'>
+          Please order first.
+        </h3>
       </div>)
     }
   }
@@ -173,6 +217,7 @@ const main = {
         <Page
           menus={rootElem.data('menus')}
           cart={rootElem.data('cart')}
+          cartId={rootElem.data('cart-id')}
           totalPrice={rootElem.data('total-price')}
         />, rootElem[0]
       )
