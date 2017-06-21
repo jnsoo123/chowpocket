@@ -10,7 +10,11 @@ class LineItemsController < ApplicationController
 
   def update
     line_item = @cart.line_items.find(params[:id])    
-    line_item.update line_items_params
+    if line_items_params[:quantity].to_i.zero?
+      line_item.destroy
+    else
+      line_item.update line_items_params
+    end
 
     render json: { items: line_items, total_price: @cart.total_price } 
   end
