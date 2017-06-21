@@ -25,6 +25,7 @@ gem 'slim'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'foreman'
+gem 'font-awesome-sass'
 
 # -- END --
 
