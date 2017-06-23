@@ -6,6 +6,7 @@ class User < ApplicationRecord
     :omniauthable, :omniauth_providers => [:google_oauth2]
 
   has_many :carts, dependent: :delete_all
+  has_many :orders, through: :carts
 
   def current_cart
     carts.unordered.last

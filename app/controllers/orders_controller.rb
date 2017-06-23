@@ -6,4 +6,14 @@ class OrdersController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def index
+    @orders = current_user.orders
+  end
+
+  def show
+  end
+  
+  def destroy
+  end
 end
