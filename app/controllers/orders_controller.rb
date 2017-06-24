@@ -11,9 +11,9 @@ class OrdersController < ApplicationController
     @orders = Order.includes(cart: {line_items: :menu}).where(carts: { user: current_user })
   end
 
-  def show
-  end
-  
   def destroy
+    @order = current_user.orders.find(params[:id])
+    @order.destroy
+    redirect_to orders_path, notice: 'Your order has been cancelled.'
   end
 end

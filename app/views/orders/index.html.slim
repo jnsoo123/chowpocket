@@ -5,9 +5,10 @@ table.table.table-hover
     tr
       th #
       th Items
+      th Total Price
       th Status
       th Ordered On
-      th Actions
+      th 
   tbody
     - @orders.each do |order| 
       tr
@@ -16,13 +17,11 @@ table.table.table-hover
           - order.cart.line_items.each do |item|
             = "#{item.menu.name} x#{item.quantity} - P#{item.menu.price * item.quantity}"
             br
+        td= order.cart.total_price
         td
-          span.label class='label-#{order.is_delivered? ? 'success' : 'warning'}'
-            = order.is_delivered? ? 'Delivered' : 'Pending'
+          span.label class='#{order.label}'
+            = order.status
         td= order.created_at
         td
-          .btn-group
-            = link_to 'More Details', nil, class: 'btn btn-default btn-xs'
-            = link_to 'Cancel Order', nil, class: 'btn btn-danger btn-xs'
-
-
+          = link_to 'Cancel Order', order_path(order), \
+            class: 'btn btn-danger btn-xs', method: :delete unless order.deleted? || order.is_delivered?
