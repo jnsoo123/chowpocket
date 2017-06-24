@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_user.orders
+    @orders = Order.includes(cart: {line_items: :menu}).where(carts: { user: current_user })
   end
 
   def show
