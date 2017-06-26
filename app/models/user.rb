@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  acts_as_paranoid without_default_scope: true
+  acts_as_paranoid
 
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable,
