@@ -21,10 +21,10 @@ nav.nav.navbar-default
             - if current_user.is_admin?
               li
                 = link_to icon('cogs', ' Administrator'), admin_root_path
-              li
-                = link_to icon('user', ' My Profile'), profiles_path
-              li
-                = link_to icon('list-ul', ' Order History'), orders_path
-              li.divider
-              li
-                = link_to icon('sign-out', ' Logout'), destroy_user_session_path, method: :delete
+            li
+              = link_to icon('user', ' My Profile'), profiles_path
+            li
+              = link_to icon('list-ul', ' Order History'), orders_path
+            li.divider
+            li
+              = link_to icon('sign-out', ' Logout'), destroy_user_session_path, method: :delete

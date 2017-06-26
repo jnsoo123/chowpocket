@@ -1,5 +1,6 @@
 class BuildingsController < ApplicationController
   before_action :set_building, only: :show
+  skip_before_action :authenticate_user!
 
   def index
   end

@@ -1,5 +1,6 @@
 class PasswordsController < ApplicationController
   def edit
+    redirect_to profiles_path, notice: 'Cannot change password with google account' if current_user.provider.present?
   end
 
   def update
