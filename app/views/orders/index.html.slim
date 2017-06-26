@@ -24,4 +24,5 @@ table.table.table-hover
         td= order.created_at
         td
           = link_to 'Cancel Order', order_path(order), \
-            class: 'btn btn-danger btn-xs', method: :delete unless order.deleted? || order.is_delivered?
+            class: 'btn btn-danger btn-xs', method: :delete, \
+            data: { confirm: 'Are you sure you want to cancel your order?' } unless order.deleted? || order.is_delivered?

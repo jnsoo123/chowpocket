@@ -1,5 +1,5 @@
 class Cart < ApplicationRecord
-  acts_as_paranoid
+  acts_as_paranoid without_default_scope: true
   belongs_to :user
   has_many :line_items, dependent: :destroy
   has_many :orders, dependent: :destroy
