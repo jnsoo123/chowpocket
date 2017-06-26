@@ -1,0 +1,18 @@
+h3 My Profile
+hr
+.row
+  .col-xs-3
+    | Name:
+  .col-xs-9
+    b
+      = current_user.name
+  .col-xs-3
+    | Email:
+  .col-xs-9
+    b
+      = current_user.email
+hr
+.btn-group
+  = link_to icon('pencil', ' Edit Profile'), edit_profiles_path, class: 'btn btn-info btn-sm'
+  - if current_user.provider.nil?
+    = link_to icon('key', ' Change Password'), edit_passwords_path, class: 'btn btn-warning btn-sm'

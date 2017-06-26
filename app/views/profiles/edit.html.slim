@@ -1,0 +1,23 @@
+.container style='width: 600px;'
+  h3 Edit Profile
+  hr
+  fieldset
+    = form_for current_user, url: profiles_path, method: :put, html: { class: 'form-horizontal' } do |f|
+      .form-group
+        = f.label :name, class: 'control-label col-xs-2'
+        .col-xs-10
+          = f.text_field :name, class: 'form-control', autofocus: true
+      .form-group
+        = f.label :email, class: 'control-label col-xs-2'
+        .col-xs-10
+          = f.email_field :email, class: 'form-control'
+      .form-group
+        .btn-group.col-xs-10.col-xs-offset-2
+          = f.submit 'Save', class: 'btn btn-success'
+          button.btn.btn-warning type='reset'
+            | Reset
+          = link_to 'Cancel', profiles_path, class: 'btn btn-danger'
+    
+
+
+
