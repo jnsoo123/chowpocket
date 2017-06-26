@@ -1,11 +1,11 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  acts_as_paranoid without_default_scope: true
+
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable,
     :omniauthable, :omniauth_providers => [:google_oauth2]
 
-  has_many :carts, dependent: :delete_all
+  has_many :carts, dependent: :destroy
   has_many :orders, through: :carts
 
   def current_cart

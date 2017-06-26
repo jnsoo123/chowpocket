@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 puts 'Creating admin user...'
-User.create(email: 'admin@example.com', password: 'password', password_confirmation: 'password', role: 'admin', name: 'Admin')
+User.create(email: 'admin@example.com', password: 'password', password_confirmation: 'password', role: 'admin', name: 'Admin', deleted_at: nil)
 
 puts 'Creating menus...'
 foods = %w(Sisig Rice Friedchicken Hotdog Giniling Sinigang Liempo Porkchop Chopseuy)
