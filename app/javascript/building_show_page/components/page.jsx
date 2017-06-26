@@ -68,6 +68,7 @@ class Page extends Component{
     })
   }
 
+ 
   renderCartItems(){
     let views
     if(this.state.cart.length > 0) {
@@ -87,6 +88,22 @@ class Page extends Component{
       views = 'No items yet.'
     }
     return views
+  }
+
+  renderCartButtons(menu){
+    if(this.props.userSignedIn) {
+      return(
+        <a href='#' data-menu-id={menu.id} onClick={this.addToCart.bind(this)} className='btn btn-success'>
+          Add To Cart
+        </a>
+      )
+    } else {
+      return(
+        <a href='#' data-menu-id={menu.id} className='btn btn-success'>
+          Check Availability
+        </a>
+      )
+    }
   }
 
   renderMenus(){
@@ -115,9 +132,7 @@ class Page extends Component{
                 </p>
               </div>
               <div className='pull-right'>
-                <a href='#' data-menu-id={menu.id} onClick={this.addToCart.bind(this)} className='btn btn-success'>
-                  Order Now
-                </a>
+                {this.renderCartButtons(menu)}
               </div>
             </div>
           </div>
@@ -188,6 +203,7 @@ const main = {
           cart={rootElem.data('cart')}
           cartId={rootElem.data('cart-id')}
           totalPrice={rootElem.data('total-price')}
+          userSignedIn={rootElem.data('user-logged-in')}
         />, rootElem[0]
       )
     }

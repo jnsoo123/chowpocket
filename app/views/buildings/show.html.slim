@@ -1,1 +1,1 @@
-.building-show-page data-menus='#{@menus.to_json}' data-cart-id='#{@cart.try(:id)}' data-cart='#{@line_items.presence}' data-total-price='#{@cart.try(:total_price)}'
+.building-show-page data-menus='#{@menus.to_json}' data-cart-id='#{@cart.try(:id)}' data-cart='#{@line_items.presence}' data-total-price='#{@cart.try(:total_price)}' data-user-logged-in='#{user_signed_in?}'
