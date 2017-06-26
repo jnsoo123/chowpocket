@@ -69,84 +69,24 @@ class Page extends Component{
   }
 
   renderCartItems(){
-    let views = this.state.cart.map((item, i) => {
-      return(<tr key={i}>
-        <td>{item.menu}</td>
-        <td>{item.quantity}</td>
-        <td>
-          <div className='btn-group'>
-            <button onClick={this.updateQuantity.bind(this, item, 'add')} className='btn btn-xs btn-success'>+ Add</button>
-            { item.quantity > 0 ? <button onClick={this.updateQuantity.bind(this, item, 'minus')} className='btn btn-xs btn-danger'>- Minus</button> : '' }
-          </div>
-        </td>
-        <td>P{item.price * item.quantity}</td>
-      </tr>) 
-    })
-
-    return views
-  }
-
-  renderModalBody(){
-    if (this.state.cart.length){
-      return(<div> 
-        <div className='modal-body'>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th></th>
-                <th>Price</th>
-              </tr>
-            </thead>
-            <tbody className='cart-items'>
-              {this.renderCartItems()}
-              <tr>
-                <td colSpan='4' style={{borderBottom: '1px solid black'}}></td>
-              </tr>
-              <tr>
-                <td colSpan='3'>Total Price</td>
-                <td>{this.state.totalPrice}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className='modal-footer'>
-          <button className='btn btn-default' data-dismiss='modal'>
-            Continue Shopping
-          </button>
-          <a href='/checkouts' className='btn btn-primary'>
-            Contine to Checkout Page
-          </a>
-        </div>
-      </div>)
-    } else {
-      return(<div className='modal-body'> 
-        <h3 className='text-center'>
-          Please order first.
-        </h3>
-      </div>)
-    }
-  }
-
-  renderModal(){
-    return(<div className='modal fade' id='cart-modal' role='dialog' aria-labelledby='cart-modal-label'>
-      <div className='modal-dialog' role='document'>
-        <div className='modal-content'>
-          <div className='modal-header'>
-            <button className='close' type='button' data-dismiss='modal' aria-label='Close'>
-              <span aria-hidden='true'>
-                &times;
-              </span>
+    let views
+    if(this.state.cart.length > 0) {
+      views = this.state.cart.map((item, i) => {
+        return(<li className='list-group-item' key={i}>
+          <span className='badge'>P{item.price * item.quantity}</span>
+          <div className='btn-group' style={{marginRight: '7px'}}>
+            <button onClick={this.updateQuantity.bind(this, item, 'add')} className='btn btn-xs btn-success'>
+              <i className='fa fa-plus'></i>
             </button>
-            <h4 className='modal-title' id='cart-modal-label'>
-              View Cart
-            </h4>
+            { item.quantity > 0 ? <button onClick={this.updateQuantity.bind(this, item, 'minus')} className='btn btn-xs btn-danger'><i className='fa fa-minus'></i></button> : '' }
           </div>
-          {this.renderModalBody()}
-        </div>
-      </div>
-    </div>) 
+          {item.menu} x {item.quantity}
+        </li>) 
+      })
+    } else {
+      views = 'No items yet.'
+    }
+    return views
   }
 
   renderMenus(){
@@ -200,10 +140,39 @@ class Page extends Component{
     )
   }
 
+  renderCheckoutButton(){
+    if (this.state.cart.length > 0){
+      return(
+        <a href='/checkouts' className='btn btn-success btn-block'>
+          <i className='fa fa-check'></i>
+          <span style={{marginLeft: '5px'}}>
+            Checkout
+          </span>
+        </a>
+      )
+    }
+  }
+
   render(){
     return(<div className='building-show-page__main'>
-      {this.renderMenus()}
-      {this.renderModal()}
+      <div className='row'>
+        <div className='col-xs-8'>
+          {this.renderMenus()}
+        </div>
+        <div className='col-xs-4'>
+          <h3>
+            <i className='fa fa-shopping-cart'></i>
+            <span style={{marginLeft: '5px'}}>
+              Shopping Cart
+            </span>
+          </h3>
+          <hr />
+          <ul className='list-group'>
+            {this.renderCartItems()}
+          </ul>
+          {this.renderCheckoutButton()}
+        </div>
+      </div>
       {this.renderSweetAlert()}
     </div>)
   }
