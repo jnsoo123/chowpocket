@@ -12,7 +12,8 @@ class BuildingsController < ApplicationController
         id:   menu.id,
         name: menu.name, 
         price: menu.price, 
-        count: menu_order_count[menu.id] || 0
+        count: menu_order_count[menu.id] || 0,
+        image: menu.avatar.url
       }
     end
   end

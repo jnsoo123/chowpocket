@@ -27,6 +27,7 @@ gem 'omniauth-google-oauth2'
 gem 'foreman'
 gem 'font-awesome-sass'
 gem 'paranoia', '~> 2.2'
+gem 'carrierwave'
 
 # -- END --
 

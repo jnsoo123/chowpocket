@@ -120,8 +120,8 @@ class Page extends Component{
               </span>
             </h3>
             <br />
-            <div className='building-show-page__menu-item-picture'>
-              pic here
+            <div className='building-show-page__menu-item-picture' style={{backgroundImage: 'url(' + menu.image + ')'}}>
+            
             </div>
           </div>
           <div className='panel-footer'>
@@ -169,6 +169,7 @@ class Page extends Component{
   }
 
   render(){
+    console.log(this.props.menus)
     return(<div className='building-show-page__main'>
       <div className='row'>
         <div className='col-xs-8'>
