@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import SweetAlert from 'sweetalert-react'
-import update from 'immutability-helper'
 
 class Page extends Component{
   constructor(props){
@@ -49,6 +48,9 @@ class Page extends Component{
       case 'minus':
         newQuantity = item.quantity - 1
         break;
+      case 'delete':
+        newQuantity = 0
+        break;
     }
 
     $.ajax({
@@ -77,21 +79,21 @@ class Page extends Component{
           <h5 className='list-group-item-heading'>
             {item.menu}
           </h5>
-          <p className='building-show-page__cart-item-price'>P {item.price}</p>
+          <p className='building-show-page__cart-item-price'>P {item.price * item.quantity}</p>
           <div className='clearfix'>
             <div className='pull-left'>
               <div className='btn-group'>
                 <button onClick={this.updateQuantity.bind(this, item, 'minus')} className='btn btn-xs btn-danger'>
                   <i className='fa fa-minus'></i>
                 </button>
-                <button className='btn btn-xs btn-default'>{item.quantity}</button>
+                <button className='btn btn-xs btn-default building-show-page__cart-item-quantity'>{item.quantity}</button>
                 <button onClick={this.updateQuantity.bind(this, item, 'add')} className='btn btn-xs btn-success'>
                   <i className='fa fa-plus'></i>
                 </button>
               </div>
             </div>
             <div className='pull-right'>
-              <button className='btn btn-xs btn-danger'><i className='fa fa-trash'></i></button>
+              <button className='btn btn-xs btn-danger' onClick={this.updateQuantity.bind(this, item, 'delete')}><i className='fa fa-trash'></i></button>
             </div>
           </div>
         </li>) 
@@ -195,6 +197,18 @@ class Page extends Component{
             <hr />
             <ul className='list-group'>
               {this.renderCartItems()}
+            </ul>
+            <ul className='list-group'>
+              <li className='list-group-item'>
+                <div className='clearfix'>
+                  <span className='pull-left'>
+                    Total Price: 
+                  </span>
+                  <span className='pull-right'>
+                    {this.state.totalPrice}
+                  </span>
+                </div>
+              </li>
             </ul>
             {this.renderCheckoutButton()}
           </div>

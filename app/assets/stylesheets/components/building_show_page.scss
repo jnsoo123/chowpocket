@@ -22,3 +22,15 @@
 .building-show-page__cart-item-price {
   color: red;
 }
+
+.building-show-page__cart-item-quantity {
+  cursor: default;
+  background-color: white;
+  border-color: white;
+  color: black;
+  &:hover {
+    background-color: white;
+    border-color: white;
+    color: black;
+  }
+}
