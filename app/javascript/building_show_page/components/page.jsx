@@ -74,14 +74,26 @@ class Page extends Component{
     if(this.state.cart.length > 0) {
       views = this.state.cart.map((item, i) => {
         return(<li className='list-group-item' key={i}>
-          <span className='badge'>P{item.price * item.quantity}</span>
-          <div className='btn-group' style={{marginRight: '7px'}}>
-            <button onClick={this.updateQuantity.bind(this, item, 'add')} className='btn btn-xs btn-success'>
-              <i className='fa fa-plus'></i>
-            </button>
-            { item.quantity > 0 ? <button onClick={this.updateQuantity.bind(this, item, 'minus')} className='btn btn-xs btn-danger'><i className='fa fa-minus'></i></button> : '' }
+          <h5 className='list-group-item-heading'>
+            {item.menu}
+          </h5>
+          <p className='building-show-page__cart-item-price'>P {item.price}</p>
+          <div className='clearfix'>
+            <div className='pull-left'>
+              <div className='btn-group'>
+                <button onClick={this.updateQuantity.bind(this, item, 'minus')} className='btn btn-xs btn-danger'>
+                  <i className='fa fa-minus'></i>
+                </button>
+                <button className='btn btn-xs btn-default'>{item.quantity}</button>
+                <button onClick={this.updateQuantity.bind(this, item, 'add')} className='btn btn-xs btn-success'>
+                  <i className='fa fa-plus'></i>
+                </button>
+              </div>
+            </div>
+            <div className='pull-right'>
+              <button className='btn btn-xs btn-danger'><i className='fa fa-trash'></i></button>
+            </div>
           </div>
-          {item.menu} x {item.quantity}
         </li>) 
       })
     } else {
@@ -93,13 +105,14 @@ class Page extends Component{
   renderCartButtons(menu){
     if(this.props.userSignedIn) {
       return(
-        <a href='#' data-menu-id={menu.id} onClick={this.addToCart.bind(this)} className='btn btn-success'>
-          Add To Cart
+        <a href='#' data-menu-id={menu.id} onClick={this.addToCart.bind(this)} className='btn btn-success btn-sm'>
+          <i className='fa fa-plus'></i>
+          &nbsp;Add To Cart
         </a>
       )
     } else {
       return(
-        <a href='#' data-menu-id={menu.id} className='btn btn-success'>
+        <a href='#' data-menu-id={menu.id} className='btn btn-success btn-sm'>
           Check Availability
         </a>
       )
@@ -109,31 +122,27 @@ class Page extends Component{
   renderMenus(){
     var renderedMenus = this.props.menus.map((menu, i) => {
       return(<div key={i} className='building-show-page__menu-item'>
-        <div className='panel panel-default'>
-          <div className='panel-body'>
-            <h3 className='clearfix'>
-              <span className='pull-left'>
-                {menu.name}
-              </span>
-              <span className='pull-right'>
-                {'P'+menu.price}
-              </span>
-            </h3>
-            <br />
+        <div className='panel panel-default' style={{borderRadius: '5px'}}>
+          <div className='panel-body building-show-page__menu-item-panel-body'>
             <div className='building-show-page__menu-item-picture' style={{backgroundImage: 'url(' + menu.image + ')'}}>
-            
+            </div>
+            <div className='building-show-page__menu-item-title'>
+              <h3 className='clearfix'>
+                <span className='pull-left'>
+                  {menu.name}
+                </span>
+                <span className='pull-right'>
+                  {'P'+menu.price}
+                </span>
+              </h3>
+              <p>{menu.description}</p>
             </div>
           </div>
-          <div className='panel-footer'>
-            <div className='clearfix'>
-              <div className='pull-left'>
-                <p>
-                  Order Counter: {menu.count}
-                </p>
-              </div>
-              <div className='pull-right'>
-                {this.renderCartButtons(menu)}
-              </div>
+          <div className='panel-footer building-show-page__menu-item-panel-footer'>
+            <div className='btn-group btn-group-justified'>
+              <a href='#' className='btn btn-default btn-sm'><i className='fa fa-shopping-cart'></i> { menu.count } Orders</a>
+              <a href='#' className='btn btn-info btn-sm'><i className='fa fa-comments'></i> Comments</a>
+              {this.renderCartButtons(menu)}
             </div>
           </div>
         </div>
@@ -176,17 +185,19 @@ class Page extends Component{
           {this.renderMenus()}
         </div>
         <div className='col-xs-4'>
-          <h3>
-            <i className='fa fa-shopping-cart'></i>
-            <span style={{marginLeft: '5px'}}>
-              Shopping Cart
-            </span>
-          </h3>
-          <hr />
-          <ul className='list-group'>
-            {this.renderCartItems()}
-          </ul>
-          {this.renderCheckoutButton()}
+          <div className='well'>
+            <h3>
+              <i className='fa fa-shopping-cart'></i>
+              <span style={{marginLeft: '5px'}}>
+                Shopping Cart
+              </span>
+            </h3>
+            <hr />
+            <ul className='list-group'>
+              {this.renderCartItems()}
+            </ul>
+            {this.renderCheckoutButton()}
+          </div>
         </div>
       </div>
       {this.renderSweetAlert()}
