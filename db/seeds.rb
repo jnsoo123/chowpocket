@@ -1,5 +1,12 @@
 puts 'Creating admin user...'
-User.create(email: 'admin@example.com', password: 'password', password_confirmation: 'password', role: 'admin', name: 'Admin', deleted_at: nil)
+User.create(
+  email:                  'admin@example.com', 
+  password:               'password', 
+  password_confirmation:  'password', 
+  role:                   'admin', 
+  name:                   'Admin', 
+  deleted_at:             nil
+)
 
 puts 'Creating menus...'
 6.times do |iteration|
