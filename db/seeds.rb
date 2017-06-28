@@ -1,12 +1,23 @@
 puts 'Creating admin user...'
-User.create(
-  email:                  'admin@example.com', 
-  password:               'password', 
-  password_confirmation:  'password', 
-  role:                   'admin', 
-  name:                   'Admin', 
-  deleted_at:             nil
-)
+if Rails.env.development?
+  User.create(
+    email:                  'admin@example.com', 
+    password:               'password', 
+    password_confirmation:  'password', 
+    role:                   'admin', 
+    name:                   'Admin', 
+    deleted_at:             nil
+  )
+else
+  User.create(
+    email:                  'team@chowpocket.com', 
+    password:               'teamchowpocket', 
+    password_confirmation:  'teamchowpocket', 
+    role:                   'admin', 
+    name:                   'Admin', 
+    deleted_at:             nil
+  )
+end
 
 puts 'Creating menus...'
 foods = [
