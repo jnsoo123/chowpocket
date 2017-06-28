@@ -3,7 +3,9 @@ User.create(email: 'admin@example.com', password: 'password', password_confirmat
 
 puts 'Creating menus...'
 6.times do |iteration|
-  Menu.create(name: "Food#{iteration + 1}", price: 10*(iteration + 1), avatar: ActionController::Base.helpers.asset_path("food#{iteration+1}.jpg"))
+  File.open(Rails.root.join("app/assets/images/food#{iteration + 1}.jpg")) do |file|
+    Menu.create(name: "Food#{iteration + 1}", price: 10*(iteration + 1), avatar: file)
+  end
 end
 
 puts "Total Users: #{User.count}"
