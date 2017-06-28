@@ -98,6 +98,19 @@ class Page extends Component{
           </div>
         </li>) 
       })
+
+      views.push(
+        <li className='list-group-item'>
+          <div className='clearfix'>
+            <span className='pull-left'>
+              Total Price: 
+            </span>
+            <span className='pull-right'>
+              {this.state.totalPrice}
+            </span>
+          </div>
+        </li>
+      )
     } else {
       views = 'No items yet.'
     }
@@ -114,7 +127,7 @@ class Page extends Component{
       )
     } else {
       return(
-        <a href='#' data-menu-id={menu.id} className='btn btn-success btn-sm'>
+        <a href='/users/sign_in' data-menu-id={menu.id} className='btn btn-success btn-sm'>
           Check Availability
         </a>
       )
@@ -197,18 +210,6 @@ class Page extends Component{
             <hr />
             <ul className='list-group'>
               {this.renderCartItems()}
-            </ul>
-            <ul className='list-group'>
-              <li className='list-group-item'>
-                <div className='clearfix'>
-                  <span className='pull-left'>
-                    Total Price: 
-                  </span>
-                  <span className='pull-right'>
-                    {this.state.totalPrice}
-                  </span>
-                </div>
-              </li>
             </ul>
             {this.renderCheckoutButton()}
           </div>
