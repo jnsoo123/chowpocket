@@ -15,7 +15,6 @@ class Page extends Component{
   addToCart(e){
     e.preventDefault()
     let menuId = $(e.target).data('menu-id')
-    console.log($(e.target))
 
     $.ajax({
       url: '/line_items',
@@ -24,6 +23,12 @@ class Page extends Component{
         id: menuId
       },
       success: (response) => {
+        swal({
+          title: 'Food added to cart!',
+          timer: 1000,
+          showConfirmButton: false,
+          type: 'success'
+        })
         this.setState({ 
           cart:       response.items, 
           totalPrice: response.total_price
