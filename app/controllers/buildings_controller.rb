@@ -21,6 +21,6 @@ class BuildingsController < ApplicationController
 
   private
   def set_building
-    Building.find_by_name(params[:name])
+    @building = Building.find_by_name(params[:name])
   end
 end

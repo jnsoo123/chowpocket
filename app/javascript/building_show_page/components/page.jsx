@@ -37,6 +37,38 @@ class Page extends Component{
     })
   }
 
+  emptyCart(e) {
+    e.preventDefault()
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover your cart items',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: "Yes, I'm sure.",
+      closeOnConfirm: false,
+      closeOnCancel: true
+    }, (isConfirm) => {
+      if(isConfirm) {
+        swal(
+          'Emptied!',
+          'Your cart has been emptied!',
+          'success'
+        )
+        $.ajax({
+          url: '/line_items',
+          method: 'DELETE',
+          success: (response) => {
+            this.setState({
+              cart: response.items,
+              totalPrice: response.total_price
+            })
+          }
+        })
+      } 
+    })
+  }
+
   updateQuantity(item, type, e){
     e.preventDefault()
 
@@ -193,14 +225,20 @@ class Page extends Component{
 
   renderCheckoutButton(){
     if (this.state.cart.length > 0){
-      return(
+      return(<div>
         <a href='/checkouts' className='btn btn-success btn-block'>
           <i className='fa fa-check'></i>
           <span style={{marginLeft: '5px'}}>
             Checkout
           </span>
         </a>
-      )
+        <a href='#' onClick={this.emptyCart.bind(this)} className='btn btn-danger btn-block'>
+          <i className='fa fa-times'></i>
+          <span style={{marginLeft: '5px'}}>
+            Empty Cart
+          </span>
+        </a>
+      </div>)
     }
   }
 

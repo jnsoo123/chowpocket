@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :line_items, only: [:create, :update]
+  resource  :line_items, only: :destroy
   resources :orders, only: [:create, :index, :show, :destroy]
   resources :checkouts, only: :index
   resource  :profiles, only: [:show, :edit, :update]
