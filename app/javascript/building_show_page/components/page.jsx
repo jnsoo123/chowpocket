@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import SweetAlert from 'sweetalert-react'
+import swal from 'sweetalert'
 
 class Page extends Component{
   constructor(props){
@@ -8,8 +8,7 @@ class Page extends Component{
 
     this.state = {
       cart: props.cart,
-      totalPrice: props.totalPrice,
-      sweetAlert: false
+      totalPrice: props.totalPrice
     }
   }
 
@@ -24,10 +23,15 @@ class Page extends Component{
         id: menuId
       },
       success: (response) => {
+        swal({
+          title: 'Food added to cart!',
+          timer: 1000,
+          showConfirmButton: false,
+          type: 'success'
+        })
         this.setState({ 
           cart:       response.items, 
-          totalPrice: response.total_price,
-          sweetAlert: true 
+          totalPrice: response.total_price
         })
       }
     })
@@ -44,32 +48,52 @@ class Page extends Component{
     switch(type) {
       case 'add':
         newQuantity = item.quantity + 1
+        this.ajaxUpdateQuantity(item, newQuantity)
         break;
       case 'minus':
         newQuantity = item.quantity - 1
+        if (newQuantity == 0) {
+          newQuantity = 1
+        }
+        this.ajaxUpdateQuantity(item, newQuantity)
         break;
       case 'delete':
-        newQuantity = 0
+        swal({
+          title: 'Are you sure?',
+          text: 'It will be removed from your cart.',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#DD6B55',
+          confirmButtonText: 'Yes, remove it!',
+          closeOnConfirm: false
+        }, () => {
+          swal('Deleted!', '', 'success')
+          this.ajaxUpdateQuantity(item, 0)
+        })
         break;
     }
-
-    $.ajax({
-      url: `/line_items/${item.id}`,
-      method: 'PATCH',
-      data: { 
-        line_items: { 
-          quantity: newQuantity 
-        } 
-      },
-      success: (response) => {
-        this.setState({
-          cart: response.items,
-          totalPrice: response.total_price
-        }) 
-      }
-    })
   }
 
+  ajaxUpdateQuantity(item, quantity) {
+    console.log(quantity)
+    if (quantity != item.quantity) {
+      $.ajax({
+        url: `/line_items/${item.id}`,
+        method: 'PATCH',
+        data: { 
+          line_items: { 
+            quantity: quantity 
+          } 
+        },
+        success: (response) => {
+          this.setState({
+            cart: response.items,
+            totalPrice: response.total_price
+          }) 
+        }
+      })
+    }
+  }
  
   renderCartItems(){
     let views
@@ -167,18 +191,6 @@ class Page extends Component{
     return renderedMenus
   }
 
-  renderSweetAlert(){
-    return(
-      <SweetAlert
-        show={this.state.sweetAlert}
-        title='Order Added!'
-        text='Your cart has been updated!'
-        type='success'
-        onConfirm={() => this.setState({ sweetAlert: false })}
-      />
-    )
-  }
-
   renderCheckoutButton(){
     if (this.state.cart.length > 0){
       return(
@@ -215,7 +227,6 @@ class Page extends Component{
           </div>
         </div>
       </div>
-      {this.renderSweetAlert()}
     </div>)
   }
 }
