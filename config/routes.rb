@@ -4,12 +4,12 @@ Rails.application.routes.draw do
   resources :line_items, only: [:create, :update]
   resources :orders, only: [:create, :index, :show, :destroy]
   resources :checkouts, only: :index
-  resource :profiles, only: [:show, :edit, :update]
-  resource :passwords, only: [:edit, :update]
+  resource  :profiles, only: [:show, :edit, :update]
+  resource  :passwords, only: [:edit, :update]
 
   get '/:name' => 'buildings#show', as: :building_path
 
-  devise_for :users, controllers: { omniauth_callbacks: 'callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'callbacks', registrations: 'registrations' }
 
   root to: redirect('/JPMorgan')
 end
