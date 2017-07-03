@@ -1,7 +1,9 @@
 class OrdersController < ApplicationController
   def create
     @order = Order.new(cart: @cart)
+
     if @order.save
+      check_pending_orders
       flash[:notice] = 'Your order has been made. Wait for an email for confirmation.'
       redirect_to root_path
     end
@@ -15,5 +17,13 @@ class OrdersController < ApplicationController
     @order = current_user.orders.find(params[:id])
     @order.destroy
     redirect_to orders_path, notice: 'Your order has been cancelled.'
+  end
+
+  private
+  def check_pending_orders
+    orders = Order.pending
+    if orders.joins(cart: :line_items).sum('quantity') > 10
+      orders.update_all(status: OrderStatuses::CONFIRMED)
+    end
   end
 end
