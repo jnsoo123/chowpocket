@@ -4,8 +4,9 @@ class Order < ApplicationRecord
   belongs_to :cart
   delegate :user, to: :cart
 
-  scope :pending, -> { without_deleted.where(status: OrderStatuses::PENDING) }
-
+  scope :pending, ->    { without_deleted.where(status: OrderStatuses::PENDING) }
+  scope :confirmed, ->  { without_deleted.where(status: OrderStatuses::CONFIRMED) }
+  
   after_create do
     cart.update is_ordered: true
   end
