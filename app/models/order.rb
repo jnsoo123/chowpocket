@@ -1,22 +1,27 @@
 class Order < ApplicationRecord
   acts_as_paranoid without_default_scope: true
+
   belongs_to :cart
   delegate :user, to: :cart
+
+  scope :pending, -> { without_deleted.where(status: OrderStatuses::PENDING) }
 
   after_create do
     cart.update is_ordered: true
   end
 
-  def status
+  def state
     if deleted? 
       'Cancelled'
     else
-      is_delivered? ? 'Delivered' : 'Pending'
+      status.capitalize
     end
   end
 
   def label
-    case status
+    case state
+    when 'Confirmed'
+      'label-info'
     when 'Cancelled'
       'label-danger'
     when 'Delivered'

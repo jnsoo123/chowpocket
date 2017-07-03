@@ -6,7 +6,7 @@ class BuildingsController < ApplicationController
   end
 
   def show
-    menu_order_count = Order.joins(cart: :line_items).
+    menu_order_count = Order.without_deleted.joins(cart: :line_items).
       group('line_items.menu_id').
       sum('quantity')
 

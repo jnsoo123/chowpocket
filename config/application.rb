@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Chowpocket
   class Application < Rails::Application
+    require Rails.root.join('lib/properties.rb')
     # Initialize configuration defaults for originally generated Rails version.
 
     config.load_defaults 5.1

@@ -20,9 +20,9 @@ table.table.table-hover
         td= order.cart.total_price
         td
           span.label class='#{order.label}'
-            = order.status
+            = order.state
         td= order.created_at
         td
           = link_to 'Cancel Order', order_path(order), \
             class: 'btn btn-danger btn-xs', method: :delete, \
-            data: { confirm: 'Are you sure you want to cancel your order?' } unless order.deleted? || order.is_delivered?
+            data: { confirm: 'Are you sure you want to cancel your order?' } unless order.deleted? || order.status != OrderStatuses::PENDING
