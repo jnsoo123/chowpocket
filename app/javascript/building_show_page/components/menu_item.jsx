@@ -14,7 +14,7 @@ class MenuItem extends Component {
       ) 
     } else {
       return(
-        <a href='/users/sign_in' className='btn btn-sucess btn-sm'>
+        <a href='/users/sign_in' className='btn btn-success btn-sm'>
           Check Availability
         </a>
       ) 
