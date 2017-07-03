@@ -1,5 +1,4 @@
 class LineItemsController < ApplicationController
-  #test
   def create
     menu = Menu.find(params[:id])
     line_item = @cart.add_menu menu.id
@@ -31,7 +30,7 @@ class LineItemsController < ApplicationController
   end
 
   def line_items
-    @cart.reload.line_items.includes(:menu).collect do |item|
+    @cart.reload.line_items.includes(:menu).order(created_at: :asc).collect do |item|
       {
         id: item.id,
         menu: item.menu.name,

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import swal from 'sweetalert'
+import MenuItem from './menu_item'
+import CartItem from './cart_item'
 
 class Page extends Component{
   constructor(props){
@@ -69,9 +71,7 @@ class Page extends Component{
     })
   }
 
-  updateQuantity(item, type, e){
-    e.preventDefault()
-
+  updateQuantity(item, type){
     let items = this.state.cart
     let index = items.indexOf(item)
     let newQuantity
@@ -107,7 +107,6 @@ class Page extends Component{
   }
 
   ajaxUpdateQuantity(item, quantity) {
-    console.log(quantity)
     if (quantity != item.quantity) {
       $.ajax({
         url: `/line_items/${item.id}`,
@@ -129,34 +128,19 @@ class Page extends Component{
  
   renderCartItems(){
     let views
-    if(this.state.cart.length > 0) {
+    if (this.state.cart.length > 0) {
       views = this.state.cart.map((item, i) => {
-        return(<li className='list-group-item' key={i}>
-          <h5 className='list-group-item-heading'>
-            {item.menu}
-          </h5>
-          <p className='building-show-page__cart-item-price'>P {item.price * item.quantity}</p>
-          <div className='clearfix'>
-            <div className='pull-left'>
-              <div className='btn-group'>
-                <button onClick={this.updateQuantity.bind(this, item, 'minus')} className='btn btn-xs btn-danger'>
-                  <i className='fa fa-minus'></i>
-                </button>
-                <button className='btn btn-xs btn-default building-show-page__cart-item-quantity'>{item.quantity}</button>
-                <button onClick={this.updateQuantity.bind(this, item, 'add')} className='btn btn-xs btn-success'>
-                  <i className='fa fa-plus'></i>
-                </button>
-              </div>
-            </div>
-            <div className='pull-right'>
-              <button className='btn btn-xs btn-danger' onClick={this.updateQuantity.bind(this, item, 'delete')}><i className='fa fa-trash'></i></button>
-            </div>
-          </div>
-        </li>) 
-      })
+        return(
+          <CartItem
+            {...item}
+            key={i}
+            updateQuantity={this.updateQuantity.bind(this)}
+          />
+        ) 
+      }, this)
 
       views.push(
-        <li className='list-group-item'>
+        <li key={this.state.cart.length+1} className='list-group-item'>
           <div className='clearfix'>
             <span className='pull-left'>
               Total Price: 
@@ -192,52 +176,15 @@ class Page extends Component{
 
   renderMenus(){
     var renderedMenus = this.props.menus.map((menu, i) => {
-      var meterColor
-      switch(menu.percent){
-        case 10:
-          meterColor = 'success';
-          break;
-        case 20:
-          meterColor = 'warning';
-          break;
-        case 30:
-          meterColor = 'danger';
-          break;
-      }
-
-      return(<div key={i} className='building-show-page__menu-item'>
-        <div className='panel panel-default' style={{borderRadius: '5px'}}>
-          <div className='panel-body building-show-page__menu-item-panel-body'>
-            <div className='building-show-page__menu-item-picture' style={{backgroundImage: 'url(' + menu.image + ')'}}>
-            </div>
-            <div className='building-show-page__menu-item-title'>
-              <h3 className='clearfix'>
-                <span className='pull-left'>
-                  {menu.name}
-                </span>
-                <span className='pull-right'>
-                  {'P'+menu.price}
-                </span>
-              </h3>
-              <p>{menu.description}</p>
-              Discount o Meter
-              <div className='progress'>
-                <div className={'progress-bar progress-bar-'+meterColor} style={{width: ((menu.percent/30)*100) + '%'}}>
-                  {menu.percent + '%'}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='panel-footer building-show-page__menu-item-panel-footer'>
-            <div className='btn-group btn-group-justified'>
-              <a href='#' className='btn btn-default btn-sm'><i className='fa fa-shopping-cart'></i> { menu.count } Orders</a>
-              <a href='#' className='btn btn-info btn-sm'><i className='fa fa-comments'></i> Comments</a>
-              {this.renderCartButtons(menu)}
-            </div>
-          </div>
-        </div>
-      </div>) 
-    })
+      return(
+        <MenuItem
+          {...menu}
+          key={i}
+          userSignedIn={this.props.userSignedIn}
+          addToCart={this.addToCart.bind(this)}
+        />
+      ) 
+    }, this)
 
     return renderedMenus
   }
@@ -262,7 +209,6 @@ class Page extends Component{
   }
 
   render(){
-    console.log(this.props.menus)
     return(<div className='building-show-page__main'>
       <div className='row'>
         <div className='col-xs-8'>
