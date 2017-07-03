@@ -192,6 +192,19 @@ class Page extends Component{
 
   renderMenus(){
     var renderedMenus = this.props.menus.map((menu, i) => {
+      var meterColor
+      switch(menu.percent){
+        case 10:
+          meterColor = 'success';
+          break;
+        case 20:
+          meterColor = 'warning';
+          break;
+        case 30:
+          meterColor = 'danger';
+          break;
+      }
+
       return(<div key={i} className='building-show-page__menu-item'>
         <div className='panel panel-default' style={{borderRadius: '5px'}}>
           <div className='panel-body building-show-page__menu-item-panel-body'>
@@ -207,6 +220,12 @@ class Page extends Component{
                 </span>
               </h3>
               <p>{menu.description}</p>
+              Discount o Meter
+              <div className='progress'>
+                <div className={'progress-bar progress-bar-'+meterColor} style={{width: ((menu.percent/30)*100) + '%'}}>
+                  {menu.percent + '%'}
+                </div>
+              </div>
             </div>
           </div>
           <div className='panel-footer building-show-page__menu-item-panel-footer'>
