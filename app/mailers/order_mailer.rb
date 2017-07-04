@@ -3,7 +3,7 @@ class OrderMailer < ApplicationMailer
 
   def order_confirmed(user)
     @user = user
-    @order_date = @user.orders.pending.last.created_at
+    @order_date = @user.orders.pending_today.last.created_at
     mail(
       to: @user.email, 
       subject: 'Order Confirmed!',
