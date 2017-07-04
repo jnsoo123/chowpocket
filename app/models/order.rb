@@ -4,11 +4,11 @@ class Order < ApplicationRecord
   belongs_to :cart
   delegate :user, to: :cart
 
-  scope :pending, ->    { without_deleted.where(status: OrderStatuses::PENDING).where('created_at < ?', DateTime.now.beginning_of_day) }
-  scope :confirmed, ->  { without_deleted.where(status: OrderStatuses::CONFIRMED).where('created_at < ?', DateTime.now.beginning_of_day) }
+  scope :pending_today, ->    { without_deleted.where(status: OrderStatuses::PENDING).where(created_at: DateTime.now.beginning_of_day..DateTime.now) }
+  scope :confirmed_today, ->  { without_deleted.where(status: OrderStatuses::CONFIRMED).where(created_at: DateTime.now.beginning_of_day..DateTime.now) }
 
-  scope :pending_today, ->    { without_deleted.where(status: OrderStatuses::PENDING).where('created_at > ?', DateTime.now.beginning_of_day) }
-  scope :confirmed_today, ->  { without_deleted.where(status: OrderStatuses::CONFIRMED).where('created_at > ?', DateTime.now.beginning_of_day) }
+  scope :pending, ->    { without_deleted.where(status: OrderStatuses::PENDING).where.not(created_at: DateTime.now.beginning_of_day..DateTime.now) }
+  scope :confirmed, ->  { without_deleted.where(status: OrderStatuses::CONFIRMED).where.not(created_at: DateTime.now.beginning_of_day..DateTime.now) }
   
   after_create do
     cart.update is_ordered: true

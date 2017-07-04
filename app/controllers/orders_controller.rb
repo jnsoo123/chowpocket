@@ -21,8 +21,8 @@ class OrdersController < ApplicationController
 
   private
   def check_pending_orders
-    orders = Order.pending_today
-    if orders.joins(cart: :line_items).sum('quantity') > 10
+    orders = Order.includes(cart: :line_items).pending_today
+    if orders.sum('quantity') > 10
       deliver_emails
     end
   end
