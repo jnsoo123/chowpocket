@@ -23,14 +23,11 @@ class OrdersController < ApplicationController
   def check_pending_orders
     orders = Order.pending
     if orders.joins(cart: :line_items).sum('quantity') > 10
-      orders.update_all(status: OrderStatuses::CONFIRMED)
       deliver_emails
     end
   end
 
   def deliver_emails
-    Order.includes(cart: :user).map(&:user) do |user|
-      OrderMailer.order_confirmed(user).deliver_later
-    end
+    SendConfirmationMailJob.perform_later
   end
 end
