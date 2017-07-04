@@ -1,4 +1,4 @@
 web: bundle exec rails s -p $PORT
 webpacker: ./bin/webpack-dev-server
-worker: QUEUE=* bundle exec rake environment resque:work
+resque: env TERM_CHILD=1 QUEUE=* bundle exec rake resque:work
 redis: redis-server
