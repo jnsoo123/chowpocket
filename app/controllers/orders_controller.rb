@@ -1,9 +1,8 @@
 class OrdersController < ApplicationController
   def create
-    @order = Order.new(cart: @cart)
+    @order = Order.new(cart: @cart, cluster: cluster)
 
     if @order.save
-      check_pending_orders
       flash[:notice] = 'Your order has been made. Wait for an email for confirmation.'
       redirect_to root_path
     end
@@ -20,14 +19,10 @@ class OrdersController < ApplicationController
   end
 
   private
-  def check_pending_orders
-    orders = Order.includes(cart: :line_items).pending_today
-    if orders.sum('quantity') > 10
-      deliver_emails
+  def cluster
+    object = Cluster.where(date_created: Date.today).first_or_create do |cluster_object|
+      cluster_object.date_created = Date.today
     end
-  end
-
-  def deliver_emails
-    SendConfirmationMailJob.perform_later
+    object
   end
 end
