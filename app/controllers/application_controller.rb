@@ -40,6 +40,8 @@ class ApplicationController < ActionController::Base
   end
 
   def mark_cancelled_all_pending_orders_yesterday
-    Order.pending.where('created_at < ?', Date.today).destroy_all
+    Order.transaction do
+      Order.pending.destroy_all
+    end
   end
 end
