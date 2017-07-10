@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170703071952) do
+ActiveRecord::Schema.define(version: 20170705053229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,14 @@ ActiveRecord::Schema.define(version: 20170703071952) do
     t.string "facebook_id"
   end
 
+  create_table "clusters", force: :cascade do |t|
+    t.integer "discount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "date_created"
+    t.integer "orders_count"
+  end
+
   create_table "line_items", force: :cascade do |t|
     t.bigint "menu_id"
     t.bigint "cart_id"
@@ -79,7 +87,9 @@ ActiveRecord::Schema.define(version: 20170703071952) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.string "status", default: "pending"
+    t.bigint "cluster_id"
     t.index ["cart_id"], name: "index_orders_on_cart_id"
+    t.index ["cluster_id"], name: "index_orders_on_cluster_id"
     t.index ["deleted_at"], name: "index_orders_on_deleted_at"
   end
 
@@ -109,4 +119,5 @@ ActiveRecord::Schema.define(version: 20170703071952) do
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "menus"
   add_foreign_key "orders", "carts"
+  add_foreign_key "orders", "clusters"
 end
