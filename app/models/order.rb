@@ -10,22 +10,22 @@ class Order < ApplicationRecord
   scope :pending_today, -> { 
     includes(cart: :line_items).
     without_deleted.where(status: OrderStatuses::PENDING).
-    where(created_at: (DateTime.now-1.day).change({hour: 19})..DateTime.now.change({hour: 19})) 
+    where.not(created_at: (DateTime.now-1.day).change({hour: 19})..DateTime.now.change({hour: 19})) 
   }
   scope :confirmed_today, -> { 
     includes(cart: :line_items).
     without_deleted.where(status: OrderStatuses::CONFIRMED).
-    where(created_at: (DateTime.now-1.day).change({hour: 19})..DateTime.now.change({hour: 19})) 
+    where.not(created_at: (DateTime.now-1.day).change({hour: 19})..DateTime.now.change({hour: 19})) 
   }
   scope :pending, ->    { 
     includes(cart: :line_items).
     without_deleted.where(status: OrderStatuses::PENDING).
-    where.not(created_at: (DateTime.now-1.day).change({hour: 19})..DateTime.now.change({hour: 19})) 
+    where(created_at: (DateTime.now-1.day).change({hour: 19})..DateTime.now.change({hour: 19})) 
   }
   scope :confirmed, ->  { 
     includes(cart: :line_items).
     without_deleted.where(status: OrderStatuses::CONFIRMED).
-    where.not(created_at: (DateTime.now-1.day).change({hour: 19})..DateTime.now.change({hour: 19})) 
+    where(created_at: (DateTime.now-1.day).change({hour: 19})..DateTime.now.change({hour: 19})) 
   }
   
   after_create do

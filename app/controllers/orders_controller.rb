@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
 
   private
   def cluster
-    object = Cluster.where(date_created: Date.today).first_or_create do |cluster_object|
+    object = Cluster.where(date_created: Date.today).where('orders_count < 3').first_or_create do |cluster_object|
       cluster_object.date_created = Date.today
     end
     object
