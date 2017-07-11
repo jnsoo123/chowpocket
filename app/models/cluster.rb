@@ -1,3 +1,3 @@
 class Cluster < ApplicationRecord
-  has_many :orders, dependent: :destroy
+  has_many :menu_cluster, dependent: :destroy
 end

@@ -1,13 +1,9 @@
 class Order < ApplicationRecord
   acts_as_paranoid without_default_scope: true
-
   belongs_to :cart
-  belongs_to :cluster, counter_cache: true
-
   delegate :user, to: :cart
 
   scope :confirmed_quantity, -> { confirmed_today.sum('quantity') }
-
   scope :pending,   -> {includes(cart: :line_items).without_deleted.where(status: OrderStatuses::PENDING)} do
     def date_option
       if DateTime.now.change({hour: 19}) > DateTime.now
