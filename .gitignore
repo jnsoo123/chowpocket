@@ -27,3 +27,4 @@
 /config/application.yml
 .DS_Store
 dump.rdb
+erd.pdf

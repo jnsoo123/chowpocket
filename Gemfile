@@ -41,6 +41,7 @@ group :development, :test do
   
   gem 'figaro'
   gem 'pry-rails'
+  gem 'rails-erd', require: false
 
   # -- END --
 end
