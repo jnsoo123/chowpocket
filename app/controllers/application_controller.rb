@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
 
   def mark_cancelled_all_pending_orders_yesterday
     Order.transaction do
-      Order.pending.destroy_all
+      Order.pending.not_today.destroy_all
     end
   end
 

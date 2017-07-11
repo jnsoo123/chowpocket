@@ -7,26 +7,41 @@ class Order < ApplicationRecord
   delegate :user, to: :cart
 
   scope :confirmed_quantity, -> { confirmed_today.sum('quantity') }
-  scope :pending_today, -> { 
-    includes(cart: :line_items).
-    without_deleted.where(status: OrderStatuses::PENDING).
-    where.not(created_at: (DateTime.now-1.day).change({hour: 19})..DateTime.now.change({hour: 19})) 
-  }
-  scope :confirmed_today, -> { 
-    includes(cart: :line_items).
-    without_deleted.where(status: OrderStatuses::CONFIRMED).
-    where.not(created_at: (DateTime.now-1.day).change({hour: 19})..DateTime.now.change({hour: 19})) 
-  }
-  scope :pending, ->    { 
-    includes(cart: :line_items).
-    without_deleted.where(status: OrderStatuses::PENDING).
-    where(created_at: (DateTime.now-1.day).change({hour: 19})..DateTime.now.change({hour: 19})) 
-  }
-  scope :confirmed, ->  { 
-    includes(cart: :line_items).
-    without_deleted.where(status: OrderStatuses::CONFIRMED).
-    where(created_at: (DateTime.now-1.day).change({hour: 19})..DateTime.now.change({hour: 19})) 
-  }
+
+  scope :pending,   -> {includes(cart: :line_items).without_deleted.where(status: OrderStatuses::PENDING)} do
+    def date_option
+      if DateTime.now.change({hour: 19}) > DateTime.now
+        { created_at: (DateTime.now - 1.day).change({ hour: 19 })..DateTime.now.change({ hour: 19 }) }
+      else
+        { created_at: DateTime.now.change({ hour: 19 })..(DateTime.now + 1.day).change({ hour: 19 }) }
+      end
+    end
+
+    def today
+      where(date_option)
+    end
+
+    def not_today
+      where.not(date_option)
+    end
+  end
+  scope :confirmed, -> {includes(cart: :line_items).without_deleted.where(status: OrderStatuses::CONFIRMED)} do
+    def date_option
+      if DateTime.now.change({hour: 19}) > DateTime.now
+        { created_at: (DateTime.now - 1.day).change({ hour: 19 })..DateTime.now.change({ hour: 19 }) }
+      else
+        { created_at: DateTime.now.change({ hour: 19 })..(DateTime.now + 1.day).change({ hour: 19 }) }
+      end
+    end
+
+    def today
+      where(date_option)
+    end
+
+    def not_today
+      where.not(date_option)
+    end
+  end
   
   after_create do
     cart.update is_ordered: true
@@ -57,7 +72,7 @@ class Order < ApplicationRecord
 
   private
   def check_pending_orders
-    if Order.pending_today.sum('quantity') > 10
+    if Order.pending.today.sum('quantity') > 10
       deliver_emails
     end
   end
