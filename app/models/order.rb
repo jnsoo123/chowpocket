@@ -38,7 +38,7 @@ class Order < ApplicationRecord
       where.not(date_option)
     end
   end
-  
+
   after_create do
     cart.update is_ordered: true
     check_pending_orders
@@ -78,10 +78,10 @@ class Order < ApplicationRecord
   end
 
   def check_discount_availability
-#    case Order.confirmed_today_quantity
-#    when 10..19
-#    when 20..29
-#    when 30..Float::INFINITY
-#    end
+    #    case Order.confirmed_today_quantity
+    #    when 10..19
+    #    when 20..29
+    #    when 30..Float::INFINITY
+    #    end
   end
 end
