@@ -1,4 +1,6 @@
 {
-  "application.js": "http://0.0.0.0:8080/packs/application.js",
-  "hello_react.js": "http://0.0.0.0:8080/packs/hello_react.js"
+  "application.js": "/packs/application-ae4f4ba19e328be939da.js",
+  "application.js.map": "/packs/application-ae4f4ba19e328be939da.js.map",
+  "hello_react.js": "/packs/hello_react-c2e60a71fa78d6ff3daf.js",
+  "hello_react.js.map": "/packs/hello_react-c2e60a71fa78d6ff3daf.js.map"
 }
