@@ -1,4 +1,6 @@
 class ProfilesController < ApplicationController
+  skip_before_action :check_if_user_has_phone_number
+
   def show
   end 
 
@@ -13,6 +15,6 @@ class ProfilesController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :phone_number)
   end
 end

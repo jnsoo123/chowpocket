@@ -12,6 +12,10 @@
         .col-xs-10
           = f.email_field :email, class: 'form-control'
       .form-group
+        = f.label :phone_number, class: 'control-label col-xs-2'
+        .col-xs-10
+          = f.text_field :phone_number, class: 'form-control'
+      .form-group
         .btn-group.col-xs-10.col-xs-offset-2
           = f.submit 'Save', class: 'btn btn-success'
           button.btn.btn-warning type='reset'

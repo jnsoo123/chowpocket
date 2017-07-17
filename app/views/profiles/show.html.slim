@@ -11,6 +11,11 @@ hr
   .col-xs-9
     b
       = current_user.email
+  .col-xs-3
+    | Phone Number
+  .col-xs-9
+    b
+      = current_user.phone_number || '--'
 hr
 .btn-group
   = link_to icon('pencil', ' Edit Profile'), edit_profiles_path, class: 'btn btn-info btn-sm'

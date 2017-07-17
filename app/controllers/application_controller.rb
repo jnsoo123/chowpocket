@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :mark_cancelled_all_pending_orders_yesterday
   before_action :check_cluster_discount_availability
+  before_action :check_if_user_has_phone_number
 
   layout :layout_of_resource
 
@@ -47,6 +48,13 @@ class ApplicationController < ActionController::Base
   end
 
   def check_cluster_discount_availability
-      
+  end
+
+  def check_if_user_has_phone_number
+    if user_signed_in?
+      if current_user.phone_number.nil?
+        flash[:error] = 'Please update your phone number so that we can notify you to what ever happens. <a class="alert-link" href="/profiles">Update here</a>'
+      end
+    end 
   end
 end
