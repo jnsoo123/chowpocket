@@ -21,7 +21,7 @@ table.table.table-hover
         td
           span.label class='#{order.label}'
             = order.state
-        td= order.created_at
+        td= order.created_at.strftime('%B %-d, %Y -- %l:%M %p')
         td
           = link_to 'Cancel Order', order_path(order), \
             class: 'btn btn-danger btn-xs', method: :delete, \
