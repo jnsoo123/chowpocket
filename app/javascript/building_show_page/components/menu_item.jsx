@@ -74,6 +74,7 @@ class MenuItem extends Component {
             <div className='clearfix'>
               <div className='pull-left'>
                 Discount o Meter
+                <button className='btn btn-link btn-xs'><i className='fa fa-info'></i></button>
               </div>
               <div className='pull-right'>
                 {this.getCountLeftForDiscount(menu.count)}

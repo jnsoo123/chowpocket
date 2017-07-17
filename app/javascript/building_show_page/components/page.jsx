@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import swal from 'sweetalert'
 import MenuItem from './menu_item'
 import CartItem from './cart_item'
+import ModalInfo from './modal_info'
 
 class Page extends Component{
   constructor(props){
@@ -230,6 +231,7 @@ class Page extends Component{
           </div>
         </div>
       </div>
+      <ModalInfo />
     </div>)
   }
 }
