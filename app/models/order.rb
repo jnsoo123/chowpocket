@@ -45,6 +45,16 @@ class Order < ApplicationRecord
     check_discount_availability
   end
 
+  def self.today
+    date_option = if DateTime.now.change({hour: 19}) > DateTime.now
+                    { created_at: (DateTime.now - 1.day).change({ hour: 19 })..DateTime.now.change({ hour: 19 }) }
+                  else
+                    { created_at: DateTime.now.change({ hour: 19 })..(DateTime.now + 1.day).change({ hour: 19 }) }
+                  end
+
+    where(date_option)
+  end
+
   def state
     if deleted? 
       'Cancelled'

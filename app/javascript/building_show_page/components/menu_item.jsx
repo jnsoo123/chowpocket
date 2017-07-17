@@ -21,6 +21,24 @@ class MenuItem extends Component {
     }
   }
 
+  getCountLeftForDiscount(count){
+    let text = ''
+
+    switch(true) {
+      case count < 30:
+        text = (30 - count) + ' orders left for 10% discount'
+        break
+      case count >= 30 && count < 40:
+        text = (40 - count) + ' orders left for 20% discount'
+        break
+      case count >= 40 && count < 50:
+        text = (50 - count) + ' orders left for 30% discount'
+        break
+    }
+
+    return text
+  }
+
   render() {
     let menu = this.props
 
@@ -53,7 +71,14 @@ class MenuItem extends Component {
               </span>
             </h3>
             <p>{menu.description}</p>
-            Discount o Meter
+            <div className='clearfix'>
+              <div className='pull-left'>
+                Discount o Meter
+              </div>
+              <div className='pull-right'>
+                {this.getCountLeftForDiscount(menu.count)}
+              </div>
+            </div>
             <div className='progress'>
               <div 
                 className={'progress-bar progress-bar-'+meterColor} 

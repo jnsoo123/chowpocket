@@ -6,7 +6,7 @@ class BuildingsController < ApplicationController
   end
 
   def show
-    menu_order_count = Order.without_deleted.joins(cart: :line_items).
+    menu_order_count = Order.today.joins(cart: :line_items).
       group('line_items.menu_id').
       sum('quantity')
 
@@ -30,11 +30,11 @@ class BuildingsController < ApplicationController
 
   def get_discount_percentage(count)
     case count
-    when 10..19
+    when 30..39
       10
-    when 20..29
+    when 40..49
       20
-    when 30..Float::INFINITY
+    when 50..Float::INFINITY
       30
     else
       0
