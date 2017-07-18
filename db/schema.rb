@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717071830) do
+ActiveRecord::Schema.define(version: 20170718110253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20170717071830) do
     t.datetime "updated_at", null: false
     t.date "date_created"
     t.integer "menu_clusters_count"
+    t.bigint "menu_id"
+    t.index ["menu_id"], name: "index_clusters_on_menu_id"
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -127,6 +129,7 @@ ActiveRecord::Schema.define(version: 20170717071830) do
   end
 
   add_foreign_key "carts", "users"
+  add_foreign_key "clusters", "menus"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "menus"
   add_foreign_key "menu_clusters", "clusters"
