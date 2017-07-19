@@ -20,16 +20,20 @@ class OrdersController < ApplicationController
   end
 
   private
-  def cluster
-    object = Cluster.last
+  def create_cluster(menu_id)
+    Cluster.create(menu_id: menu_id, date_created: Date.today)
+  end
+
+  def set_cluster(menu_id)
+    cluster = Cluster.where(menu_id: menu_id, date_created: Date.today).last
     begin
-      if not object.menu_clusters.sum(:quantity) <= 50
-        object = Cluster.create(date_created: Date.today) 
+      if cluster.menu_clusters.sum('quantity') > 50
+        cluster = create_cluster(menu_id)
       end
     rescue
-      object = Cluster.create(date_created: Date.today)
+      cluster = create_cluster(menu_id)
     end
-    object
+    cluster
   end
 
   def set_menu_clusters
@@ -37,7 +41,7 @@ class OrdersController < ApplicationController
       MenuCluster.create! do |menu_cluster|
         menu_cluster.order = @order
         menu_cluster.menu = item.menu
-        menu_cluster.cluster = cluster
+        menu_cluster.cluster = set_cluster(item.menu.id)
         menu_cluster.quantity = item.quantity
       end
     end
