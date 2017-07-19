@@ -78,7 +78,7 @@ class Order < ApplicationRecord
 
   private
   def check_pending_orders
-    if Order.pending.today.sum('quantity') > 10
+    if Order.pending.today.sum('quantity') > 30
       deliver_emails
     end
   end

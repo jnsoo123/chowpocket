@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170718110253) do
+ActiveRecord::Schema.define(version: 20170719010934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,11 +55,10 @@ ActiveRecord::Schema.define(version: 20170718110253) do
   end
 
   create_table "clusters", force: :cascade do |t|
-    t.integer "discount"
+    t.integer "discount", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date_created"
-    t.integer "menu_clusters_count"
     t.bigint "menu_id"
     t.index ["menu_id"], name: "index_clusters_on_menu_id"
   end
