@@ -52,7 +52,7 @@ class ApplicationController < ActionController::Base
 
   def check_if_user_has_phone_number
     if user_signed_in?
-      if current_user.phone_number.nil?
+      if current_user.phone_number.blank?
         flash[:error] = 'Please update your phone number so that we can notify you to what ever happens. <a class="alert-link" href="/profiles">Update here</a>'
       end
     end 
