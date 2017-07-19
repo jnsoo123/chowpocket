@@ -11,8 +11,10 @@ class MenuCluster < ApplicationRecord
       set_discount = 20
     when 50..Float::INFINITY
       set_discount = 30
+    else
+      set_discount = nil
     end
-
-    cluster.update discount: set_discount
+    
+    cluster.update discount: set_discount unless set_discount.nil?
   end
 end
