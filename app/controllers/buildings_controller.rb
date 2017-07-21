@@ -1,24 +1,20 @@
 class BuildingsController < ApplicationController
   before_action :set_building, only: :show
+  before_action :set_clusters, only: :show
   skip_before_action :authenticate_user!
 
   def index
   end
 
   def show
-    menu_order_count = Order.today.joins(cart: :line_items).
-      group('line_items.menu_id').
-      sum('quantity')
-
     @menus = Menu.all.collect do |menu|
       { 
         id:           menu.id,
         name:         menu.name, 
         description:  menu.description,
-        price:        (menu.price - ( menu.price * (get_discount_percentage(menu_order_count[menu.id]).to_f) / 100.0 )).to_f, 
-        count:        menu_order_count[menu.id] || 0,
+        price:        (menu.price - (menu.price * (get_discount(menu)) / 100.0 )).to_f, 
         image:        menu.avatar.url,
-        percent:      get_discount_percentage(menu_order_count[menu.id])
+        percent:      get_discount(menu)
       }
     end
   end
@@ -28,16 +24,17 @@ class BuildingsController < ApplicationController
     @building = Building.find_by_name(params[:name])
   end
 
-  def get_discount_percentage(count)
-    case count
-    when 30..39
-      10
-    when 40..49
-      20
-    when 50..Float::INFINITY
-      30
-    else
-      0
+  def get_discount(menu)
+    @clusters.detect {|cluster| cluster[:menu_id] == menu.id}[:discount].to_f rescue 0
+  end
+
+  def set_clusters
+    @clusters = Cluster.includes(:menu_clusters).where(date_created: Date.today).collect do |cluster|
+      {
+        menu_id: cluster.menu.id,
+        discount: cluster.discount,
+        count: cluster.menu_clusters.sum('quantity')
+      }
     end
   end
 end
