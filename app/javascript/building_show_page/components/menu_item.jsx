@@ -39,6 +39,14 @@ class MenuItem extends Component {
     return text
   }
 
+  isDiscounted(){
+    if (this.props.percent != 0) {
+      return(
+        <span className='label label-danger'>Discounted!</span>
+      ) 
+    }
+  }
+
   render() {
     let menu = this.props
 
@@ -67,9 +75,10 @@ class MenuItem extends Component {
                 {menu.name}
               </span>
               <span className='pull-right'>
-                {'P'+menu.price}
+                {'P' + menu.price.toFixed(2)}
               </span>
             </h3>
+            {this.isDiscounted()}
             <p>{menu.description}</p>
             <div className='clearfix'>
               <div className='pull-left'>

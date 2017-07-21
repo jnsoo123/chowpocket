@@ -15,7 +15,7 @@ class BuildingsController < ApplicationController
         id:           menu.id,
         name:         menu.name, 
         description:  menu.description,
-        price:        menu.price, 
+        price:        (menu.price - ( menu.price * (get_discount_percentage(menu_order_count[menu.id]).to_f) / 100.0 )).to_f, 
         count:        menu_order_count[menu.id] || 0,
         image:        menu.avatar.url,
         percent:      get_discount_percentage(menu_order_count[menu.id])
