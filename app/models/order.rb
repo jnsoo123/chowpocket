@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   acts_as_paranoid without_default_scope: true
   belongs_to :cart
   delegate :user, to: :cart
+  has_many :menu_clusters
 
   scope :confirmed_quantity, -> { confirmed_today.sum('quantity') }
   scope :pending,   -> {includes(cart: :line_items).without_deleted.where(status: OrderStatuses::PENDING)} do

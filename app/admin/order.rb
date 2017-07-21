@@ -24,14 +24,36 @@ ActiveAdmin.register Order do
     end
 
     panel 'Order List' do
-      attributes_table_for order do
-        row 'Menu Items' do
-          order.cart.line_items.map do |item|
-            link_to "#{item.menu.name} x #{item.quantity} = P#{item.menu.price * item.quantity}", admin_menu_path(item.menu)
-          end.join('<br>').html_safe
+      clusters = Cluster.all
+      table_for order.cart.line_items.includes(:menu) do
+        column :menu
+        column :quantity
+        column 'Price' do |item|
+          number_to_currency(item.quantity * item.menu.price, unit: 'P')
         end
-        row 'Total Price' do
-          order.cart.total_price
+        column 'Discounted?' do |item|
+          item.discount > 0 ? status_tag('Yes', :ok) : status_tag('No')
+        end
+        column 'Discounted Price' do |item|
+          number_to_currency(item.discounted_price, unit: 'P')
+        end
+      end
+      div class: 'panel_contents' do
+        table do
+          thead do
+            tr do
+              th
+              th
+              th
+            end
+          end
+          tbody do
+            tr do
+              td 'Total Price'
+              td
+              td number_to_currency(order.cart.total_discounted_price, unit: 'P')
+            end
+          end
         end
       end
     end
