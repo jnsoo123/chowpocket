@@ -33,7 +33,7 @@ foods = [
   File.open(Rails.root.join("app/assets/images/food#{iteration + 1}.jpg")) do |file|
     Menu.create do |menu|
       menu.name         = foods[iteration]
-      menu.price        = 10 * (iteration + 1) 
+      menu.price        = 52 * (iteration + 1) 
       menu.avatar       = file
       menu.description  = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
     end
