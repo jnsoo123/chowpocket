@@ -10,6 +10,13 @@ class Page extends Component {
     }
   }
 
+  componentDidMount(){
+    $(window).on('popstate', function(e){
+      e.preventDefault()
+      location.href = '/'
+    })
+  }
+
   orderNow(e){
     e.preventDefault()
     $.ajax({
