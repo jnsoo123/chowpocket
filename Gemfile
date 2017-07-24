@@ -29,6 +29,8 @@ gem 'font-awesome-sass'
 gem 'paranoia', '~> 2.2'
 gem 'carrierwave'
 gem 'resque-web', require: 'resque_web'
+gem 'ice_cube'
+gem 'timecop'
 
 # -- END --
 

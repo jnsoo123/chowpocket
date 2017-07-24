@@ -29,13 +29,19 @@ foods = [
   'Pappardelle with Sea Urchin and Cauliflower'
 ]
 
-6.times do |iteration|
-  File.open(Rails.root.join("app/assets/images/food#{iteration + 1}.jpg")) do |file|
+14.times do |iteration|
+  iterator = (iteration % 5) + 1  
+  File.open(Rails.root.join("app/assets/images/food#{iterator}.jpg")) do |file|
+    schedule = IceCube::Schedule.new(now = Time.now) do |s|
+      s.add_recurrence_rule IceCube::Rule.weekly(2).day(iterator)
+    end
+
     Menu.create do |menu|
-      menu.name         = foods[iteration]
+      menu.name         = "Silog ##{iteration + 1}"
       menu.price        = 52 * (iteration + 1) 
       menu.avatar       = file
       menu.description  = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
+      menu.schedule     = schedule.to_yaml
     end
   end
 end
