@@ -14,7 +14,8 @@ class BuildingsController < ApplicationController
         description:  menu.description,
         price:        (menu.price - (menu.price * (get_discount(menu)) / 100.0 )).to_f, 
         image:        menu.avatar.url,
-        percent:      get_discount(menu)
+        percent:      get_discount(menu),
+        count:        (@clusters.select {|cluster| cluster[:menu_id] == menu.id}.last[:count].to_i rescue 0)
       }
     end
   end
@@ -25,11 +26,11 @@ class BuildingsController < ApplicationController
   end
 
   def get_discount(menu)
-    @clusters.detect {|cluster| cluster[:menu_id] == menu.id}[:discount].to_f rescue 0
+    @clusters.select {|cluster| cluster[:menu_id] == menu.id}.last[:discount].to_f rescue 0
   end
 
   def set_clusters
-    @clusters = Cluster.includes(:menu_clusters).where(date_created: Date.today).collect do |cluster|
+    @clusters = Cluster.includes(:menu_clusters).where(date_created: Date.today).order(id: :asc).collect do |cluster|
       {
         menu_id: cluster.menu.id,
         discount: cluster.discount,

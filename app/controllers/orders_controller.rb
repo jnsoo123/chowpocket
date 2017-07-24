@@ -27,9 +27,11 @@ class OrdersController < ApplicationController
   def set_cluster(menu_id)
     cluster = Cluster.where(menu_id: menu_id, date_created: Date.today).last
     begin
-      if cluster.menu_clusters.sum('quantity') > 50
+      cluster_quantity = cluster.menu_clusters.sum('quantity')
+      if cluster_quantity > 49
         cluster = create_cluster(menu_id)
       end
+      create_cluster(menu_id) if cluster_quantity == 49
     rescue
       cluster = create_cluster(menu_id)
     end
