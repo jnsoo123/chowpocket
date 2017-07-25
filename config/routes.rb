@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resource  :passwords, only: [:edit, :update]
 
   get '/privacy', to: 'footer#privacy'
+  get '/faqs', to: 'footer#faqs'
 
   devise_for :users, controllers: { omniauth_callbacks: 'callbacks', registrations: 'registrations' }
 
