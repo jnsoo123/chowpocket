@@ -1,11 +1,4 @@
 {
-<<<<<<< HEAD
   "application.js": "https://0.0.0.0:8081/packs/application.js",
   "hello_react.js": "https://0.0.0.0:8081/packs/hello_react.js"
-=======
-  "application.js": "/packs/application-7d00bf05cb457c825937.js",
-  "application.js.map": "/packs/application-7d00bf05cb457c825937.js.map",
-  "hello_react.js": "/packs/hello_react-59eea226ddf700fc2eaa.js",
-  "hello_react.js.map": "/packs/hello_react-59eea226ddf700fc2eaa.js.map"
->>>>>>> 2a4a1280d43d7df11ed4ca67f0aa5b1dcb901f00
 }
