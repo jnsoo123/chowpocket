@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   resource  :profiles, only: [:show, :edit, :update]
   resource  :passwords, only: [:edit, :update]
 
+  get '/privacy', to: 'footer#privacy'
+
   devise_for :users, controllers: { omniauth_callbacks: 'callbacks', registrations: 'registrations' }
 
   root to: redirect('/buildings/1')

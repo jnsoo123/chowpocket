@@ -102,9 +102,6 @@ class MenuItem extends Component {
         </div>
         <div className='panel-footer building-show-page__menu-item-panel-footer'>
           <div className='btn-group btn-group-justified'>
-            <a href='#' className='btn btn-info btn-sm'>
-              <i className='fa fa-comments' /> Comments
-            </a>
             {this.renderCartButtons()}
           </div>
         </div>

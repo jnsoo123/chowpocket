@@ -1,30 +1,31 @@
 nav.nav.navbar-default
-  .navbar-header
-    button.navbar-toggle.collapsed data-target="#navbar-collapse-1" data-toggle="collapse" type="button" 
-      span.sr-only Toggle navigation
-      span.icon-bar
-      span.icon-bar
-      span.icon-bar
-    = link_to root_path, class: 'navbar-brand' do
-      | chow<strong>pocket</strong>
-  #navbar-collapse-1.collapse.navbar-collapse
-    ul.nav.navbar-nav.navbar-right
-      - if not user_signed_in?
-        li
-          = link_to 'Login', new_user_session_path
-      - else
-        li.dropdown
-          a.dropdown-toggle href='#' data-toggle='dropdown' role='button' aria-expanded='false'
-            = icon('user', " #{current_user.name} ", style: 'margin-right: 8px;')
-            span.caret
-          ul.dropdown-menu role='menu'
-            - if current_user.is_admin?
+  .container
+    .navbar-header
+      button.navbar-toggle.collapsed data-target="#navbar-collapse-1" data-toggle="collapse" type="button" 
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      = link_to root_path, class: 'navbar-brand' do
+        | chow<strong>pocket</strong>
+    #navbar-collapse-1.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right
+        - if not user_signed_in?
+          li
+            = link_to 'Login', new_user_session_path
+        - else
+          li.dropdown
+            a.dropdown-toggle href='#' data-toggle='dropdown' role='button' aria-expanded='false'
+              = icon('user', " #{current_user.name} ", style: 'margin-right: 8px;')
+              span.caret
+            ul.dropdown-menu role='menu'
+              - if current_user.is_admin?
+               li
+                  = link_to icon('cogs', ' Administrator'), admin_root_path
               li
-                = link_to icon('cogs', ' Administrator'), admin_root_path
-            li
-              = link_to icon('user', ' My Profile'), profiles_path
-            li
-              = link_to icon('list-ul', ' Order History'), orders_path
-            li.divider
-            li
-              = link_to icon('sign-out', ' Logout'), destroy_user_session_path, method: :delete
+                = link_to icon('user', ' My Profile'), profiles_path
+              li
+                = link_to icon('list-ul', ' Order History'), orders_path
+              li.divider
+              li
+                = link_to icon('sign-out', ' Logout'), destroy_user_session_path, method: :delete
