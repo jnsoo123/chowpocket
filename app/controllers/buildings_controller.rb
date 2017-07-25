@@ -8,7 +8,7 @@ class BuildingsController < ApplicationController
 
   def show
     @menus = []
-    #date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
+    # date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
 
     Menu.all.each do |menu|
       #schedule = IceCube::Schedule.from_yaml(menu.schedule)
