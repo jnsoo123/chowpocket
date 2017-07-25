@@ -24,7 +24,6 @@ class BuildingsController < ApplicationController
       }
       @menus.push hash
     end
-    binding.pry
   end
 
   private
