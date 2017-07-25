@@ -46,5 +46,7 @@ foods = [
   end
 end
 
+Building.create(name: 'Globe Valero')
+
 puts "Total Users: #{User.count}"
 puts "Total Menus: #{Menu.count}"

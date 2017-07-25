@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170724073931) do
+ActiveRecord::Schema.define(version: 20170725124510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,8 @@ ActiveRecord::Schema.define(version: 20170724073931) do
     t.string "name"
     t.datetime "deleted_at"
     t.string "phone_number"
+    t.bigint "building_id"
+    t.index ["building_id"], name: "index_users_on_building_id"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -136,4 +138,5 @@ ActiveRecord::Schema.define(version: 20170724073931) do
   add_foreign_key "menu_clusters", "menus"
   add_foreign_key "menu_clusters", "orders"
   add_foreign_key "orders", "carts"
+  add_foreign_key "users", "buildings"
 end
