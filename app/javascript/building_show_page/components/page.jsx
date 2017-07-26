@@ -234,7 +234,9 @@ class Page extends Component{
           </div>
         </div>
       </div>
-      <ModalInfo />
+      <ModalInfo
+        modalInfo={this.props.modalInfo}
+      />
     </div>)
   }
 }
@@ -250,6 +252,7 @@ const main = {
           cartId={rootElem.data('cart-id')}
           totalPrice={rootElem.data('total-price')}
           userSignedIn={rootElem.data('user-logged-in')}
+          modalInfo={rootElem.data('modal-info')}
         />, rootElem[0]
       )
     }

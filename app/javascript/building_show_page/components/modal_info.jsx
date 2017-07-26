@@ -4,13 +4,12 @@ class ModalInfo extends Component {
   render(){
     return(
       <div id='discountMeterInfoModal' className='modal fade' tabIndex='-1' role='dialog'>
-        <div className='modal-dialog' role='document'>
+        <div className='modal-dialog modal-lg' role='document' style={{width: '1000px'}}>
           <div className='modal-content'>
             <div className='modal-header'>
-              Discount'o Meter FAQs
+              Discount'o Meter Information
             </div>
-            <div className='modal-body'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+            <div className='modal-body' style={{backgroundImage: 'url('+ this.props.modalInfo +')', height: '540px'}}>
             </div>
           </div>
         </div>
