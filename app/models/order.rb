@@ -45,6 +45,11 @@ class Order < ApplicationRecord
     check_pending_orders
   end
 
+  after_destroy do
+    destroy_menu_clusters
+    self.update status: 'cancelled'
+  end
+
   def self.today
     date_option = if DateTime.now.change({hour: 19}) > DateTime.now
                     { created_at: (DateTime.now - 1.day).change({ hour: 19 })..DateTime.now.change({ hour: 19 }) }
@@ -77,6 +82,10 @@ class Order < ApplicationRecord
   end
 
   private
+  def destroy_menu_clusters
+    self.menu_clusters.destroy_all
+  end
+
   def check_pending_orders
     if Order.pending.today.sum('quantity') > 30
       deliver_emails

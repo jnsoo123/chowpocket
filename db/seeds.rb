@@ -1,6 +1,6 @@
 puts 'Creating admin user...'
 if Rails.env.development?
-  User.create(
+  User.create!(
     email:                  'admin@example.com', 
     password:               'password', 
     password_confirmation:  'password', 
