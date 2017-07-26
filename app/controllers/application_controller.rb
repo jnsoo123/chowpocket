@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_params, if: :devise_controller?
   before_action :authenticate_user!
   before_action :mark_cancelled_all_pending_orders_yesterday
-  before_action :check_cluster_discount_availability
   before_action :check_if_user_has_phone_number
 
   layout :layout_of_resource
@@ -45,9 +44,6 @@ class ApplicationController < ActionController::Base
     Order.transaction do
       Order.pending.not_today.destroy_all
     end
-  end
-
-  def check_cluster_discount_availability
   end
 
   def check_if_user_has_phone_number

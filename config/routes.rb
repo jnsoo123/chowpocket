@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   get '/privacy', to: 'footer#privacy'
   get '/faqs', to: 'footer#faqs'
+  get '/contact_us', to: 'footer#contact_us'
 
   devise_for :users, controllers: { omniauth_callbacks: 'callbacks', registrations: 'registrations' }
 
