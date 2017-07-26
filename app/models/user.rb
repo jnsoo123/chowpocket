@@ -1,12 +1,10 @@
 class User < ApplicationRecord
-  belongs_to :building
+  belongs_to :building, optional: true
   acts_as_paranoid without_default_scope: true
 
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable,
     :omniauthable, :omniauth_providers => [:google_oauth2]
-
-  validates_presence_of :name, :email, :phone_number, :company_name, :floor, :building_id
 
   has_many :carts, dependent: :destroy
   has_many :orders, through: :carts

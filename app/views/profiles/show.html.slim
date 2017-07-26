@@ -12,10 +12,25 @@ hr
     b
       = current_user.email
   .col-xs-3
-    | Phone Number
+    | Phone Number:
   .col-xs-9
     b
       = current_user.phone_number || '--'
+  .col-xs-3
+    | Building:
+  .col-xs-9
+    b
+      = current_user.building.try(:name) || '--'
+  .col-xs-3
+    | Company Name:
+  .col-xs-9
+    b
+      = current_user.company_name || '--'
+  .col-xs-3
+    | Floor Number:
+  .col-xs-9
+    b
+      = current_user.floor || '--'
 hr
 .btn-group
   = link_to icon('pencil', ' Edit Profile'), edit_profiles_path, class: 'btn btn-info btn-sm'
