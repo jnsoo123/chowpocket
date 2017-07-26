@@ -1,5 +1,5 @@
 ActiveAdmin.register Menu do
-  permit_params :name, :price, :avatar
+  permit_params :name, :price, :avatar, :description
 
   index do
     selectable_column
@@ -14,6 +14,7 @@ ActiveAdmin.register Menu do
   form do |f|
     f.inputs 'Menu Details' do
       f.input :name
+      f.input :description
       f.input :price
       f.input :avatar, as: :file
     end

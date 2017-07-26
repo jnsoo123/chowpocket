@@ -43,7 +43,6 @@ class Order < ApplicationRecord
   after_create do
     cart.update is_ordered: true
     check_pending_orders
-    check_discount_availability
   end
 
   def self.today
@@ -86,13 +85,5 @@ class Order < ApplicationRecord
 
   def deliver_emails
     SendConfirmationMailJob.perform_later
-  end
-
-  def check_discount_availability
-    #    case Order.confirmed_today_quantity
-    #    when 10..19
-    #    when 20..29
-    #    when 30..Float::INFINITY
-    #    end
   end
 end
