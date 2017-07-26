@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
 
   private
   def configure_permitted_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :building_id, :floor, :phone_number, :company_name])
   end
 
   def mark_cancelled_all_pending_orders_yesterday

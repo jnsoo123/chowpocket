@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  belongs_to :building
   acts_as_paranoid without_default_scope: true
 
   devise :database_authenticatable, :registerable,

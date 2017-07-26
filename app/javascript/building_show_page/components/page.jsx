@@ -153,7 +153,10 @@ class Page extends Component{
         </li>
       )
     } else {
-      views = 'No items yet.'
+      views = 'Your cart is empty!'
+      if (!this.props.userSignedIn){
+        views += ' Login to order.'
+      }
     }
     return views
   }
