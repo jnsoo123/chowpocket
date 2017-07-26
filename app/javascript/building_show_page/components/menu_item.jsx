@@ -47,6 +47,14 @@ class MenuItem extends Component {
     }
   }
 
+  renderPrice(){
+    if(this.props.userSignedIn){
+      return(
+        'P' + this.props.price.toFixed(2)
+      )
+    }
+  }
+
   render() {
     let menu = this.props
 
@@ -75,7 +83,7 @@ class MenuItem extends Component {
                 {menu.name}
               </span>
               <span className='pull-right'>
-                {'P' + menu.price.toFixed(2)}
+                {this.renderPrice()}
               </span>
             </h3>
             {this.isDiscounted()}
