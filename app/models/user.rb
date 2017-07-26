@@ -6,6 +6,8 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :trackable, :validatable,
     :omniauthable, :omniauth_providers => [:google_oauth2]
 
+  validates_presence_of :name, :email, :phone_number, :company_name, :floor, :building_id
+
   has_many :carts, dependent: :destroy
   has_many :orders, through: :carts
 
