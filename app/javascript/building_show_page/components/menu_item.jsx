@@ -76,7 +76,7 @@ class MenuItem extends Component {
         <div className='panel-body building-show-page__menu-item-panel-body'>
           <div 
             className='building-show-page__menu-item-picture' 
-            style={{backgroundImage: 'url(' + menu.image + ')'}} />
+            style={{backgroundImage: 'url(' + menu.image_url + ')'}} />
           <div className='building-show-page__menu-item-title'>
             <h3 className='clearfix'>
               <span className='pull-left'>
