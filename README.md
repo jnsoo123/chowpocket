@@ -2,4 +2,4 @@
 
 Basic food delivery app.
 
-[Access deployment website here](https://chowpocket.herokuapp.com/)
+[Access deployment website here](https://www.chowpocket.com/)
