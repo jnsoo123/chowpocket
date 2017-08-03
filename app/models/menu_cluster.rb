@@ -14,11 +14,11 @@ class MenuCluster < ApplicationRecord
   private
   def update_cluster_discount
     case cluster.menu_clusters.sum('quantity')
-    when 30..39
+    when 15..19
       set_discount = 10
-    when 40..49
+    when 20..29
       set_discount = 20
-    when 50..Float::INFINITY
+    when 30..Float::INFINITY
       set_discount = 30
     else
       set_discount = nil

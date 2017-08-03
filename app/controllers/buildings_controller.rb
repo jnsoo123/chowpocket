@@ -20,8 +20,7 @@ class BuildingsController < ApplicationController
         price:        (menu.price - (menu.price * (get_discount(menu)) / 100.0 )).to_f, 
         image:        menu.avatar.url,
         percent:      get_discount(menu),
-        count:        (@clusters.select {|cluster| cluster[:menu_id] == menu.id}.last[:count].to_i rescue 0),
-        image_url:    menu.temp_photo_url
+        count:        (@clusters.select {|cluster| cluster[:menu_id] == menu.id}.last[:count].to_i rescue 0)
       }
       @menus.push hash
     end
@@ -29,7 +28,7 @@ class BuildingsController < ApplicationController
 
   private
   def set_building
-    @building = Building.find_by_name(params[:name])
+    @building = Building.find(params[:id])
   end
 
   def get_discount(menu)

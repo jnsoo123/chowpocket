@@ -7,42 +7,26 @@ class MenuItem extends Component {
         <a 
           href='#' 
           data-menu-id={this.props.id} 
-          className='btn btn-success btn-sm'
+          className='btn btn-success btn-xs btn-order'
           onClick={this.props.addToCart}>
           <i className='fa fa-plus' /> Add to Cart
         </a>
       ) 
     } else {
       return(
-        <a href='/users/sign_in' className='btn btn-success btn-sm'>
+        <a href='/users/sign_in' className='btn btn-success btn-xs btn-order'>
           Check Availability
         </a>
       ) 
     }
   }
 
-  getCountLeftForDiscount(count){
-    let text = ''
-
-    switch(true) {
-      case count < 30:
-        text = (30 - count) + ' orders left for 10% discount'
-        break
-      case count >= 30 && count < 40:
-        text = (40 - count) + ' orders left for 20% discount'
-        break
-      case count >= 40 && count < 50:
-        text = (50 - count) + ' orders left for 30% discount'
-        break
-    }
-
-    return text
-  }
-
   isDiscounted(){
     if (this.props.percent != 0) {
       return(
-        <span className='label label-danger'>Discounted!</span>
+        <div className='pull-right'>
+          <span className='label label-danger'>{this.props.percent}% OFF!</span>
+        </div>
       ) 
     }
   }
@@ -71,12 +55,17 @@ class MenuItem extends Component {
         break
     }
 
+    let firstLevelDiscountCount = menu.count-15 > 15 ? 15 : (menu.count < 15 ? menu.count : 15)
+    let secondLevelDiscountCount = menu.count-10 > 20 ? 20 : (menu.count < 20 ? (menu.count)%20 : 20 )
+    let thirdLevelDiscountCount = menu.count > 30 ? 30 : (menu.count < 30 ? (menu.count)%30 : 30)
+    console.log(menu.count)
+
     return(<div className='building-show-page__menu-item'>
       <div className='panel panel-default' style={{borderRadius: '5px'}}>
         <div className='panel-body building-show-page__menu-item-panel-body'>
           <div 
             className='building-show-page__menu-item-picture' 
-            style={{backgroundImage: 'url(' + menu.image_url + ')'}} />
+            style={{backgroundImage: 'url(' + menu.image + ')'}} />
           <div className='building-show-page__menu-item-title'>
             <h3 className='clearfix'>
               <span className='pull-left'>
@@ -88,29 +77,38 @@ class MenuItem extends Component {
             </h3>
             {this.isDiscounted()}
             <p>{menu.description}</p>
-            <div className='clearfix'>
-              <div className='pull-left'>
-                Discount o Meter
-                <button className='btn btn-link btn-xs' data-toggle='modal' data-target='#discountMeterInfoModal'>
-                  <i className='fa fa-info'></i>
-                </button>
+            <div className='row'>
+              <div className='col-xs-9'>
+                <div className='text-center'><small>Discount o Meter:</small></div>
+                <div className='progress'>
+                  <div 
+                    className='progress-bar progress-bar-success'
+                    style={{width: ((firstLevelDiscountCount/15)*100*(33/100))+'%'}}>
+                    {firstLevelDiscountCount > 0 ? firstLevelDiscountCount + '/15' : ''}
+                  </div>
+                  <div 
+                    className='progress-bar progress-bar-warning' 
+                    style={{width: (secondLevelDiscountCount > 15 ? ((secondLevelDiscountCount-15)/5)*100*(33/100) : 0)+'%'}}>
+                    {secondLevelDiscountCount > 15 ? secondLevelDiscountCount + '/20' : ''}
+                  </div>
+                  <div 
+                    className='progress-bar progress-bar-danger' 
+                    style={{width: (thirdLevelDiscountCount > 20 ? ((thirdLevelDiscountCount-20)/10)*100*(34/100) : 0)+'%'}}>
+                    {thirdLevelDiscountCount > 20 ? thirdLevelDiscountCount + '/30' : ''}
+                  </div>
+                </div>
               </div>
-              <div className='pull-right'>
-                {this.getCountLeftForDiscount(menu.count)}
+              <div className='col-xs-3'>
+                <div style={{marginTop: '21px'}}>
+                  <div className='btn-group'>
+                    {this.renderCartButtons()}
+                    <button className='btn btn-link btn-xs' data-toggle='modal' data-target='#discountMeterInfoModal'>
+                      <i className='fa fa-info'></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className='progress'>
-              <div 
-                className={'progress-bar progress-bar-'+meterColor} 
-                style={{width: ((menu.percent/30)*100)+'%'}}>
-                {menu.percent + '%'}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className='panel-footer building-show-page__menu-item-panel-footer'>
-          <div className='btn-group btn-group-justified'>
-            {this.renderCartButtons()}
           </div>
         </div>
       </div>

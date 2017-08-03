@@ -34,3 +34,18 @@
     color: black;
   }
 }
+
+.building-show-page .btn-order {
+  border-radius: 20px;
+}
+
+.building-show-page__menu-item-panel-body .progress {
+  height: 25px;
+  border-radius: 20px;
+
+  .progress-bar {
+    font-size: 12px;
+    padding-top: 8px;
+    color: #333;
+  }
+}
