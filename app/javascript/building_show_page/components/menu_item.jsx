@@ -58,7 +58,6 @@ class MenuItem extends Component {
     let firstLevelDiscountCount = menu.count-15 > 15 ? 15 : (menu.count < 15 ? menu.count : 15)
     let secondLevelDiscountCount = menu.count-10 > 20 ? 20 : (menu.count < 20 ? (menu.count)%20 : 20 )
     let thirdLevelDiscountCount = menu.count > 30 ? 30 : (menu.count < 30 ? (menu.count)%30 : 30)
-    console.log(menu.count)
 
     return(<div className='building-show-page__menu-item'>
       <div className='panel panel-default' style={{borderRadius: '5px'}}>
@@ -78,7 +77,7 @@ class MenuItem extends Component {
             {this.isDiscounted()}
             <p>{menu.description}</p>
             <div className='row'>
-              <div className='col-xs-9'>
+              <div className='col-xs-8'>
                 <div className='text-center'><small>Discount o Meter:</small></div>
                 <div className='progress'>
                   <div 
@@ -98,11 +97,11 @@ class MenuItem extends Component {
                   </div>
                 </div>
               </div>
-              <div className='col-xs-3'>
-                <div style={{marginTop: '21px'}}>
+              <div className='col-xs-4'>
+                <div className='pull-right' style={{marginTop: '21px'}}>
                   <div className='btn-group'>
                     {this.renderCartButtons()}
-                    <button className='btn btn-link btn-xs' data-toggle='modal' data-target='#discountMeterInfoModal'>
+                    <button className='btn btn-default btn-order btn-xs' data-toggle='modal' data-target='#discountMeterInfoModal'>
                       <i className='fa fa-info'></i>
                     </button>
                   </div>
