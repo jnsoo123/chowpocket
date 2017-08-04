@@ -18,7 +18,7 @@ class BuildingsController < ApplicationController
         name:         menu.name, 
         description:  menu.description,
         price:        (menu.price - (menu.price * (get_discount(menu)) / 100.0 )).to_f, 
-        image:        menu.avatar.url,
+        image:        menu.avatar_url,
         percent:      get_discount(menu),
         count:        (@clusters.select {|cluster| cluster[:menu_id] == menu.id}.last[:count].to_i rescue 0)
       }
