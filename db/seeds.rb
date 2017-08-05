@@ -45,7 +45,7 @@ if Rails.env.development?
 end
 
 puts 'Creating buildings...'
-Building.create(name: 'Globe Valero')
+Building.create(name: '111 Globe Telepark Valero')
 
 puts "Total Users: #{User.count}"
 puts "Total Menus: #{Menu.count}"
