@@ -1,5 +1,5 @@
 ActiveAdmin.register Menu do
-  permit_params :name, :price, :avatar, :description, :temp_photo_url
+  permit_params :name, :price, :avatar, :description, :temp_photo_url, :schedule
 
   index do
     selectable_column
@@ -16,7 +16,7 @@ ActiveAdmin.register Menu do
       f.input :name
       f.input :description
       f.input :price
-      f.input :schedule, as: :select, collection: ScheduleDays::RADIO_ALL
+      f.input :schedule, as: :select, collection: ScheduleDays::ALL, include_blank: false
       f.input :avatar, as: :file
     end
     f.actions

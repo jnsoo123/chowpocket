@@ -29,10 +29,10 @@ gem 'font-awesome-sass'
 gem 'paranoia', '~> 2.2'
 gem 'carrierwave'
 gem 'resque-web', require: 'resque_web'
-gem 'ice_cube'
 gem 'timecop'
 gem 'mini_magick'
 gem 'fog'
+gem 'activeadmin_addons'
 
 # -- END --
 

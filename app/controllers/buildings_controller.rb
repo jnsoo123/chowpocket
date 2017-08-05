@@ -8,21 +8,24 @@ class BuildingsController < ApplicationController
 
   def show
     @menus = []
-    # date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
+    date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
+
+    date = date + 1.day if date.sunday?
+    date = date + 2.day if date.saturday?
 
     Menu.all.each do |menu|
-      #schedule = IceCube::Schedule.from_yaml(menu.schedule)
-      #if schedule.occurs_on? date
-      hash = { 
-        id:           menu.id,
-        name:         menu.name, 
-        description:  menu.description,
-        price:        (menu.price - (menu.price * (get_discount(menu)) / 100.0 )).to_f, 
-        image:        menu.avatar_url,
-        percent:      get_discount(menu),
-        count:        (@clusters.select {|cluster| cluster[:menu_id] == menu.id}.last[:count].to_i rescue 0)
-      }
-      @menus.push hash
+      if date.send("#{menu.schedule.downcase}?")
+        hash = { 
+          id:           menu.id,
+          name:         menu.name, 
+          description:  menu.description,
+          price:        (menu.price - (menu.price * (get_discount(menu)) / 100.0 )).to_f, 
+          image:        menu.avatar_url,
+          percent:      get_discount(menu),
+          count:        (@clusters.select {|cluster| cluster[:menu_id] == menu.id}.last[:count].to_i rescue 0)
+        }
+        @menus.push hash
+      end
     end
   end
 
