@@ -6,4 +6,5 @@ ActiveAdmin.setup do |config|
   config.batch_actions = true
   config.localize_format = :long
   config.skip_before_action :check_if_user_has_phone_number
+  config.register_stylesheet 'activeadmin_customizations.css'
 end
