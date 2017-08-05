@@ -18,7 +18,6 @@ ActiveAdmin.register Menu do
       f.input :price
       f.input :schedule, as: :select, collection: ScheduleDays::RADIO_ALL
       f.input :avatar, as: :file
-      f.input :temp_photo_url
     end
     f.actions
   end
