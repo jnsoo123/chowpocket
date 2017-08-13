@@ -27,4 +27,8 @@ ActiveAdmin.register Cluster do
       end
     end
   end
+
+  controller do
+    skip_before_action :set_clusters
+  end
 end
