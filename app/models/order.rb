@@ -48,7 +48,6 @@ class Order < ApplicationRecord
   after_destroy do
     destroy_menu_clusters
     self.update status: 'cancelled'
-    self.menu_clusters.destroy_all
   end
 
   def self.today
