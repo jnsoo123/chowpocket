@@ -79,7 +79,7 @@ class Page extends Component {
               </tr>
               <tr>
                 <td colSpan='2'>Total Price:</td>
-                <td>{this.state.totalPrice.toFixed(2)}</td>
+                <td>{this.state.totalPrice}</td>
               </tr>
             </tbody>
           </table>

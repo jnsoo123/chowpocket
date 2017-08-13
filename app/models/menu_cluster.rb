@@ -11,6 +11,10 @@ class MenuCluster < ApplicationRecord
     update_cluster_discount
   end
 
+  after_update do
+    update_cluster_discount
+  end
+
   private
   def update_cluster_discount
     case cluster.menu_clusters.sum('quantity')
