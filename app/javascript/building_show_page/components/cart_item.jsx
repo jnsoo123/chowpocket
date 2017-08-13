@@ -23,7 +23,7 @@ class CartItem extends Component {
         {item.menu} 
       </h5>
       <p className='building-show-page__cart-item-price'>
-        P {item.price * item.quantity}
+        P {(item.price * item.quantity).toFixed(2)}
       </p>
       <div className='clearfix'>
         <div className='pull-left'>

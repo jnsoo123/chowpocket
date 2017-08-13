@@ -3,7 +3,17 @@ class LineItem < ApplicationRecord
   belongs_to :cart
 
   def discount
-    Cluster.joins(:menu_clusters).where(menu_clusters: {menu: self.menu, order: self.cart.order}).uniq.last.discount rescue 0
+    clusters = Cluster.includes(:menu_clusters, :menu).
+      where(date_created: Date.today).
+      order(id: :asc).
+      collect do |cluster|
+        {
+          menu_id: cluster.menu.id,
+          discount: cluster.discount,
+        }
+      end
+
+    clusters.select {|cluster| cluster[:menu_id] == menu.id}.last[:discount].to_f rescue 0
   end
 
   def discounted_price

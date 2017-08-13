@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  before_action :set_clusters
   before_action :set_cart
   before_action :configure_permitted_params, if: :devise_controller?
   before_action :authenticate_user!
@@ -21,7 +22,7 @@ class ApplicationController < ActionController::Base
           id: item.id,
           menu: item.menu.name,
           quantity: item.quantity,
-          price: item.menu.price
+          price:    (item.menu.price - (item.menu.price * (get_discount(item.menu)) / 100.0 )).to_f, 
         } 
       end.to_json
     end
@@ -52,5 +53,19 @@ class ApplicationController < ActionController::Base
         flash[:error] = 'Please update your all your account details so that we can notify you to what ever happens. <a class="alert-link" href="/profiles">Update here</a>'
       end
     end 
+  end
+
+  def get_discount(menu)
+    @clusters.select {|cluster| cluster[:menu_id] == menu.id}.last[:discount].to_f rescue 0
+  end
+
+  def set_clusters
+    @clusters = Cluster.includes(:menu_clusters).where(date_created: Date.today).order(id: :asc).collect do |cluster|
+      {
+        menu_id: cluster.menu.id,
+        discount: cluster.discount,
+        count: cluster.menu_clusters.sum('quantity')
+      }
+    end
   end
 end

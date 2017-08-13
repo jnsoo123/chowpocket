@@ -48,7 +48,7 @@ class Page extends Component {
         return(<tr key={i}>
           <td>{item.menu}</td> 
           <td>{item.quantity}</td>
-          <td>{item.price * item.quantity}</td>
+          <td>{(item.price * item.quantity).toFixed(2)}</td>
           <td>
             <button className='btn btn-danger btn-xs' onClick={this.removeOrder.bind(this, item)}>Remove Order</button>
           </td>
@@ -79,7 +79,7 @@ class Page extends Component {
               </tr>
               <tr>
                 <td colSpan='2'>Total Price:</td>
-                <td>{this.state.totalPrice}</td>
+                <td>{this.state.totalPrice.toFixed(2)}</td>
               </tr>
             </tbody>
           </table>

@@ -1,6 +1,5 @@
 class BuildingsController < ApplicationController
   before_action :set_building, only: :show
-  before_action :set_clusters, only: :show
   skip_before_action :authenticate_user!
 
   def index
@@ -32,19 +31,5 @@ class BuildingsController < ApplicationController
   private
   def set_building
     @building = Building.find(params[:id])
-  end
-
-  def get_discount(menu)
-    @clusters.select {|cluster| cluster[:menu_id] == menu.id}.last[:discount].to_f rescue 0
-  end
-
-  def set_clusters
-    @clusters = Cluster.includes(:menu_clusters).where(date_created: Date.today).order(id: :asc).collect do |cluster|
-      {
-        menu_id: cluster.menu.id,
-        discount: cluster.discount,
-        count: cluster.menu_clusters.sum('quantity')
-      }
-    end
   end
 end

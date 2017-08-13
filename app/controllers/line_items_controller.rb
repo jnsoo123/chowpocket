@@ -32,10 +32,10 @@ class LineItemsController < ApplicationController
   def line_items
     @cart.reload.line_items.includes(:menu).order(created_at: :asc).collect do |item|
       {
-        id: item.id,
-        menu: item.menu.name,
+        id:       item.id,
+        menu:     item.menu.name,
         quantity: item.quantity,
-        price: item.menu.price
+        price:    (item.menu.price - (item.menu.price * (get_discount(item.menu)) / 100.0 )).to_f, 
       } 
     end
   end

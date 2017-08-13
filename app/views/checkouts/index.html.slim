@@ -1,1 +1,1 @@
-.checkout-page data-cart='#{@line_items.presence}' data-total-price='#{@cart.try(:total_price)}'
+.checkout-page data-cart='#{@line_items.presence}' data-total-price='#{@cart.try(:total_discounted_price)}'
