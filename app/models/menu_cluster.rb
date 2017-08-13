@@ -17,7 +17,6 @@ class MenuCluster < ApplicationRecord
 
   private
   def update_cluster_discount
-    binding.pry
     case cluster.menu_clusters.sum('quantity')
     when 15..19
       set_discount = 10
