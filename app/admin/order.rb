@@ -6,9 +6,19 @@ ActiveAdmin.register Order do
       link_to order.cart.user.email, admin_user_path(order.cart.user)
     end
     column :is_delivered
+    column 'Deleted/ Cancelled' do |order|
+      order.deleted? ? status_tag('Yes', :ok) : status_tag('No') 
+    end
     column :created_at
     column :updated_at
-    actions
+
+    column :actions do |object|
+      div class: 'table_actions' do
+        raw( %(#{link_to "View", [:admin, object], class: 'view_link member_link'} 
+            #{link_to "Edit", [:admin, object], class: 'edit_link member_link'} 
+            #{(link_to"Delete", [:admin, object], class: 'delete_link member_link', method: :delete) if not object.deleted? }) )
+      end
+    end
   end
 
   show do
@@ -17,6 +27,9 @@ ActiveAdmin.register Order do
       row :cart_id
       row 'User' do |order|
         link_to order.cart.user.email, admin_user_path(order.cart.user)
+      end
+      row 'Deleted/ Cancelled' do |order|
+        order.deleted? ? status_tag('Yes', :ok) : status_tag('No') 
       end
       row :is_delivered
       row :created_at
