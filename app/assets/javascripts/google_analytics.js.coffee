@@ -11,7 +11,7 @@ class @GoogleAnalytics
     firstScript.parentNode.insertBefore ga, firstScript
 
     if typeof Turbolinks isnt 'undefined' and Turbolinks.supported
-      document.addEventListener 'page:change', (->
+      document.addEventListener 'turbolinks:load', (->
         GoogleAnalytics.trackPageview()
       ), true
     else
