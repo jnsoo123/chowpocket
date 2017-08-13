@@ -7,7 +7,7 @@ class @GoogleAnalytics
     ga.type = 'text/javasript'
     ga.async = true
     ga.src = ((if 'https:' is document.location.protocol then 'https://ssl' else 'http://www')) + '.google-analytics.com/ga.js'
-    firstScript = document.getElementByTagName('script')[0]
+    firstScript = document.getElementsByTagName('script')[0]
     firstScript.parentNode.insertBefore ga, firstScript
 
     if typeof Turbolinks isnt 'undefined' and Turbolinks.supported
