@@ -42,22 +42,9 @@ class MenuItem extends Component {
   render() {
     let menu = this.props
 
-    let meterColor
-    switch(menu.percent){
-      case 10:
-        meterColor = 'success'
-        break
-      case 20:
-        meterColor = 'warning'
-        break
-      case 30:
-        meterColor = 'danger'
-        break
-    }
-
-    let firstLevelDiscountCount = menu.count-15 > 15 ? 15 : (menu.count < 15 ? menu.count : 15)
+    let firstLevelDiscountCount = menu.count-10 > 10 ? 10 : (menu.count < 10 ? menu.count : 10)
     let secondLevelDiscountCount = menu.count-10 > 20 ? 20 : (menu.count < 20 ? (menu.count)%20 : 20 )
-    let thirdLevelDiscountCount = menu.count > 30 ? 30 : (menu.count < 30 ? (menu.count)%30 : 30)
+    let thirdLevelDiscountCount = menu.count > 25 ? 25 : (menu.count < 25 ? (menu.count)%25 : 25)
 
     return(<div className='building-show-page__menu-item'>
       <div className='panel panel-default' style={{borderRadius: '5px'}}>
@@ -82,18 +69,18 @@ class MenuItem extends Component {
                 <div className='progress'>
                   <div 
                     className='progress-bar progress-bar-success'
-                    style={{width: ((firstLevelDiscountCount/15)*100*(33/100))+'%'}}>
-                    {firstLevelDiscountCount > 0 ? firstLevelDiscountCount + '/15' : ''}
+                    style={{width: ((firstLevelDiscountCount/10)*100*(33/100))+'%'}}>
+                    {firstLevelDiscountCount > 0 ? firstLevelDiscountCount + '/10' : ''}
                   </div>
                   <div 
                     className='progress-bar progress-bar-warning' 
-                    style={{width: (secondLevelDiscountCount > 15 ? ((secondLevelDiscountCount-15)/5)*100*(33/100) : 0)+'%'}}>
-                    {secondLevelDiscountCount > 15 ? secondLevelDiscountCount + '/20' : ''}
+                    style={{width: (secondLevelDiscountCount > 10 ? ((secondLevelDiscountCount-10)/10)*100*(33/100) : 0)+'%'}}>
+                    {secondLevelDiscountCount > 10 ? secondLevelDiscountCount + '/20' : ''}
                   </div>
                   <div 
                     className='progress-bar progress-bar-danger' 
-                    style={{width: (thirdLevelDiscountCount > 20 ? ((thirdLevelDiscountCount-20)/10)*100*(34/100) : 0)+'%'}}>
-                    {thirdLevelDiscountCount > 20 ? thirdLevelDiscountCount + '/30' : ''}
+                    style={{width: (thirdLevelDiscountCount > 20 ? ((thirdLevelDiscountCount-20)/5)*100*(34/100) : 0)+'%'}}>
+                    {thirdLevelDiscountCount > 20 ? thirdLevelDiscountCount + '/25' : ''}
                   </div>
                 </div>
               </div>
