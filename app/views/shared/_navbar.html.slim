@@ -6,13 +6,13 @@ nav.nav.navbar-default
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      = link_to root_path, class: 'navbar-brand' do
-        | chow<strong>pocket</strong> <small class='brand-small'>Pre-Alpha</small>
+      = link_to root_path, class: 'navbar-brand', style: 'padding: 0; height: 100px;' do
+        = image_tag('navbarlogo.png', style: 'width: 280px; height: 100px;')
     #navbar-collapse-1.collapse.navbar-collapse
-      ul.nav.navbar-nav.navbar-right
+      ul.nav.navbar-nav.navbar-right.navbar__links
         - if not user_signed_in?
           li
-            = link_to 'Login', new_user_session_path
+            = link_to 'Log In', new_user_session_path
         - else
           li.dropdown
             a.dropdown-toggle href='#' data-toggle='dropdown' role='button' aria-expanded='false'
