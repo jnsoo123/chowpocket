@@ -4,31 +4,31 @@
   fieldset
     = form_for current_user, url: profiles_path, method: :put, html: { class: 'form-horizontal' } do |f|
       .form-group
-        = f.label :name, class: 'control-label col-xs-2'
-        .col-xs-10
+        = f.label :name, class: 'control-label col-md-2 col-sm-2 col-xs-12'
+        .col-md-10.col-xs-12.col-sm-10
           = f.text_field :name, class: 'form-control', autofocus: true
       .form-group
-        = f.label :email, class: 'control-label col-xs-2'
-        .col-xs-10
+        = f.label :email, class: 'control-label col-md-2 col-sm-2 col-xs-12'
+        .col-md-10.col-xs-12.col-sm-10
           = f.email_field :email, class: 'form-control', required: true
       .form-group
-        = f.label :phone_number, class: 'control-label col-xs-2'
-        .col-xs-10
+        = f.label :phone_number, class: 'control-label col-md-2 col-sm-2 col-xs-12'
+        .col-md-10.col-xs-12.col-sm-10
           = f.text_field :phone_number, class: 'form-control', required: true
       .form-group
-        = f.label :building_id, class: 'control-label col-xs-2'
-        .col-xs-10
+        = f.label :building_id, class: 'control-label col-md-2 col-sm-2 col-xs-12'
+        .col-md-10.col-xs-12.col-sm-10
           = f.select :building_id, Building.all.collect{|x| [x.name, x.id]}, {include_blank: 'Select building'}, class: 'form-control', required: true
       .form-group
-        = f.label :company_name, class: 'control-label col-xs-2'
-        .col-xs-10
+        = f.label :company_name, class: 'control-label col-md-2 col-sm-2 col-xs-12'
+        .col-md-10.col-xs-12.col-sm-10
           = f.text_field :company_name, class: 'form-control', required: true
       .form-group
-        = f.label :floor, class: 'control-label col-xs-2'
-        .col-xs-10
+        = f.label :floor, class: 'control-label col-md-2 col-sm-2 col-xs-12'
+        .col-md-10.col-xs-12.col-sm-10
           = f.text_field :floor, class: 'form-control', required: true
       .form-group
-        .btn-group.col-xs-10.col-xs-offset-2
+        .btn-group.col-md-10.col-md-offset-2
           = f.submit 'Save', class: 'btn btn-success'
           button.btn.btn-warning type='reset'
             | Reset

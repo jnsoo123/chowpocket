@@ -7,14 +7,14 @@ class MenuItem extends Component {
         <a 
           href='#' 
           data-menu-id={this.props.id} 
-          className='btn btn-success btn-xs btn-order'
+          className='btn btn-success btn-sm btn-order'
           onClick={this.props.addToCart}>
           <i className='fa fa-plus' /> Add to Cart
         </a>
       ) 
     } else {
       return(
-        <a href='/users/sign_in' className='btn btn-success btn-xs btn-order'>
+        <a href='/users/sign_in' className='btn btn-success btn-sm btn-order'>
           Check Availability
         </a>
       ) 
@@ -64,7 +64,7 @@ class MenuItem extends Component {
             {this.isDiscounted()}
             <p>{menu.description}</p>
             <div className='row'>
-              <div className='col-xs-8'>
+              <div className='col-xs-12'>
                 <div className='text-center'><small>Discount o Meter:</small></div>
                 <div className='progress'>
                   <div 
@@ -84,14 +84,12 @@ class MenuItem extends Component {
                   </div>
                 </div>
               </div>
-              <div className='col-xs-4'>
-                <div className='pull-right' style={{marginTop: '21px'}}>
-                  <div className='btn-group'>
-                    {this.renderCartButtons()}
-                    <button className='btn btn-default btn-order btn-xs' data-toggle='modal' data-target='#discountMeterInfoModal'>
-                      <i className='fa fa-info'></i>
-                    </button>
-                  </div>
+              <div className='col-xs-12'>
+                <div className='btn-group'>
+                  {this.renderCartButtons()}
+                  <button className='btn btn-default btn-sm btn-order' data-toggle='modal' data-target='#discountMeterInfoModal'>
+                    <i className='fa fa-info'></i>
+                  </button>
                 </div>
               </div>
             </div>
