@@ -1,38 +1,38 @@
 h3 My Profile
 hr
 .row
-  .col-xs-3
+  .col-md-3.col-xs-12
     | Name:
-  .col-xs-9
+  .col-md-9.col-xs-12
     b
       = current_user.name
-  .col-xs-3
+  .col-md-3.col-xs-12
     | Email:
-  .col-xs-9
+  .col-md-9.col-xs-12
     b
       = current_user.email
-  .col-xs-3
+  .col-md-3.col-xs-12
     | Phone Number:
-  .col-xs-9
+  .col-md-9.col-xs-12
     b
       = current_user.phone_number || '--'
-  .col-xs-3
+  .col-md-3.col-xs-12
     | Building:
-  .col-xs-9
+  .col-md-9.col-xs-12
     b
       = current_user.building.try(:name) || '--'
-  .col-xs-3
+  .col-md-3.col-xs-12
     | Company Name:
-  .col-xs-9
+  .col-md-9.col-xs-12
     b
       = current_user.company_name || '--'
-  .col-xs-3
+  .col-md-3.col-xs-12
     | Floor Number:
-  .col-xs-9
+  .col-md-9.col-xs-12
     b
       = current_user.floor || '--'
 hr
-.btn-group
+.btn-group style='margin-bottom: 20px;'
   = link_to icon('pencil', ' Edit Profile'), edit_profiles_path, class: 'btn btn-info btn-sm'
   - if current_user.provider.nil?
     = link_to icon('key', ' Change Password'), edit_passwords_path, class: 'btn btn-warning btn-sm'

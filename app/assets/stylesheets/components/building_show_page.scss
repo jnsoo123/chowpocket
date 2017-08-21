@@ -8,7 +8,7 @@
 }
 
 .building-show-page__menu-item-panel-body {
-  padding: 0px;
+  padding: 0 0 20px 0;
 }
 
 .building-show-page__menu-item-panel-footer {
@@ -47,5 +47,57 @@
     font-size: 12px;
     padding-top: 8px;
     color: #333;
+  }
+}
+
+.building-show-page__main {
+  @media only screen and (min-width : 320px) {
+    #largeScreen {
+      display: none;
+    } 
+
+    #smallScreen {
+      display: unset;
+    } 
+  }
+
+  @media only screen and (min-width : 480px) {
+    #largeScreen {
+      display: none;
+    } 
+
+    #smallScreen {
+      display: unset;
+    } 
+  }
+
+  @media only screen and (min-width : 768px) {
+    #largeScreen {
+      display: none;
+    } 
+
+    #smallScreen {
+      display: unset;
+    } 
+  }
+
+  @media only screen and (min-width : 992px) {
+    #largeScreen {
+      display: unset;
+    } 
+
+    #smallScreen {
+      display: none;
+    } 
+  }
+
+  @media only screen and (min-width : 1200px) {
+    #largeScreen {
+      display: unset;
+    } 
+
+    #smallScreen {
+      display: none;
+    } 
   }
 }

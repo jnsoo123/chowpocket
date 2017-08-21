@@ -1,12 +1,13 @@
 <div class="container login-page__container">
   <div class="well">
     <h3 class='text-center'>
-      <%= icon('user-o') %>
+      <a href='/'><%= icon('user-o') %></a>
     </h3>
     <hr />
     <%= render partial: 'shared/alerts' %>
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-md-6 col-xs-12">
+        <h4 class="text-center">Sign In</h4>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class='form-group'>
             <div class='input-group'>
@@ -26,11 +27,12 @@
           </div>
         <% end %>
         <p class='text-center'><small>OR CONNECT WITH</small></p>
-        <div class='text-center'>
+        <div class='text-center' style='margin-bottom: 20px;'>
           <%= link_to icon('google'), omniauth_authorize_path(resource_name, :google_oauth2), class: 'btn btn-google' %>
         </div>
       </div>
-      <div class="col-xs-6">
+      <div class="col-md-6 col-xs-12">
+        <h4 class="text-center">Sign Up</h4>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <div class="field form-group">
             <div class='input-group'>

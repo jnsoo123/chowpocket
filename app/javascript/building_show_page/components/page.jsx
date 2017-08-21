@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import swal from 'sweetalert'
 import MenuItem from './menu_item'
-import CartItem from './cart_item'
 import ModalInfo from './modal_info'
+import ShoppingCart from './shopping_cart'
 
 class Page extends Component{
   constructor(props){
@@ -127,40 +127,6 @@ class Page extends Component{
     }
   }
  
-  renderCartItems(){
-    let views
-    if (this.state.cart.length > 0) {
-      views = this.state.cart.map((item, i) => {
-        return(
-          <CartItem
-            {...item}
-            key={i}
-            updateQuantity={this.updateQuantity.bind(this)}
-          />
-        ) 
-      }, this)
-
-      views.push(
-        <li key={this.state.cart.length+1} className='list-group-item'>
-          <div className='clearfix'>
-            <span className='pull-left'>
-              Total Price: 
-            </span>
-            <span className='pull-right'>
-              {this.state.totalPrice}
-            </span>
-          </div>
-        </li>
-      )
-    } else {
-      views = 'Your cart is empty!'
-      if (!this.props.userSignedIn){
-        views += ' Login to order.'
-      }
-    }
-    return views
-  }
-
   renderCartButtons(menu){
     if(this.props.userSignedIn) {
       return(
@@ -193,45 +159,29 @@ class Page extends Component{
     return renderedMenus
   }
 
-  renderCheckoutButton(){
-    if (this.state.cart.length > 0){
-      return(<div>
-        <a href='/checkouts' className='btn btn-success btn-block'>
-          <i className='fa fa-check'></i>
-          <span style={{marginLeft: '5px'}}>
-            Checkout
-          </span>
-        </a>
-        <a href='#' onClick={this.emptyCart.bind(this)} className='btn btn-danger btn-block'>
-          <i className='fa fa-times'></i>
-          <span style={{marginLeft: '5px'}}>
-            Empty Cart
-          </span>
-        </a>
-      </div>)
-    }
-  }
-
   render(){
     return(<div className='building-show-page__main'>
       <div className='row'>
-        <div className='col-xs-8'>
+        <div id='smallScreen' className='col-xs-12'>
+          <ShoppingCart
+            cart={this.state.cart} 
+            emptyCart={this.emptyCart.bind(this)}
+            updateQuantity={this.updateQuantity.bind(this)}
+            userSignedIn={this.props.userSignedIn}
+            totalPrice={this.state.totalPrice}
+          />
+        </div>
+        <div className='col-md-8 col-xs-12'>
           {this.renderMenus()}
         </div>
-        <div className='col-xs-4'>
-          <div className='well'>
-            <h3>
-              <i className='fa fa-shopping-cart'></i>
-              <span style={{marginLeft: '5px'}}>
-                Shopping Cart
-              </span>
-            </h3>
-            <hr />
-            <ul className='list-group'>
-              {this.renderCartItems()}
-            </ul>
-            {this.renderCheckoutButton()}
-          </div>
+        <div id='largeScreen' className='col-md-4 col-xs-12'>
+          <ShoppingCart 
+            cart={this.state.cart} 
+            emptyCart={this.emptyCart.bind(this)}
+            updateQuantity={this.updateQuantity.bind(this)}
+            userSignedIn={this.props.userSignedIn}
+            totalPrice={this.state.totalPrice}
+          />
         </div>
       </div>
       <ModalInfo

@@ -62,7 +62,7 @@ class Page extends Component {
   renderCheckoutInfo(){
     if (this.state.items.length > 0) {
       return(
-        <div>
+        <div className='checkout-page'>
           <table className='table table-striped'>
             <thead>
               <tr>
