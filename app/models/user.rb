@@ -9,6 +9,10 @@ class User < ApplicationRecord
   has_many :carts, dependent: :destroy
   has_many :orders, through: :carts
 
+  def incomplete_credentials?
+    self.phone_number.blank? || self.floor.blank? || self.building_id.blank? || self.company_name.blank?
+  end
+
   def current_cart
     carts.unordered.last
   end

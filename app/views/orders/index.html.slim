@@ -25,4 +25,4 @@ table.table.table-hover
         td
           = link_to 'Cancel Order', order_path(order), \
             class: 'btn btn-danger btn-xs', method: :delete, \
-            data: { confirm: 'Are you sure you want to cancel your order?' } unless order.deleted? || order.status != OrderStatuses::PENDING
+            data: { confirm: 'Are you sure you want to cancel your order?' } unless (order.deleted? || order.status != OrderStatuses::PENDING) && order.status != OrderStatuses::WAITING
