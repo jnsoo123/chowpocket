@@ -77,6 +77,8 @@ class Order < ApplicationRecord
     when 'Delivered'
       'label-success'
     when 'Pending'
+      'label-default'
+    when 'Waiting for confirmation'
       'label-warning'
     end
   end

@@ -10,9 +10,11 @@ nav.nav.navbar-default
         = image_tag('navbarlogo.png', style: 'width: 280px; height: 100px;')
     #navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav.navbar-right.navbar__links
+        li
+          = link_to icon('cutlery', ' Become a Food Partner', style: 'margin-right: 8px;'), 'https://trychowpocket.typeform.com/to/PWjYyk', target: '_blank'
         - if not user_signed_in?
           li
-            = link_to 'Log In', new_user_session_path
+            = link_to icon('user', ' Log In', style: 'margin-right: 8px;'), new_user_session_path
         - else
           li.dropdown
             a.dropdown-toggle href='#' data-toggle='dropdown' role='button' aria-expanded='false'

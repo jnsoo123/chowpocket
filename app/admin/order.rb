@@ -1,22 +1,30 @@
 ActiveAdmin.register Order do
+  member_action :confirm_order, method: :put do
+    resource.update status: 'confirmed'
+    redirect_to admin_orders_path, notice: "Order ##{resource.id} Confirmed"
+  end
+
   index do
     selectable_column
     column :id
     column 'User' do |order|
       link_to order.cart.user.email, admin_user_path(order.cart.user)
     end
-    column :is_delivered
-    column 'Deleted/ Cancelled' do |order|
-      order.deleted? ? status_tag('Yes', :ok) : status_tag('No') 
+    column :status do |order|
+      status_tag(order.state, class: "#{order.label}")
+    end
+    column 'Contact #' do |order|
+      order.user.phone_number || '--'
     end
     column :created_at
-    column :updated_at
-
     column :actions do |object|
       div class: 'table_actions' do
-        raw( %(#{link_to "View", [:admin, object], class: 'view_link member_link'} 
+        raw( %(
+            #{link_to "View", [:admin, object], class: 'view_link member_link'} 
             #{link_to "Edit", [:admin, object], class: 'edit_link member_link'} 
-            #{(link_to"Delete", [:admin, object], class: 'delete_link member_link', method: :delete) if not object.deleted? }) )
+            #{(link_to 'Confirm Order', confirm_order_admin_order_path(object), class: 'member_link', method: :put, data: { confirm: 'Sure you want to confirm this order?' }) if not object.deleted? || object.state.downcase == OrderStatuses::CONFIRMED}
+            #{(link_to "Cancel Order", [:admin, object], class: 'delete_link member_link', method: :delete, data: { confirm: 'Sure you want to cancel this order?' }) if not object.deleted? || object.state.downcase == OrderStatuses::CONFIRMED }
+            ) )
       end
     end
   end
