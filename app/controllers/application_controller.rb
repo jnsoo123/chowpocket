@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
 
   def check_if_user_has_phone_number
     if user_signed_in?
-      if current_user.phone_number.blank? || current_user.floor.blank? || current_user.building_id.blank? || current_user.company_name.blank?
+      if current_user.incomplete_credentials?
         flash[:error] = 'Please update your all your account details so that we can notify you to what ever happens. <a class="alert-link" href="/profiles">Update here</a>'
       end
     end 
