@@ -15,10 +15,10 @@
         h4 Connect
         p
           a href='/contact_us' Contact Us
-        p
-          a href='https://www.facebook.com/trychowpocket/' Facebook
-        p
-          a href='https://twitter.com/chowpocket' Twitter
+        p.footer__social-links
+          = link_to icon('facebook-official'), 'https://www.facebook.com/trychowpocket/', target: '_blank'
+          = link_to icon('twitter'), 'https://twitter.com/chowpocket', target: '_blank'
+          = link_to icon('instagram'), 'https://www.instagram.com/trychowpocket/', target: '_blank'
 
 .footer2 style='background-color: #333; color: white;'
   .container

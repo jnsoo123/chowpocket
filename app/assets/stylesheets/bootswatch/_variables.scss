@@ -32,7 +32,7 @@ $body-bg:               #fff !default;
 $text-color:            $brand-primary !default;
 
 //** Global textual link color.
-$link-color:            $brand-success !default;
+$link-color:            $brand-warning !default;
 //** Link hover color set via `darken()` function.
 $link-hover-color:      $link-color !default;
 //** Link hover decoration.
@@ -371,7 +371,7 @@ $navbar-default-border:            transparent !default;
 
 // Navbar links
 $navbar-default-link-color:                #fff !default;
-$navbar-default-link-hover-color:          $brand-success !default;
+$navbar-default-link-hover-color:          $brand-warning !default;
 $navbar-default-link-hover-bg:             transparent !default;
 $navbar-default-link-active-color:         #fff !default;
 $navbar-default-link-active-bg:            darken($navbar-default-bg, 10%) !default;
