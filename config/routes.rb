@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:create, :index, :show, :destroy]
   resources :checkouts, only: :index
   resources :buildings, only: [:index, :show]
+  resources :landing_page, only: :index
 
   resource  :line_items, only: :destroy
   resource  :profiles, only: [:show, :edit, :update]
@@ -25,5 +26,5 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'callbacks', registrations: 'registrations' }
 
-  root to: redirect('/buildings/1')
+  root to: 'landing_page#index'
 end

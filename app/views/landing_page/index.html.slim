@@ -1,0 +1,40 @@
+nav.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header
+      button.navbar-toggle.collapsed data-toggle='collapse' type='button' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand href='/' Chowpocket
+    .navbar-collapsed.collapsed id='bs-example-navbar-collapse-1'
+      ul.nav.navbar-nav.navbar-right
+        li
+          = link_to 'Order Now', building_path(1)
+.landing-page__jumbotron
+  h1.text-center
+    | HUNGRY?
+  h2.text-center
+    | Get
+  h1.text-center
+    | CHOWPOCKET
+  h2.text-center
+    | to deliver Lunch at your office.
+  p.text-center
+    = link_to 'Get Started!', building_path(1), class: 'btn btn-primary text-center'
+
+.container.landing-page__bottom-containers
+  h3.text-center
+    | Best Thing About Chowpocket
+  hr
+  h4.text-center
+    | Social
+  p.text-center
+    | We believe that enjoying food should be a social experience. 
+      That's why we came up with a discount-o-meter! 
+      The more people that order, the bigger the discounts you can receive!
+  hr
+  h4.text-center
+    | Discounts
+  p.text-center
+    | You don't have to worry about the delivery fee! 
+      Big discounts on the price of the food you order with the same taste and experience.

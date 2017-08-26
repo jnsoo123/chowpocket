@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
 
   layout :layout_of_resource
 
+  def after_sign_in_path_for(resource)
+    building_path(1)
+  end
+
   def authenticate_admin!
     redirect_to root_path unless current_user.is_admin? 
   end
