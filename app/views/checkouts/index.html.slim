@@ -1,1 +1,1 @@
-.checkout-page data-cart='#{@line_items.presence}' data-total-price='#{number_to_currency(@cart.try(:total_discounted_price), precision: 2, unit: 'P ')}'
+.checkout-page data-cart='#{@line_items.presence}' data-total-price='#{number_to_currency(@cart.try(:total_price), precision: 2, unit: 'P ')}'

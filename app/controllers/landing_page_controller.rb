@@ -3,5 +3,6 @@ class LandingPageController < ApplicationController
   layout 'landing'
 
   def index
+    redirect_to building_path(current_user.building) if user_signed_in?
   end
 end

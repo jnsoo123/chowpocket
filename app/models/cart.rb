@@ -19,14 +19,6 @@ class Cart < ApplicationRecord
 
   def total_price
     price = line_items.map do |item|
-      item.menu.price * item.quantity
-    end.sum
-
-    "P#{price}"
-  end
-
-  def total_discounted_price
-    price = line_items.map do |item|
       total = 0.0
       if not item.discount.zero?
         price = item.menu.price - (item.menu.price * item.discount.to_f / 100)
