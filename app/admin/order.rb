@@ -72,7 +72,7 @@ ActiveAdmin.register Order do
             tr do
               td 'Total Price'
               td
-              td number_to_currency(order.cart.total_discounted_price, unit: 'P')
+              td number_to_currency(order.cart.total_price, unit: 'P')
             end
           end
         end
