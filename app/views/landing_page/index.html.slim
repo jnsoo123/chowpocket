@@ -1,12 +1,13 @@
 nav.navbar.navbar-default.navbar-fixed-top
   .container
     .navbar-header
-      button.navbar-toggle.collapsed data-toggle='collapse' type='button' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'
+      button.navbar-toggle.collapsed data-toggle='collapse' type='button' data-target='#bs-example-navbar-collapse-1'
+        span.sr-only Toggle Navigation
         span.icon-bar
         span.icon-bar
         span.icon-bar
       a.navbar-brand href='/' Chowpocket
-    .navbar-collapsed.collapsed id='bs-example-navbar-collapse-1'
+    .navbar-collapse.collapse id='bs-example-navbar-collapse-1'
       ul.nav.navbar-nav.navbar-right
         li
           = link_to 'Order Now', building_path(1)
@@ -22,7 +23,41 @@ nav.navbar.navbar-default.navbar-fixed-top
   p.text-center
     = link_to 'Get Started!', building_path(1), class: 'btn btn-primary text-center'
 
-.container.landing-page__bottom-containers
+.container.landing-page__how-to-use
+  h3.text-center
+    | How to Use
+  hr
+  .row
+    .col-md-4.col-xs-12.col-sm-4
+      .well
+        h4.text-center
+          | Step 1
+        = image_tag('step1.png', class: 'img-rounded img-responsive center-block')
+        br
+        p.text-center 
+          | Click on 'Get Started' on top of this page. 
+    .col-md-4.col-xs-12.col-sm-4
+      .well
+        h4.text-center
+          | Step 2
+        = image_tag('step2.png', class: 'img-rounded img-responsive center-block')
+        br
+        p.text-center
+          | Log in on either with your facebook, google+, or you can register your account on our website.
+    .col-md-4.col-xs-12.col-sm-4
+      .well
+        h4.text-center
+          | Step 3
+        = image_tag('step3.png', class: 'img-rounded img-responsive center-block')
+        br
+        p.text-center
+          | Select your food on the menu and input your delivery details and expect a hassle-free lunch on your office desk the next day.
+
+.landing-page__wait-theres-more
+  .text-center
+    | BUT WAIT, THERE'S MORE
+
+.container.landing-page__best-thing-about-chowpocket
   h3.text-center
     | Best Thing About Chowpocket
   hr
