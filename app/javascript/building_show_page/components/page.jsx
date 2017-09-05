@@ -145,18 +145,25 @@ class Page extends Component{
   }
 
   renderMenus(){
-    var renderedMenus = this.props.menus.map((menu, i) => {
-      return(
-        <MenuItem
-          {...menu}
-          key={i}
-          userSignedIn={this.props.userSignedIn}
-          addToCart={this.addToCart.bind(this)}
-        />
-      ) 
-    }, this)
+    var views = []
+    if(this.props.menus.length) {
+      views = this.props.menus.map((menu, i) => {
+        return(
+          <MenuItem
+            {...menu}
+            key={i}
+            userSignedIn={this.props.userSignedIn}
+            addToCart={this.addToCart.bind(this)}
+          />
+        ) 
+      }, this)
+    } else {
+      views.push(<div className='well' style={{padding: '200px 0'}}>
+        <h3 className='text-center'>There is no food for today!</h3> 
+      </div>)
+    }
 
-    return renderedMenus
+    return views
   }
 
   render(){
