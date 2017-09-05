@@ -89,7 +89,7 @@ class Order < ApplicationRecord
   end
 
   def check_pending_orders
-    if Order.pending.today.sum('quantity') > 5
+    if Order.pending.today.sum('quantity') > OrderSettings::MINIMUM_ORDER
       deliver_emails
     end
   end

@@ -14,3 +14,7 @@ module ScheduleDays
     'Friday'
   ]
 end
+
+module OrderSettings
+  MINIMUM_ORDER = 0
+end

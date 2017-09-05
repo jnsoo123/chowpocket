@@ -1,3 +1,6 @@
+puts 'Creating buildings...'
+Building.create(name: '111 Globe Telepark Valero')
+
 puts 'Creating admin user...'
 if Rails.env.development?
   User.create!(
@@ -6,7 +9,11 @@ if Rails.env.development?
     password_confirmation:  'password', 
     role:                   'admin', 
     name:                   'Admin', 
-    deleted_at:             nil
+    deleted_at:             nil,
+    floor:                  '12',
+    phone_number:           '09056671505',
+    building:               Building.last,
+    company_name:           'adish International'
   )
 else
   User.create(
@@ -30,7 +37,7 @@ if Rails.env.development?
     'Pappardelle with Sea Urchin and Cauliflower'
   ]
 
-  14.times do |iteration|
+  1.times do |iteration|
     iterator = (iteration % 5) + 1  
     File.open(Rails.root.join("app/assets/images/food#{iterator}.jpg")) do |file|
       Menu.create do |menu|
@@ -43,9 +50,6 @@ if Rails.env.development?
     end
   end
 end
-
-puts 'Creating buildings...'
-Building.create(name: '111 Globe Telepark Valero')
 
 puts "Total Users: #{User.count}"
 puts "Total Menus: #{Menu.count}"

@@ -22,7 +22,7 @@ class ShoppingCart extends Component {
               Total Price: 
             </span>
             <span className='pull-right'>
-              {this.props.totalPrice.toFixed(2)}
+              {parseInt(this.props.totalPrice).toFixed(2)}
             </span>
           </div>
         </li>
