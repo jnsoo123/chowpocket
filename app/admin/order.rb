@@ -16,6 +16,9 @@ ActiveAdmin.register Order do
     column 'Contact #' do |order|
       order.user.phone_number || '--'
     end
+    column 'Nth order' do |order|
+      order.user.orders.where(status: OrderStatuses::CONFIRMED).count.ordinalize
+    end
     column :created_at
     column :actions do |object|
       div class: 'table_actions' do
