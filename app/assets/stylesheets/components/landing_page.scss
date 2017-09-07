@@ -12,6 +12,10 @@
     background-size: cover;
     color: white;
 
+    .text-title {
+      padding-top: 30vh;
+    }
+
     h1 {
       font-size: 5vw;
     }
@@ -22,26 +26,6 @@
 
     h4 {
       font-size: 3vw;
-    }
-
-    @media only screen and (min-width : 320px) {
-      padding: 200px 0
-    }
-
-    @media only screen and (min-width : 480px) {
-      padding: 200px 0
-    }
-
-    @media only screen and (min-width : 768px) {
-      padding: 300px 0
-    }
-
-    @media only screen and (min-width : 992px) {
-      padding: 300px 0
-    }
-
-    @media only screen and (min-width : 1200px) {
-      padding: 300px 0
     }
   }
 
