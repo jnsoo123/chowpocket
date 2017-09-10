@@ -1,0 +1,14 @@
+h3 Notifications
+hr
+- @notifications.each do |notif|
+  .panel.panel-default
+    .panel-body
+      p.text-muted
+        = time_ago_in_words(notif.created_at) + ' ago'
+      p
+        = notif.message
+      br
+      .btn-group
+        - if notif.notification_type == NotificationTypes::ORDER
+          = link_to icon('list-ul', ' View Order History'), orders_path, class: 'btn btn-primary'
+        = link_to icon('trash', ' Delete'), notification_path(notif), class: 'btn btn-danger', method: :delete

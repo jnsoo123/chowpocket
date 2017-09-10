@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :checkouts, only: :index
   resources :buildings, only: [:index, :show]
   resources :landing_page, only: :index
+  resources :notifications, only: [:index, :destroy]
 
   resource  :line_items, only: :destroy
   resource  :profiles, only: [:show, :edit, :update]

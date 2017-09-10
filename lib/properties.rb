@@ -5,6 +5,15 @@ module OrderStatuses
   WAITING   = 'waiting for confirmation'
 end
 
+module NotificationTypes
+  ORDER = 'order'
+end
+
+module NotificationStatuses
+  UNREAD = 'unread'
+  READ   = 'read'
+end
+
 module ScheduleDays
   ALL = [
     'Monday',
