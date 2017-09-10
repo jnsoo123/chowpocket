@@ -37,7 +37,7 @@ if Rails.env.development?
     'Pappardelle with Sea Urchin and Cauliflower'
   ]
 
-  1.times do |iteration|
+  5.times do |iteration|
     iterator = (iteration % 5) + 1  
     File.open(Rails.root.join("app/assets/images/food#{iterator}.jpg")) do |file|
       Menu.create do |menu|

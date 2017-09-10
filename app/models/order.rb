@@ -43,6 +43,11 @@ class Order < ApplicationRecord
   after_create do
     cart.update is_ordered: true
     check_pending_orders
+    send_notifications(OrderStatuses::PENDING)
+  end
+
+  after_update do
+    send_notifications(OrderStatuses::CONFIRMED)  if self.status == OrderStatuses::CONFIRMED
   end
 
   after_destroy do
@@ -80,6 +85,23 @@ class Order < ApplicationRecord
       'label-default'
     when 'Waiting for confirmation'
       'label-warning'
+    end
+  end
+
+  def send_notifications(type)
+    message = if type == OrderStatuses::WAITING
+                "Your order has been made and is waiting for confirmation"
+              elsif type == OrderStatuses::CONFIRMED 
+                "Your order has been confirmed"
+              elsif type == OrderStatuses::PENDING
+                'Your order has been made and is pending'
+              end
+
+    Notification.create! do |notif|
+      notif.user              = self.user
+      notif.message           = message
+      notif.notification_type = NotificationTypes::ORDER
+      notif.status            = NotificationStatuses::UNREAD
     end
   end
 

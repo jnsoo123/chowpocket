@@ -16,6 +16,12 @@ nav.nav.navbar-default
           li
             = link_to icon('user', ' Log In', style: 'margin-right: 8px;'), new_user_session_path
         - else
+          li
+            = link_to notifications_path do
+              = icon('bell', ' Notifications')
+              span.badge
+                = current_user.unread_notifications_count
+
           li.dropdown
             a.dropdown-toggle href='#' data-toggle='dropdown' role='button' aria-expanded='false'
               = icon('user', " #{current_user.name} ", style: 'margin-right: 8px;')
