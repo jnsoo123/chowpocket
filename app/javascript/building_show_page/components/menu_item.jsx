@@ -40,7 +40,6 @@ class MenuItem extends Component {
     } else if (menuCount < 25) {
       views.push(<span key={2} className='label label-warning'>{25-menuCount} more orders to get 50% OFF</span>) 
     }
-
     return views
   }
 
