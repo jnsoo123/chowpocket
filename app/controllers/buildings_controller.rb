@@ -15,13 +15,14 @@ class BuildingsController < ApplicationController
     Menu.all.each do |menu|
       if date.send("#{menu.schedule.downcase}?")
         hash = { 
-          id:           menu.id,
-          name:         menu.name, 
-          description:  menu.description,
-          price:        (menu.price - (menu.price * (get_discount(menu)) / 100.0 )).to_f, 
-          image:        menu.avatar_url,
-          percent:      get_discount(menu),
-          count:        (@clusters.select {|cluster| cluster[:menu_id] == menu.id}.last[:count].to_i rescue 0)
+          id:             menu.id,
+          name:           menu.name, 
+          description:    menu.description,
+          original_price: menu.price,
+          price:          (menu.price - (menu.price * (get_discount(menu)) / 100.0 )).to_f, 
+          image:          menu.avatar_url,
+          percent:        get_discount(menu),
+          count:          (@clusters.select {|cluster| cluster[:menu_id] == menu.id}.last[:count].to_i rescue 0)
         }
         @menus.push hash
       end

@@ -24,27 +24,53 @@ class MenuItem extends Component {
   isDiscounted(){
     if (this.props.percent != 0) {
       return(
-        <div className='pull-right'>
-          <span className='label label-danger'>{this.props.percent}% OFF!</span>
-        </div>
+        <span className='label label-danger'>-{this.props.percent}%</span>
       ) 
     }
   }
 
-  renderPrice(){
-    if(this.props.userSignedIn){
-      return(
-        'P' + this.props.price.toFixed(2)
-      )
+  moreDiscountInfo(){
+    let menuCount = this.props.count
+    let views     = []
+
+    if(menuCount < 10) {
+      views.push(<span key={0} className='label label-warning'>{10-menuCount} more orders to get 30% OFF</span>) 
+    } else if (menuCount < 20) {
+      views.push(<span key={1} className='label label-warning'>{20-menuCount} more orders to get 40% OFF</span>) 
+    } else if (menuCount < 25) {
+      views.push(<span key={2} className='label label-warning'>{25-menuCount} more orders to get 50% OFF</span>) 
     }
+
+    return views
+  }
+
+  renderPrice(){
+    let views         = []
+    let price         = this.props.price
+    let origPrice     = this.props.original_price
+    let isDiscounted  = this.props.percent != 0
+
+    if(this.props.userSignedIn){
+      if( isDiscounted ) {
+        views.push(<span key={0} className='text-muted'>
+          <s>{ 'P' + origPrice.toFixed(2) }</s> 
+        </span>) 
+      }
+
+      views.push(<span key={1}>
+        {' P' + price.toFixed(2)}
+      </span>)
+    }
+
+    return views
   }
 
   render() {
     let menu = this.props
 
-    let firstLevelDiscountCount = menu.count-10 > 10 ? 10 : (menu.count < 10 ? menu.count : 10)
+    let firstLevelDiscountCount  = menu.count-10 > 10 ? 10 : (menu.count < 10 ? menu.count : 10)
     let secondLevelDiscountCount = menu.count-10 > 20 ? 20 : (menu.count < 20 ? (menu.count)%20 : 20 )
-    let thirdLevelDiscountCount = menu.count > 25 ? 25 : (menu.count < 25 ? (menu.count)%25 : 25)
+    let thirdLevelDiscountCount  = menu.count > 25 ? 25 : (menu.count < 25 ? (menu.count)%25 : 25)
 
     return(<div className='building-show-page__menu-item'>
       <div className='panel panel-default' style={{borderRadius: '5px'}}>
@@ -53,15 +79,14 @@ class MenuItem extends Component {
             className='building-show-page__menu-item-picture' 
             style={{backgroundImage: 'url(' + menu.image + ')'}} />
           <div className='building-show-page__menu-item-title'>
-            <h3 className='clearfix'>
-              <span className='pull-left'>
-                {menu.name}
+            <h3 className='row'>
+              <span className='col-xs-12'>
+                <p>{menu.name}</p>
               </span>
-              <span className='pull-right'>
-                {this.renderPrice()}
+              <span className='col-xs-12'>
+                <p>{this.renderPrice()} <small>{this.isDiscounted()}</small> <small>{this.moreDiscountInfo()}</small></p>
               </span>
             </h3>
-            {this.isDiscounted()}
             <p>{menu.description}</p>
             <div className='row'>
               <div className='col-xs-12'>
