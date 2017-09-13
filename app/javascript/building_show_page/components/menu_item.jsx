@@ -57,8 +57,11 @@ class MenuItem extends Component {
       }
 
       views.push(<span key={1}>
-        {' P' + price.toFixed(2)}
+        {' P' + price.toFixed(2) + ' '}
       </span>)
+
+      views.push(<small key={2}>{this.isDiscounted()}</small>)
+      views.push(<small key={3}>{this.moreDiscountInfo()}</small>)
     }
 
     return views
@@ -83,7 +86,7 @@ class MenuItem extends Component {
                 <p>{menu.name}</p>
               </span>
               <span className='col-xs-12'>
-                <p>{this.renderPrice()} <small>{this.isDiscounted()}</small> <small>{this.moreDiscountInfo()}</small></p>
+                <p>{this.renderPrice()}</p>
               </span>
             </h3>
             <p>{menu.description}</p>
