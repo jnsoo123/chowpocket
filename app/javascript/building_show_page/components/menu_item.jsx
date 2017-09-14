@@ -49,19 +49,17 @@ class MenuItem extends Component {
     let origPrice     = this.props.original_price
     let isDiscounted  = this.props.percent != 0
 
-    if(this.props.userSignedIn){
-      if( isDiscounted ) {
-        views.push(<span key={0} className='text-muted'>
-          <s>{ 'P' + origPrice.toFixed(2) }</s> 
-        </span>) 
-      }
-
-      views.push(<span key={1}>
-        {' P' + price.toFixed(2) + ' '}
-      </span>)
-
-      views.push(<small key={2}>{this.isDiscounted()}</small>)
+    if( isDiscounted ) {
+      views.push(<span key={0} className='text-muted'>
+        <s>{ 'P' + origPrice.toFixed(2) }</s> 
+      </span>) 
     }
+
+    views.push(<span key={1}>
+      {' P' + price.toFixed(2) + ' '}
+    </span>)
+
+    views.push(<small key={2}>{this.isDiscounted()}</small>)
 
     views.push(<small key={3}>{this.moreDiscountInfo()}</small>)
     return views
@@ -95,17 +93,17 @@ class MenuItem extends Component {
                 <div className='text-center'><small>Discount o Meter:</small></div>
                 <div className='progress'>
                   <div 
-                    className='progress-bar progress-bar-success'
+                    className='progress-bar progress-bar-danger-1'
                     style={{width: ((firstLevelDiscountCount/10)*100*(33/100))+'%'}}>
                     {firstLevelDiscountCount > 0 ? firstLevelDiscountCount + '/10' : ''}
                   </div>
                   <div 
-                    className='progress-bar progress-bar-warning' 
+                    className='progress-bar progress-bar-danger-2' 
                     style={{width: (secondLevelDiscountCount > 10 ? ((secondLevelDiscountCount-10)/10)*100*(33/100) : 0)+'%'}}>
                     {secondLevelDiscountCount > 10 ? secondLevelDiscountCount + '/20' : ''}
                   </div>
                   <div 
-                    className='progress-bar progress-bar-danger' 
+                    className='progress-bar progress-bar-danger-3' 
                     style={{width: (thirdLevelDiscountCount > 20 ? ((thirdLevelDiscountCount-20)/5)*100*(34/100) : 0)+'%'}}>
                     {thirdLevelDiscountCount > 20 ? thirdLevelDiscountCount + '/25' : ''}
                   </div>
