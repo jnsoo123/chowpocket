@@ -61,9 +61,9 @@ class MenuItem extends Component {
       </span>)
 
       views.push(<small key={2}>{this.isDiscounted()}</small>)
-      views.push(<small key={3}>{this.moreDiscountInfo()}</small>)
     }
 
+    views.push(<small key={3}>{this.moreDiscountInfo()}</small>)
     return views
   }
 
