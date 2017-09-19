@@ -38,6 +38,15 @@ ActiveAdmin.register Order do
       row 'User' do |order|
         link_to order.cart.user.email, admin_user_path(order.cart.user)
       end
+      row 'Building' do |order|
+        span order.cart.user.building.name
+      end
+      row 'Floor' do |order|
+        span order.cart.user.floor
+      end
+      row 'Company' do |order|
+        span order.cart.user.company_name
+      end
       row 'Deleted/ Cancelled' do |order|
         order.deleted? ? status_tag('Yes', :ok) : status_tag('No') 
       end
