@@ -31,22 +31,26 @@ ActiveAdmin.register Order do
     end
   end
 
+  sidebar 'User Details', only: :show do
+    attributes_table_for resource.user do
+      row :name
+      row :email do |user|
+        span link_to user.email, admin_user_path(user)
+      end
+      row 'Building' do |user|
+        span user.building.name
+      end
+      row 'Company' do |user|
+        span user.company_name
+      end
+      row :floor
+    end
+  end
+
   show do
     attributes_table do
       row :id
       row :cart_id
-      row 'User' do |order|
-        link_to order.cart.user.email, admin_user_path(order.cart.user)
-      end
-      row 'Building' do |order|
-        span order.cart.user.building.name
-      end
-      row 'Floor' do |order|
-        span order.cart.user.floor
-      end
-      row 'Company' do |order|
-        span order.cart.user.company_name
-      end
       row 'Deleted/ Cancelled' do |order|
         order.deleted? ? status_tag('Yes', :ok) : status_tag('No') 
       end
