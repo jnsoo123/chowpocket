@@ -10,6 +10,7 @@
 
 // Active Admin's got SASS!
 @import "active_admin/mixins";
+$primary_color: orange;
 @import "arctic_admin";
 
 // Overriding any non-variable SASS must be done after the fact.

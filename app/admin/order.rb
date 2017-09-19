@@ -19,7 +19,6 @@ ActiveAdmin.register Order do
     column 'Nth order' do |order|
       order.user.orders.where(status: OrderStatuses::CONFIRMED).count.ordinalize
     end
-    column :created_at
     column :actions do |object|
       div class: 'table_actions' do
         raw( %(
@@ -43,6 +42,9 @@ ActiveAdmin.register Order do
         order.deleted? ? status_tag('Yes', :ok) : status_tag('No') 
       end
       row :is_delivered
+      row 'Nth order' do |order|
+        order.user.orders.where(status: OrderStatuses::CONFIRMED).count.ordinalize
+      end
       row :created_at
       row :updated_at
     end
