@@ -18,7 +18,8 @@
       .form-group
         = f.label :building_id, class: 'control-label col-md-2 col-sm-2 col-xs-12'
         .col-md-10.col-xs-12.col-sm-10
-          = f.select :building_id, Building.all.collect{|x| [x.name, x.id]}, {include_blank: 'Select building'}, class: 'form-control', required: true
+          = f.select :building_id, Building.all.collect{|x| [x.name, x.id]}, {include_blank: 'Select building'}, class: 'form-control'
+          = link_to "Add your building", 'https://trychowpocket.typeform.com/to/FBRzNy', class: 'login-page__activate-building', target: '_blank'
       .form-group
         = f.label :company_name, class: 'control-label col-md-2 col-sm-2 col-xs-12'
         .col-md-10.col-xs-12.col-sm-10

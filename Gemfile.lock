@@ -556,6 +556,7 @@ DEPENDENCIES
   rails-erd
   resque-web
   sass-rails (~> 5.0)
+  select2-rails
   selenium-webdriver
   slim
   spring

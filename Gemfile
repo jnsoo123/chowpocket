@@ -33,6 +33,7 @@ gem 'timecop'
 gem 'mini_magick'
 gem 'fog'
 gem 'activeadmin_addons'
+gem 'select2-rails'
 
 # -- END --
 
