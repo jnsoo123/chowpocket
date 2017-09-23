@@ -53,7 +53,7 @@
               <span class='input-group-addon ' style='color: #ccc'>B</span> 
               <%= f.select :building_id, Building.all.collect{|x| [x.name, x.id]}, {include_blank: 'Select Building'}, class: 'form-control' %>
             </div>
-              <%= link_to "Activate in your building", 'https://trychowpocket.typeform.com/to/FBRzNy', class: 'login-page__activate-building', target: '_blank' %>
+              <%= link_to "Activate delivery in your building", 'https://trychowpocket.typeform.com/to/FBRzNy', class: 'login-page__activate-building', target: '_blank' %>
           </div>
 
           <div class='field form-group'>
