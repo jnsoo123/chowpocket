@@ -3,10 +3,10 @@ import CartItem from './cart_item'
 
 class ShoppingCart extends Component {
   renderCartItems(){
-    let views
+    let views = []
     if (this.props.cart.length > 0) {
-      views = this.props.cart.map((item, i) => {
-        return(
+      this.props.cart.map((item, i) => {
+        views.push(
           <CartItem
             {...item}
             key={i}
@@ -28,9 +28,9 @@ class ShoppingCart extends Component {
         </li>
       )
     } else {
-      views = 'Your cart is empty!'
+      views.push('Your cart is empty! ')
       if (!this.props.userSignedIn){
-        views += ' Login to order.'
+        views.push(<a href='/users/sign_in'>Login to Order</a>)
       }
     }
     return views
