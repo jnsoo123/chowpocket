@@ -1,8 +1,10 @@
 module OrderStatuses
   PENDING   = 'pending'
-  DELIVERED = 'delivered'
   CONFIRMED = 'confirmed'
   WAITING   = 'waiting for confirmation'
+  CANCELLED = 'cancelled'
+
+  ALL       = [PENDING, CONFIRMED, WAITING]
 end
 
 module NotificationTypes

@@ -4,6 +4,8 @@ class Order < ApplicationRecord
   delegate :user, to: :cart
   has_many :menu_clusters
 
+  validates_inclusion_of :status, in: OrderStatuses::ALL
+
   scope :confirmed_quantity, -> { confirmed_today.sum('quantity') }
   scope :pending,   -> {includes(cart: :line_items).without_deleted.where(status: OrderStatuses::PENDING)} do
     def date_option
@@ -52,7 +54,7 @@ class Order < ApplicationRecord
 
   after_destroy do
     destroy_menu_clusters
-    self.update status: 'cancelled'
+    self.update status: OrderStatuses::CANCELLED
   end
 
   def self.today
