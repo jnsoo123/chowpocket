@@ -6,11 +6,8 @@ class BuildingsController < ApplicationController
   end
 
   def show
-    @menus = []
-    date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
-
-    date = date - 1.day if date.saturday?
-    date = date - 2.day if date.sunday?
+    @menus  = []
+    date    = set_date
 
     Menu.all.each do |menu|
       if date.send("#{menu.schedule.downcase}?")
@@ -32,5 +29,12 @@ class BuildingsController < ApplicationController
   private
   def set_building
     @building = Building.find(params[:id])
+  end
+
+  def set_date
+    date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
+    date = date - 1.day if date.saturday?
+    date = date - 2.day if date.sunday?
+    date
   end
 end
