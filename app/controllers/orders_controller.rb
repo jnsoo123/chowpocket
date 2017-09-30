@@ -25,6 +25,10 @@ class OrdersController < ApplicationController
   end
 
   def set_cluster(menu_id)
+    date = Date.today
+    date = date - 1.day if date.saturday?
+    date = date - 2.day if date.sunday?
+
     cluster = Cluster.where(menu_id: menu_id, date_created: Date.today).last
     begin
       cluster_quantity = cluster.menu_clusters.sum('quantity')
