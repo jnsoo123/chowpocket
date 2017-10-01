@@ -65,7 +65,12 @@ class ApplicationController < ActionController::Base
   end
 
   def set_clusters
-    @clusters = Cluster.includes(:menu_clusters).where(date_created: Date.today).order(id: :asc).collect do |cluster|
+    date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
+    date = date - 1.day if date.saturday?
+    date = date - 2.day if date.sunday?
+    date
+
+    @clusters = Cluster.includes(:menu_clusters).where(date_created: date).order(id: :asc).collect do |cluster|
       {
         menu_id: cluster.menu.id,
         discount: cluster.discount,
