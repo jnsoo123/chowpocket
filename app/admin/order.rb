@@ -1,4 +1,9 @@
 ActiveAdmin.register Order do
+  scope 'Orders Today', default: true do |scope|
+    scope.ransack(created_at_gteq: Date.today.to_datetime).result
+  end
+  scope('All') {|scope| scope.all }
+
   actions :index, :show, :edit, :destroy, :update
 
   permit_params :status
