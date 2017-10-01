@@ -11,6 +11,17 @@ ActiveAdmin.register Menu do
     actions
   end
 
+  show do
+    attributes_table do
+      row :name
+      row :price
+      row :description
+      row :schedule do |menu|
+        ScheduleDays::DISPLAY_VALUE[menu.schedule]
+      end
+    end
+  end
+
   form do |f|
     f.inputs 'Menu Details' do
       f.input :name
