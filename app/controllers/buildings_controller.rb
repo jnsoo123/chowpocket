@@ -3,9 +3,6 @@ class BuildingsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-  end
-
-  def show
     @menus  = []
     date    = set_date
 
@@ -24,6 +21,9 @@ class BuildingsController < ApplicationController
         @menus.push hash
       end
     end
+  end
+
+  def show
   end
 
   private
