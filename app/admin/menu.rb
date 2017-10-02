@@ -16,6 +16,9 @@ ActiveAdmin.register Menu do
       row :name
       row :price
       row :description
+      row :avatar do |menu|
+        menu.avatar_url
+      end
       row :schedule do |menu|
         ScheduleDays::DISPLAY_VALUE[menu.schedule]
       end
