@@ -4,7 +4,7 @@ class LandingPageController < ApplicationController
 
   def index
     if user_signed_in? && current_user.building.present?
-      redirect_to building_path(current_user.building) 
+      redirect_to buildings_path 
     end
   end
 end

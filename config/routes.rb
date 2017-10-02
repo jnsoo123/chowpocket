@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :line_items, only: [:create, :update]
   resources :orders, only: [:create, :index, :show, :destroy]
   resources :checkouts, only: :index
-  resources :buildings, only: [:index, :show]
+  resources :buildings, only: :index
   resources :landing_page, only: :index
   resources :notifications, only: [:index, :destroy]
 
