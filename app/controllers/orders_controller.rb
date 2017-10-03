@@ -10,7 +10,9 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.includes(cart: {line_items: :menu}).where(carts: { user: current_user })
+    @orders = Order.includes(cart: {line_items: :menu}).
+      where(carts: { user: current_user }).
+      order(created_at: :desc)
   end
 
   def destroy
