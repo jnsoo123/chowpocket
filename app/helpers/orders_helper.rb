@@ -22,4 +22,17 @@ module OrdersHelper
            end
     date.to_datetime.in_time_zone.change({hour: 19})
   end
+
+  def get_delivery_day
+    date = get_datetime_cycle_next_day + 1.day
+    date = case 
+           when date.saturday?
+             date + 2.days
+           when date.sunday?
+             date + 1.day
+           else
+             date
+           end
+    date.strftime('%A')
+  end
 end
