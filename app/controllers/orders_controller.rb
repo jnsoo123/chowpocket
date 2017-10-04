@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
     if @order.save!
       set_menu_clusters
-      flash[:notice] = 'Your order has been made. Wait for an email for confirmation.'
+      flash[:notice] = 'Your order has been made. Wait for a text message for confirmation within the day before 7PM'
       redirect_to root_path
     end
   end
