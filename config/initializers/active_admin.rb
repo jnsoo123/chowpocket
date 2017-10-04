@@ -8,3 +8,7 @@ ActiveAdmin.setup do |config|
   config.skip_before_action :check_if_user_has_phone_number
   config.register_stylesheet 'activeadmin_customizations.css'
 end
+
+module ActiveAdmin::ViewHelpers
+  include ApplicationHelper
+end

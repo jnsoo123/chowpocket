@@ -1,6 +1,6 @@
 ActiveAdmin.register Order do
-  scope 'Orders Today', default: true do |scope|
-    scope.ransack(created_at_gteq: Date.today.to_datetime).result
+  scope 'Current Orders', default: true do |scope|
+    scope.ransack({created_at_gt: get_datetime_cycle, created_at_lt: get_datetime_cycle_next_day}).result
   end
   scope('All') {|scope| scope.all }
 
