@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
 
   layout :layout_of_resource
 
+  include OrdersHelper
+
   def after_sign_in_path_for(resource)
     buildings_path
   end
@@ -65,12 +67,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_clusters
-    date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
-    date = date - 1.day if date.saturday?
-    date = date - 2.day if date.sunday?
-    date
-
-    @clusters = Cluster.includes(:menu_clusters).where(date_created: date).order(id: :asc).collect do |cluster|
+    @clusters = Cluster.includes(:menu_clusters).where(date_created: get_date_cycle).order(id: :asc).collect do |cluster|
       {
         menu_id: cluster.menu.id,
         discount: cluster.discount,

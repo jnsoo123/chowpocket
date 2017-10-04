@@ -23,16 +23,11 @@ class OrdersController < ApplicationController
 
   private
   def create_cluster(menu_id)
-    date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
-    Cluster.create(menu_id: menu_id, date_created: date)
+    Cluster.create(menu_id: menu_id, date_created: get_date_cycle)
   end
 
   def set_cluster(menu_id)
-    date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
-    date = date - 1.day if date.saturday?
-    date = date - 2.day if date.sunday?
-
-    cluster = Cluster.where(menu_id: menu_id, date_created: date).last
+    cluster = Cluster.where(menu_id: menu_id, date_created: get_date_cycle).last
     begin
       cluster_quantity = cluster.menu_clusters.sum('quantity')
       if cluster_quantity > 49

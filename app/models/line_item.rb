@@ -1,14 +1,12 @@
 class LineItem < ApplicationRecord
+  include DateCycle
+
   belongs_to :menu
   belongs_to :cart
 
   def discount
-    date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
-    date = date - 1.day if date.saturday?
-    date = date - 2.day if date.sunday?
-
     clusters = Cluster.includes(:menu_clusters, :menu).
-      where(date_created: date).
+      where(date_created: get_date_cycle).
       order(id: :asc).
       collect do |cluster|
         {
