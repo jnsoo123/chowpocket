@@ -146,13 +146,13 @@ ActiveAdmin.register Order do
       order.user.phone_number || '--'
     end
     column 'Building' do |order|
-      order.cart.user.building.name
+      order.cart.user.building.name rescue nil
     end
     column 'Company' do |order|
-      order.cart.user.company_name
+      order.cart.user.company_name rescue nil
     end
     column 'Floor' do |order|
-      order.cart.user.floor
+      order.cart.user.floor rescue nil
     end
     column :state
     column 'Orders' do |order|
