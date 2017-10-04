@@ -131,4 +131,38 @@ ActiveAdmin.register Order do
       destroy!(notice: 'Order has been cancelled') { admin_orders_path }
     end
   end
+
+  csv force_quotes: true, col_sep: ';', column_names: true do
+    column 'Order ID' do |order|
+      order.id
+    end
+    column 'Name' do |order|
+      order.cart.user.name
+    end
+    column 'User Email' do |order|
+      order.cart.user.email
+    end
+    column 'Contact #' do |order|
+      order.user.phone_number || '--'
+    end
+    column 'Building' do |order|
+      order.cart.user.building.name
+    end
+    column 'Company' do |order|
+      order.cart.user.company_name
+    end
+    column 'Floor' do |order|
+      order.cart.user.floor
+    end
+    column :state
+    column 'Orders' do |order|
+      order.cart.line_items.includes(:menu).collect do |item|
+        "-- #{item.menu.name} x #{item.quantity} - #{number_to_currency(item.discounted_price, unit: 'P')} - #{item.discount}% Off -- "
+      end
+    end
+    column 'Total Price' do |order|
+      number_to_currency(order.cart.total_price, unit: 'P')
+    end
+
+  end
 end
