@@ -15,6 +15,11 @@ class MenuCluster < ApplicationRecord
     update_cluster_discount
   end
 
+  def discounted_price
+    discount = self.cluster.discount || 0
+    (self.menu.price - (self.menu.price * discount / 100.0)).to_f * self.quantity
+  end
+
   private
   def update_cluster_discount
     case cluster.menu_clusters.sum('quantity')

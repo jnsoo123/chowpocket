@@ -17,7 +17,7 @@ table.table.table-hover
           - order.cart.line_items.each do |item|
             = "#{item.menu.name} x#{item.quantity} - P#{item.menu.price * item.quantity}"
             br
-        td= order.cart.total_price
+        td= order.total_price
         td
           span.label class='#{order.label}'
             = order.state

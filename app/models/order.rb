@@ -66,6 +66,10 @@ class Order < ApplicationRecord
     where(date_option)
   end
 
+  def cluster
+    self.menu_cluster.first.cluster
+  end
+
   def state
     if deleted? 
       'Cancelled'
@@ -104,6 +108,20 @@ class Order < ApplicationRecord
       notif.notification_type = NotificationTypes::ORDER
       notif.status            = NotificationStatuses::UNREAD
     end
+  end
+
+  def total_price
+    self.menu_clusters.includes(:cluster).map do |mc| 
+      total = 0.0
+      discount = mc.cluster.discount
+      if not discount.nil?
+        price = mc.menu.price - (mc.menu.price * discount.to_f / 100)
+        total += price * mc.quantity
+      else
+        total += mc.menu.price * mc.quantity
+      end
+      total
+    end.sum
   end
 
   private

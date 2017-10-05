@@ -95,17 +95,20 @@ class MenuItem extends Component {
                   <div 
                     className='progress-bar progress-bar-danger-1'
                     style={{width: ((firstLevelDiscountCount/10)*100*(33/100))+'%'}}>
-                    {firstLevelDiscountCount > 0 ? firstLevelDiscountCount + '/10' : ''}
+                    {firstLevelDiscountCount > 0 ? firstLevelDiscountCount + '/10 ' : ''}
+                    {firstLevelDiscountCount > 0 ? <i className='fa fa-user'></i> : ''}
                   </div>
                   <div 
                     className='progress-bar progress-bar-danger-2' 
                     style={{width: (secondLevelDiscountCount > 10 ? ((secondLevelDiscountCount-10)/10)*100*(33/100) : 0)+'%'}}>
-                    {secondLevelDiscountCount > 10 ? secondLevelDiscountCount + '/20' : ''}
+                    {secondLevelDiscountCount > 10 ? secondLevelDiscountCount + '/20 ' : ''}
+                    {secondLevelDiscountCount > 10 ? <i className='fa fa-user'></i> : ''}
                   </div>
                   <div 
                     className='progress-bar progress-bar-danger-3' 
                     style={{width: (thirdLevelDiscountCount > 20 ? ((thirdLevelDiscountCount-20)/5)*100*(34/100) : 0)+'%'}}>
-                    {thirdLevelDiscountCount > 20 ? thirdLevelDiscountCount + '/25' : ''}
+                    {thirdLevelDiscountCount > 20 ? thirdLevelDiscountCount + '/25 ' : ''}
+                    {thirdLevelDiscountCount > 20 ? <i className='fa fa-user'></i> : ''}
                   </div>
                 </div>
               </div>

@@ -84,17 +84,17 @@ ActiveAdmin.register Order do
 
     panel 'Order List' do
       clusters = Cluster.all
-      table_for order.cart.line_items.includes(:menu) do
+      table_for order.menu_clusters.includes(:cluster) do
         column :menu
         column :quantity
-        column 'Price' do |item|
-          number_to_currency(item.quantity * item.menu.price, unit: 'P')
+        column 'Price' do |mc|
+          number_to_currency(mc.quantity * mc.menu.price, unit: 'P')
         end
-        column 'Discounted?' do |item|
-          item.discount > 0 ? status_tag('Yes', :ok) : status_tag('No')
+        column 'Discounted?' do |mc|
+          (mc.cluster.discount || 0) > 0 ? status_tag('Yes', :ok) : status_tag('No')
         end
-        column 'Discounted Price' do |item|
-          number_to_currency(item.discounted_price, unit: 'P')
+        column 'Discounted Price' do |mc|
+          number_to_currency(mc.discounted_price, unit: 'P')
         end
       end
       div class: 'panel_contents' do
@@ -110,7 +110,7 @@ ActiveAdmin.register Order do
             tr do
               td 'Total Price'
               td
-              td number_to_currency(order.cart.total_price, unit: 'P')
+              td number_to_currency(order.total_price, unit: 'P')
             end
           end
         end
@@ -132,7 +132,7 @@ ActiveAdmin.register Order do
     end
   end
 
-  csv force_quotes: true, col_sep: ';', column_names: true do
+  csv column_names: true do
     column 'Order ID' do |order|
       order.id
     end
@@ -156,12 +156,12 @@ ActiveAdmin.register Order do
     end
     column :state
     column 'Orders' do |order|
-      order.cart.line_items.includes(:menu).collect do |item|
-        "-- #{item.menu.name} x #{item.quantity} - #{number_to_currency(item.discounted_price, unit: 'P')} - #{item.discount}% Off -- "
+      order.menu_clusters.includes(:cluster).collect do |mc|
+        "-- #{mc.menu.name} x #{mc.quantity} - #{number_to_currency(mc.discounted_price, unit: 'P')} - #{mc.cluster.discount || 0}% Off -- "
       end
     end
     column 'Total Price' do |order|
-      number_to_currency(order.cart.total_price, unit: 'P')
+      number_to_currency(order.total_price, unit: 'P')
     end
 
   end

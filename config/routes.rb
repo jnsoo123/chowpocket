@@ -27,7 +27,8 @@ Rails.application.routes.draw do
   get '/faqs', to: 'footer#faqs'
   get '/contact_us', to: 'footer#contact_us'
 
-  devise_for :users, controllers: { omniauth_callbacks: 'callbacks', registrations: 'registrations' }
+  delete '/clear_notifications', to: 'notifications#destroy_all', as: :clear_notifications
 
+  devise_for :users, controllers: { omniauth_callbacks: 'callbacks', registrations: 'registrations' }
   root to: 'landing_page#index'
 end

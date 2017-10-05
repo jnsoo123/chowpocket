@@ -11,6 +11,12 @@ class NotificationsController < ApplicationController
     redirect_to notifications_path, notice: 'Notification Deleted'
   end
 
+  def destroy_all
+    @notifications = current_user.notifications
+    @notifications.destroy_all
+    redirect_to notifications_path, notice: 'Notifications Cleared'
+  end
+
   private
   def set_notification
     @notification = current_user.notifications.find(params[:id])

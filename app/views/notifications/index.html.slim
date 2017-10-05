@@ -1,4 +1,8 @@
-h3 Notifications
+.clearfix
+  .pull-left
+    h3 Notifications
+  .pull-right
+    = link_to icon('times-circle', ' Clear'), clear_notifications_path, class: 'btn btn-link', style: 'color: red; padding: 25px 0;', method: :delete
 hr
 - if @notifications.present?
   - @notifications.each do |notif|
