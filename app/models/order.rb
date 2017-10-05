@@ -66,10 +66,6 @@ class Order < ApplicationRecord
     where(date_option)
   end
 
-  def cluster
-    self.menu_cluster.first.cluster
-  end
-
   def state
     if deleted? 
       'Cancelled'
