@@ -45,7 +45,7 @@ if Rails.env.development?
         menu.price        = 52 * (iteration + 1) 
         menu.avatar       = file
         menu.description  = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
-        menu.schedule     = ScheduleDays::ALL[iteration % 5]
+        menu.schedule     = ScheduleDays::ALL[iteration % 5][1]
       end
     end
   end

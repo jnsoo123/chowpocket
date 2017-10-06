@@ -7,44 +7,22 @@ class Order < ApplicationRecord
   validates_inclusion_of :status, in: OrderStatuses::ALL
 
   scope :confirmed_quantity, -> { confirmed_today.sum('quantity') }
-  scope :pending,   -> {includes(cart: :line_items).without_deleted.where(status: OrderStatuses::PENDING)} do
-    def date_option
-      if DateTime.now.change({hour: 19}) > DateTime.now
-        { created_at: (DateTime.now - 1.day).change({ hour: 19 })..DateTime.now.change({ hour: 19 }) }
-      else
-        { created_at: DateTime.now.change({ hour: 19 })..(DateTime.now + 1.day).change({ hour: 19 }) }
-      end
-    end
+  scope :pending,   -> {includes(cart: :line_items).without_deleted.where(status: OrderStatuses::PENDING)}
+  scope :confirmed, -> {includes(cart: :line_items).without_deleted.where(status: OrderStatuses::CONFIRMED)}
 
-    def today
-      where(date_option)
-    end
-
-    def not_today
-      where.not(date_option)
-    end
+  def self.today 
+    date_option = ApplicationController.helpers.get_date_cycle_for_scopes
+    ransack(date_option).result
   end
-  scope :confirmed, -> {includes(cart: :line_items).without_deleted.where(status: OrderStatuses::CONFIRMED)} do
-    def date_option
-      if DateTime.now.change({hour: 19}) > DateTime.now
-        { created_at: (DateTime.now - 1.day).change({ hour: 19 })..DateTime.now.change({ hour: 19 }) }
-      else
-        { created_at: DateTime.now.change({ hour: 19 })..(DateTime.now + 1.day).change({ hour: 19 }) }
-      end
-    end
 
-    def today
-      where(date_option)
-    end
-
-    def not_today
-      where.not(date_option)
-    end
+  def self.not_today 
+    date_option = ApplicationController.helpers.get_date_cycle_for_scopes
+    orders = ransack(date_option).result
+    Order.where.not(id: orders.map(&:id))
   end
 
   after_create do
     cart.update is_ordered: true
-    check_pending_orders
     send_notifications(OrderStatuses::PENDING)
   end
 
@@ -54,16 +32,6 @@ class Order < ApplicationRecord
 
   after_destroy do
     destroy_menu_clusters
-  end
-
-  def self.today
-    date_option = if DateTime.now.change({hour: 19}) > DateTime.now
-                    { created_at: (DateTime.now - 1.day).change({ hour: 19 })..DateTime.now.change({ hour: 19 }) }
-                  else
-                    { created_at: DateTime.now.change({ hour: 19 })..(DateTime.now + 1.day).change({ hour: 19 }) }
-                  end
-
-    where(date_option)
   end
 
   def state
@@ -121,14 +89,15 @@ class Order < ApplicationRecord
   end
 
   private
-  def destroy_menu_clusters
-    self.menu_clusters.destroy_all
+  def get_date_cycle
+    date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
+    date = date - 1.day if date.saturday?
+    date = date - 2.day if date.sunday?
+    date
   end
 
-  def check_pending_orders
-    if Order.pending.today.sum('quantity') > OrderSettings::MINIMUM_ORDER
-      deliver_emails
-    end
+  def destroy_menu_clusters
+    self.menu_clusters.destroy_all
   end
 
   def deliver_emails

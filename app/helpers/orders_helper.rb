@@ -1,4 +1,20 @@
 module OrdersHelper
+  def get_date_cycle_for_scopes
+    date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
+    date = date.to_datetime
+    option = case
+             when date.friday?
+               {created_at_gteq_datetime: (date-1.day).change({hour: 19}), created_at_lteq_datetime: (date+2.days).change({hour: 19})}
+             when date.saturday?
+               {created_at_gteq_datetime: (date-2.days).change({hour: 19}), created_at_lteq_datetime: (date+1.days).change({hour: 19})}
+             when date.sunday?
+               {created_at_gteq_datetime: (date-3.days).change({hour: 19}), created_at_lteq_datetime: (date).change({hour: 19})}
+             else
+               {created_at_gteq_datetime: (date-1.day).change({hour: 19}), created_at_lteq_datetime: (date).change({hour: 19})}
+             end
+    option
+  end
+
   def get_date_cycle
     date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
     date = date - 1.day if date.saturday?
