@@ -1,25 +1,24 @@
 class SemaphoreApi
-  def initialize
+  def initialize(number: number)
+    @number     = number
     @apikey     = ENV['SEMAPHORE_API_KEY']
     @sendername = ENV['SEMAPHORE_SENDERNAME']
   end
 
-  def send_message
+  def send_message(message)
     uri = Addressable::URI.new
 
     options = {
       apikey:     @apikey,
-      number:     '639056671505',
-      message:    'test',
+      number:     @number,
+      message:    message,
       sendername: @sendername
     }
-
-    binding.pry
 
     uri.query_values = options
     path = "http://api.semaphore.co/api/v4/messages?#{uri.query}"
     response = HTTP.post(path)
 
-    print JSON.parse(response)
+    JSON.parse(response).all? {|r| r['status'] != 'failed'}
   end
 end
