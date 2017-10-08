@@ -43,6 +43,13 @@ class Order < ApplicationRecord
     end
 
     order_ids
+
+    menu_clusters = MenuCluster.includes(:menu, order: {cart: {user: :building}}).where(order_id: order_ids)
+    menu_clusters.each do |mc|
+      send_message_object = SendMessageObject.new(mc) 
+      api = SemaphoreApi.new(send_message_object)
+      api.send_message unless send_message_object.user.is_admin?
+    end
   end
 
   def state

@@ -1,16 +1,17 @@
 class SemaphoreApi
-  def initialize(number: nil)
-    @number     = number
+  def initialize(object)
+    @object     = object
     @apikey     = ENV['SEMAPHORE_API_KEY']
     @sendername = ENV['SEMAPHORE_SENDERNAME']
   end
 
-  def send_message(message)
-    uri = Addressable::URI.new
+  def send_message
+    message = create_message
+    uri     = Addressable::URI.new
 
     options = {
       apikey:     @apikey,
-      number:     @number,
+      number:     @object.number,
       message:    message,
       sendername: @sendername
     }
@@ -20,5 +21,17 @@ class SemaphoreApi
     response = HTTP.post(path)
 
     JSON.parse(response).all? {|r| r['status'] != 'failed'}
+  end
+
+  private
+  def create_message
+    message = "Hi #{@object.name}, thank you for your order with www.chowpocket.com.\n" +
+              "Your order:\n" + 
+              "#{@object.quantity} X #{@object.menu.name}\n" +
+              "@ #{@object.building}\n" +
+              "has been confirmed!\n" +
+              "Delivery Window: 10AM-11AM"
+          
+    message
   end
 end
