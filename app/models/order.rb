@@ -26,12 +26,23 @@ class Order < ApplicationRecord
     send_notifications(OrderStatuses::PENDING)
   end
 
-  after_update do
-    send_notifications(OrderStatuses::CONFIRMED)  if self.status == OrderStatuses::CONFIRMED
-  end
-
   after_destroy do
     destroy_menu_clusters
+  end
+
+  def self.confirm_orders
+    order_ids = []
+    orders    = Order.includes(cart: :user).today.pending
+
+    Order.transaction do
+      orders.each do |order|
+        order.update status: OrderStatuses::CONFIRMED
+        order.send_notifications OrderStatuses::CONFIRMED
+        order_ids.push order.id
+      end
+    end
+
+    order_ids
   end
 
   def state
