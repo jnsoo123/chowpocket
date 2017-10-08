@@ -31,14 +31,18 @@ class Order < ApplicationRecord
   end
 
   def self.confirm_orders
-    orders = Order.includes(cart: :user).today.pending
+    order_ids = []
+    orders    = Order.includes(cart: :user).today.pending
 
     Order.transaction do
       orders.each do |order|
         order.update status: OrderStatuses::CONFIRMED
         order.send_notifications OrderStatuses::CONFIRMED
+        order_ids.push order.id
       end
     end
+
+    order_ids
   end
 
   def state

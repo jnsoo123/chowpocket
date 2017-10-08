@@ -1,5 +1,5 @@
 class SemaphoreApi
-  def initialize(number: number)
+  def initialize(number: nil)
     @number     = number
     @apikey     = ENV['SEMAPHORE_API_KEY']
     @sendername = ENV['SEMAPHORE_SENDERNAME']

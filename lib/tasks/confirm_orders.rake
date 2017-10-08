@@ -4,6 +4,12 @@ namespace :orders do
     puts 'Confirming Orders' 
     puts '----------------'
 
-    Order.confirm_orders
+    order_ids = Order.confirm_orders
+
+    if not order_ids.empty?
+      print "Order IDs #{order_ids} confirmed"
+    else
+      print 'No orders can be confirmed'
+    end
   end
 end
