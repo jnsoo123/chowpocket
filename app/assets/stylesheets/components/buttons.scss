@@ -10,3 +10,34 @@
 .btn-max-width {
   width: 100%;
 }
+
+.btn.btn-google2 {
+  width: 100%;
+  background-color: #fff;
+  border-color: #dcdcda;
+  color: #333;
+
+  &:hover, &:active {
+    background-color: #fff;
+    border-color: #dcdcda;
+    color: #333;
+  }
+
+  .google-icon {
+    background: asset-url('g-logo.png');
+    background-size: 42px 42px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+  }
+
+  .google-text {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 21px;
+    padding-right: 21px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,21 @@
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Login to Chowpocket</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for(User.new, url: new_user_session_path) do |f| %>
+          <div class='form-group'>
+            <%= link_to omniauth_authorize_path(User.new, :google_oauth2), class: 'btn btn-default btn-google2' do %>
+              <div class="google-icon"></div>
+              <div class="google-text">Sign in with Google</div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
