@@ -14,7 +14,7 @@ nav.nav.navbar-default
           = link_to icon('cutlery', ' Schedule a FoodPartner Demo', style: 'margin-right: 8px;'), 'https://trychowpocket.typeform.com/to/PWjYyk', target: '_blank'
         - if not user_signed_in?
           li
-            = link_to icon('user', ' Log In', style: 'margin-right: 8px;'), new_user_session_path
+            = link_to icon('user', ' Log In', style: 'margin-right: 8px;'), '#', data: { toggle: 'modal', target: '#signup-modal' }
         - else
           li
             = link_to notifications_path do
@@ -37,3 +37,5 @@ nav.nav.navbar-default
               li.divider
               li
                 = link_to icon('sign-out', ' Logout'), destroy_user_session_path, method: :delete
+
+= render partial: 'shared/modals'

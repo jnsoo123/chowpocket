@@ -15,10 +15,6 @@ class ProfilesController < ApplicationController
 
   def update
     @user = current_user
-<<<<<<< HEAD
-    @user.update(user_params)
-    redirect_to profiles_url, notice: 'Profile has been updated.'
-=======
 
     if verify_number
       if @user.update(user_params)
@@ -31,7 +27,6 @@ class ProfilesController < ApplicationController
       flash[:error] = 'Invalid verification code.'
       render :edit
     end
->>>>>>> d0f6d1f... fixes #58
   end
 
   private

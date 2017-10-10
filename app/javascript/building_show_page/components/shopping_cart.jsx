@@ -30,7 +30,7 @@ class ShoppingCart extends Component {
     } else {
       views.push('Your cart is empty! ')
       if (!this.props.userSignedIn){
-        views.push(<a href='/users/sign_in'>Login to Order</a>)
+        views.push(<a href='#' data-toggle='modal' data-target='#signup-modal'>Login to Order</a>)
       }
     }
     return views
