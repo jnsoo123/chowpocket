@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable,
-    :omniauthable, :omniauth_providers => [:google_oauth2]
+    :omniauthable, :omniauth_providers => [:google_oauth2, :facebook]
 
   has_many :carts, dependent: :destroy
   has_many :orders, through: :carts
@@ -37,7 +37,7 @@ class User < ApplicationRecord
         name: data['name'],
         email: data['email'],
         password: Devise.friendly_token[0,20],
-        provider: 'google'
+        provider: auth.provider
       )
     end
     user
