@@ -37,6 +37,7 @@ gem 'select2-rails'
 gem 'facebook-messenger'
 gem 'http'
 gem 'whenever'
+gem 'omniauth-facebook'
 
 # -- END --
 
