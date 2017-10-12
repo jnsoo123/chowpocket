@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
 
   validate :check_phone_number
+  validates :phone_number, uniqueness: true, if: Proc.new {|user| user.phone_number.present?}
 
   def unread_notifications_count
     unread_count = self.notifications.where(status: NotificationStatuses::UNREAD).count

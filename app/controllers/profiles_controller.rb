@@ -9,8 +9,12 @@ class ProfilesController < ApplicationController
 
   def update
     @user = current_user
-    @user.update(user_params)
-    redirect_to profiles_url, notice: 'Profile has been updated.'
+    if @user.update(user_params)
+      redirect_to profiles_url, notice: 'Profile has been updated.'
+    else
+      flash[:error] = @user.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 
   private
