@@ -19,7 +19,7 @@
 
   &:hover, &:active {
     background-color: #fff;
-    border-color: #dcdcda;
+    border-color: #ccc;
     color: #333;
   }
 
@@ -33,6 +33,37 @@
   }
 
   .google-text {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 21px;
+    padding-right: 21px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+.btn.btn-facebook {
+  width: 100%;
+  background-color: #3b5988;
+  border-color: #3b5988;
+  color: #fff;
+
+  &:hover, &:active {
+    background-color: #35507a;
+    border-color: #35507a;
+    color: #fff;
+  }
+
+  .facebook-icon {
+    background: asset-url('facebook-logo.png');
+    background-size: 42px 42px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+  }
+
+  .facebook-text {
     display: inline-block;
     vertical-align: middle;
     padding-left: 21px;

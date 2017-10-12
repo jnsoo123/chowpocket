@@ -14,12 +14,16 @@
             <% end %>
           </div>
           <div class='form-group'>
-            <%= link_to user_facebook_omniauth_authorize_path, class: 'btn btn-default btn-google2' do %>
-              <div class="google-icon"></div>
-              <div class="google-text">Sign in with Google</div>
+            <%= link_to user_facebook_omniauth_authorize_path, class: 'btn btn-default btn-facebook' do %>
+              <div class="facebook-icon"></div>
+              <div class="facebook-text">Sign in with Facebook</div>
             <% end %>
           </div>
         <% end %>
+        <hr />
+        <p class="text-center">OR <br>Use your email</p>
+        <hr />
+        <%= link_to 'Log In / Sign up', new_user_session_path, class: 'btn btn-warning', style: 'width: 100%;' %>
       </div>
     </div>
   </div>
