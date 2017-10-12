@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :orders, through: :carts
   has_many :notifications, dependent: :destroy
 
+  validate :check_phone_number
+
   def unread_notifications_count
     unread_count = self.notifications.where(status: NotificationStatuses::UNREAD).count
     unread_count > 0 ? unread_count : nil
@@ -44,5 +46,12 @@ class User < ApplicationRecord
 
   def active_for_authentication?
     super && !deleted_at
+  end
+
+  private
+  def check_phone_number
+    if self.phone_number.present?
+      errors.add(:phone_number, 'must be valid. Eg. 09051234567') if self.phone_number.length != 11
+    end
   end
 end
