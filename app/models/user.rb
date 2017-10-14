@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   belongs_to :building, optional: true
   acts_as_paranoid without_default_scope: true
+  has_one_time_password
 
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable,
