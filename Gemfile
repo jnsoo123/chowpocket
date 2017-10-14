@@ -38,6 +38,7 @@ gem 'facebook-messenger'
 gem 'http'
 gem 'whenever'
 gem 'omniauth-facebook'
+gem 'active_model_otp'
 
 # -- END --
 
