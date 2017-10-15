@@ -1,14 +1,18 @@
 class User < ApplicationRecord
   belongs_to :building, optional: true
   acts_as_paranoid without_default_scope: true
+  has_one_time_password
 
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable,
-    :omniauthable, :omniauth_providers => [:google_oauth2]
+    :omniauthable, :omniauth_providers => [:google_oauth2, :facebook]
 
   has_many :carts, dependent: :destroy
   has_many :orders, through: :carts
   has_many :notifications, dependent: :destroy
+
+  validate :check_phone_number
+  validates :phone_number, uniqueness: true, if: Proc.new {|user| user.phone_number.present?}
 
   def unread_notifications_count
     unread_count = self.notifications.where(status: NotificationStatuses::UNREAD).count
@@ -36,7 +40,7 @@ class User < ApplicationRecord
         name: data['name'],
         email: data['email'],
         password: Devise.friendly_token[0,20],
-        provider: 'google'
+        provider: auth.provider
       )
     end
     user
@@ -44,5 +48,12 @@ class User < ApplicationRecord
 
   def active_for_authentication?
     super && !deleted_at
+  end
+
+  private
+  def check_phone_number
+    if self.phone_number.present?
+      errors.add(:phone_number, 'must be valid. Eg. 09051234567') if self.phone_number.length != 11
+    end
   end
 end

@@ -2,19 +2,17 @@
   h3 Edit Profile
   hr
   fieldset
-    = form_for current_user, url: profiles_path, method: :put, html: { class: 'form-horizontal' } do |f|
+    = form_for current_user, url: profiles_path, method: :put, html: { class: 'form-horizontal edit-user' } do |f|
+      = hidden_field_tag :verification_code
       .form-group
         = f.label :name, class: 'control-label col-md-2 col-sm-2 col-xs-12'
         .col-md-10.col-xs-12.col-sm-10
           = f.text_field :name, class: 'form-control', autofocus: true
       .form-group
-        = f.label :email, class: 'control-label col-md-2 col-sm-2 col-xs-12'
-        .col-md-10.col-xs-12.col-sm-10
-          = f.email_field :email, class: 'form-control', required: true
-      .form-group
         = f.label :phone_number, class: 'control-label col-md-2 col-sm-2 col-xs-12'
         .col-md-10.col-xs-12.col-sm-10
-          = f.text_field :phone_number, class: 'form-control', required: true
+          = f.text_field :phone_number, class: 'form-control', required: true, pattern: '^09\d{9}$'
+          span.help-block ex. 09051234567
       .form-group
         = f.label :building_id, class: 'control-label col-md-2 col-sm-2 col-xs-12'
         .col-md-10.col-xs-12.col-sm-10
