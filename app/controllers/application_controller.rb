@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :set_cart
   before_action :configure_permitted_params, if: :devise_controller?
   before_action :authenticate_user!
+  before_action :mark_cancelled_all_pending_orders_yesterday
   before_action :check_if_user_has_phone_number
 
   layout :layout_of_resource
@@ -45,6 +46,12 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :building_id, :floor, :phone_number, :company_name])
+  end
+
+  def mark_cancelled_all_pending_orders_yesterday
+    Order.transaction do
+      Order.pending.not_today.destroy_all
+    end
   end
 
   def check_if_user_has_phone_number

@@ -48,6 +48,35 @@
             </div>
           </div>
 
+          <div class='field form-group'>
+            <div class='input-group'>
+              <span class='input-group-addon ' style='color: #ccc'>B</span> 
+              <%= f.select :building_id, Building.all.collect{|x| [x.name, x.id]}, {include_blank: 'Select Building'}, class: 'form-control' %>
+            </div>
+              <%= link_to "Activate delivery in your building", 'https://trychowpocket.typeform.com/to/FBRzNy', class: 'login-page__activate-building', target: '_blank' %>
+          </div>
+
+          <div class='field form-group'>
+            <div class='input-group'>
+              <span class='input-group-addon ' style='color: #ccc'>B</span> 
+              <%= f.text_field :floor, class: 'form-control ', placeholder: 'Building Floor', required: true %>
+            </div>
+          </div>
+
+          <div class='field form-group'>
+            <div class='input-group'>
+              <span class='input-group-addon ' style='color: #ccc'>C</span> 
+              <%= f.text_field :company_name, class: 'form-control ', placeholder: 'Company Name', required: true %>
+            </div>
+          </div>
+
+          <div class='field form-group'>
+            <div class='input-group'>
+              <span class='input-group-addon ' style='color: #ccc'>N</span> 
+              <%= f.text_field :phone_number, class: 'form-control ', placeholder: 'Contact Number', required: true %>
+            </div>
+          </div>
+
           <div class="field form-group">
             <div class='input-group'>
               <span class='input-group-addon ' style='color: #ccc;'>P</span>

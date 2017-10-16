@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
+  mount Facebook::Messenger::Server, at: 'bot'
+
   resources :line_items, only: [:create, :update]
   resources :orders, only: [:create, :index, :show, :destroy]
   resources :checkouts, only: :index
@@ -24,7 +26,6 @@ Rails.application.routes.draw do
   get '/privacy', to: 'footer#privacy'
   get '/faqs', to: 'footer#faqs'
   get '/contact_us', to: 'footer#contact_us'
-  get '/profiles/verify', to: 'profiles#verify'
 
   delete '/clear_notifications', to: 'notifications#destroy_all', as: :clear_notifications
 
