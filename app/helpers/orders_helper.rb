@@ -1,7 +1,7 @@
 module OrdersHelper
   def get_date_cycle_for_scopes
     date = DateTime.now < DateTime.now.change({hour: 19}) ? Date.today : Date.today + 1
-    date = date.to_datetime
+    date = date.to_datetime.in_time_zone
     option = case
              when date.friday?
                {created_at_gteq_datetime: (date-1.day).change({hour: 19}), created_at_lteq_datetime: (date+2.days).change({hour: 19})}
