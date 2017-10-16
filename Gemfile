@@ -37,15 +37,9 @@ gem 'select2-rails'
 gem 'facebook-messenger'
 gem 'http'
 gem 'whenever'
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 gem 'omniauth-facebook'
 gem 'active_model_otp'
->>>>>>> d0f6d1f... fixes #58
-=======
 gem 'omniauth-facebook'
->>>>>>> 859210e... added facebook login
 
 # -- END --
 
