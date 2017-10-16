@@ -14,7 +14,7 @@ class MenuItem extends Component {
       ) 
     } else {
       return(
-        <a href='/users/sign_in' className='btn btn-success btn-sm btn-order'>
+        <a href='#' className='btn btn-success btn-sm btn-order' data-toggle='modal' data-target='#signup-modal'>
           Check Availability
         </a>
       ) 
