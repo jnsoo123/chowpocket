@@ -14,7 +14,6 @@ Devise.setup do |config|
   config.sign_out_via = :delete
 
   config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
-  config.omniauth :facebook, ENV['FACEBOOK_PAGE_APP_ID'], ENV['FACEBOOK_PAGE_APP_SECRET']
   config.secret_key = '6571dd44f4c5f04dae4f054c5f911245e08e83405eeb0b17b5f85ebd8fca6630c23b9b32529011d53079eecdd858042dc4952cfeb383d390ed335792bac73f4a'
 
   # The secret key used by Devise. Devise uses this key to generate
