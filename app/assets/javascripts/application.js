@@ -20,4 +20,11 @@
 
 $(document).on('turbolinks:load', function(){
   $('select').select2();
-})
+});
+
+
+$(document).on('ready', function() {
+  $('input[name="user[email]"]').val('');
+});
+
+
