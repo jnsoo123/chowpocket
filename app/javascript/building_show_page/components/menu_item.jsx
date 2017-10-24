@@ -9,7 +9,7 @@ class MenuItem extends Component {
           data-menu-id={this.props.id} 
           className='btn btn-success btn-sm btn-order'
           onClick={this.props.addToCart}>
-          <i className='fa fa-plus' /> Add to Cart
+          <i className='fa fa-plus' /> PRE-ORDER
         </a>
       ) 
     } else {
@@ -88,6 +88,7 @@ class MenuItem extends Component {
               </span>
             </h3>
             <p>{menu.description}</p>
+            <p className='text-danger'><small>* Mode of payment: Cash on Delivery</small></p>
             <div className='row'>
               <div className='col-xs-12'>
                 <div className='text-center'><small>Discount o Meter:</small></div>

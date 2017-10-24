@@ -7,6 +7,16 @@
   }
 }
 
+.btn.btn-facebook-small {
+  background-color: #3b5988;
+  color: white;
+  border-radius: 50%;
+  padding: 10px 17px;
+  &:hover {
+   background-color: #35507a;
+  }
+}
+
 .btn-max-width {
   width: 100%;
 }

@@ -28,6 +28,7 @@
         <% end %>
         <p class='text-center'><small>OR CONNECT WITH</small></p>
         <div class='text-center' style='margin-bottom: 20px;'>
+          <%= link_to icon('facebook'), omniauth_authorize_path(resource_name, :facebook), class: 'btn btn-facebook-small' %>
           <%= link_to icon('google'), omniauth_authorize_path(resource_name, :google_oauth2), class: 'btn btn-google' %>
         </div>
       </div>

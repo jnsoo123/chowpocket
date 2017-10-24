@@ -15,6 +15,15 @@ class Page extends Component{
     }
   }
 
+  componentDidMount() {
+    let url         = new URL(window.location.href)
+    let loginParams = url.searchParams.get('login')
+
+    if(loginParams && !this.props.userSignedIn){
+      $('#signup-modal').modal('show')
+    }
+  }
+
   addToCart(e){
     e.preventDefault()
     let menuId = $(e.target).data('menu-id')

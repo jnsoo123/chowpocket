@@ -104,6 +104,7 @@ class Page extends Component {
         Checkout Page
       </h2>
       <hr />
+      <p className='text-danger'><small>* Mode of payment: Cash on Delivery</small></p>
       {this.renderCheckoutInfo()}
     </div>) 
   }
