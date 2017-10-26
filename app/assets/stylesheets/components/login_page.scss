@@ -1,0 +1,39 @@
+.login-page__forgot-password-link {
+  color: #FF5C5C;
+  font-size: 10px;
+  &:hover {
+    color: #FF5C5C;
+  }
+}
+
+.login-page__activate-building {
+  color: #FF5C5C;
+  font-size: 12px;
+  &:hover {
+    color: #FF5C5C;
+  }
+}
+
+.login-page__container {
+  max-width: 1000px; 
+  margin-top: 15px;
+}
+
+.login-page__container_smaller {
+  max-width: 400px; 
+  margin-top: 30px;
+}
+
+.login-page__container .well, 
+.login-page__container_smaller .well {
+  background-color: whitesmoke;
+}
+
+.login-page__container .row .col-xs-6:last-child {
+  border-left: 2px solid #dce4ec;
+}
+
+.login-page__container hr, 
+.login-page__container_smaller hr {
+  border-bottom: 2px solid #dce4ec;
+}

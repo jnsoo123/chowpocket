@@ -1,0 +1,120 @@
+.building-show-page__menu-item-picture {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 500px; 
+}
+
+.building-show-page .progress-bar-danger-1 {
+  background-color: #eb6f62;
+}
+
+.building-show-page .progress-bar-danger-2 {
+  background-color: #e95d4f;
+}
+
+.building-show-page .progress-bar-danger-3 {
+  background-color: #e74c3c;
+}
+
+.building-show-page .progress-bar {
+  color: white!important;
+}
+
+.building-show-page__menu-item-panel-body {
+  padding: 0 0 20px 0;
+}
+
+.building-show-page__menu-item-panel-footer {
+  padding: 0px;
+}
+
+.building-show-page__menu-item-title {
+  padding: 0 15px;
+}
+
+.building-show-page__cart-item-price {
+  color: red;
+}
+
+.building-show-page__cart-item-quantity {
+  cursor: default;
+  background-color: white;
+  border-color: white;
+  color: black;
+  &:hover {
+    background-color: white;
+    border-color: white;
+    color: black;
+  }
+}
+
+.building-show-page .btn-order {
+  border-radius: 20px;
+}
+
+.building-show-page__menu-item-panel-body .progress {
+  height: 25px;
+  border-radius: 20px;
+
+  .progress-bar {
+    font-size: 12px;
+    padding-top: 8px;
+    color: #333;
+  }
+}
+
+.building-show-page__main {
+  @media only screen and (min-width : 320px) {
+    #largeScreen {
+      display: none;
+    } 
+
+    #smallScreen {
+      display: unset;
+    } 
+  }
+
+  @media only screen and (min-width : 480px) {
+    #largeScreen {
+      display: none;
+    } 
+
+    #smallScreen {
+      display: unset;
+    } 
+  }
+
+  @media only screen and (min-width : 768px) {
+    #largeScreen {
+      display: none;
+    } 
+
+    #smallScreen {
+      display: unset;
+    } 
+  }
+
+  @media only screen and (min-width : 992px) {
+    #largeScreen {
+      display: unset;
+    } 
+
+    #smallScreen {
+      display: none;
+    } 
+  }
+
+  @media only screen and (min-width : 1200px) {
+    #largeScreen {
+      display: unset;
+    } 
+
+    #smallScreen {
+      display: none;
+    } 
+  }
+}

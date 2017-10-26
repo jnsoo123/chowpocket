@@ -1,0 +1,41 @@
+/* line 1, /home/benigno/Documents/Rails/chowpocket/app/assets/stylesheets/activeadmin_customizations.scss */
+.inputs .select2-container {
+  width: 50% !important;
+}
+
+/* line 5, /home/benigno/Documents/Rails/chowpocket/app/assets/stylesheets/activeadmin_customizations.scss */
+.select2-container .select2-choice {
+  height: 30px;
+  border: 1px solid #e4eaec;
+}
+
+/* line 10, /home/benigno/Documents/Rails/chowpocket/app/assets/stylesheets/activeadmin_customizations.scss */
+.select2-container-active .select2-choice,
+.select2-container-active .select2-choices {
+  border: 1px solid #5897fb;
+  outline: none;
+}
+
+/* line 16, /home/benigno/Documents/Rails/chowpocket/app/assets/stylesheets/activeadmin_customizations.scss */
+.select2-search input {
+  border: 1px solid #e4eaec;
+  border-radius: 4px;
+}
+
+/* line 21, /home/benigno/Documents/Rails/chowpocket/app/assets/stylesheets/activeadmin_customizations.scss */
+.select2-container .select2-choice:not(.select2-dropdown-open) {
+  height: 30px;
+}
+
+/* line 25, /home/benigno/Documents/Rails/chowpocket/app/assets/stylesheets/activeadmin_customizations.scss */
+.select2-dropdown-open .select2-choice {
+  border-bottom-color: transparent;
+}
+
+/* line 29, /home/benigno/Documents/Rails/chowpocket/app/assets/stylesheets/activeadmin_customizations.scss */
+.select2-container >
+.select2-choice >
+.select2-arrow {
+  border-left: 1px solid #e4eaec;
+  background: #e4eaec;
+}

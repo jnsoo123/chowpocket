@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  menu: one
+  order: one
+  cluster: one
+  quantity: 1
+
+two:
+  menu: two
+  order: two
+  cluster: two
+  quantity: 1

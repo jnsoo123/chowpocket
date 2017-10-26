@@ -1,0 +1,25 @@
+.container style='width: 600px;'
+  h3 Change Password
+  hr
+  fieldset
+    = form_for current_user, url: passwords_path, method: :put, html: { class: 'form-horizontal' } do |f|
+      .form-group
+        = f.label :old_password, 'Old Password', class: 'control-label col-xs-3'
+        .col-xs-9
+          = f.password_field :current_password, class: 'form-control', autofocus: true
+      .form-group
+        = f.label :password, 'New Password', class: 'control-label col-xs-3'
+        .col-xs-9
+          = f.password_field :password, class: 'form-control'
+      .form-group
+        = f.label :password_confirmation, 'Confirm New Password', class: 'control-label col-xs-3'
+        .col-xs-9
+          = f.password_field :password_confirmation, class: 'form-control'
+      .form-group
+        .btn-group.col-xs-9.col-xs-offset-3
+          = f.submit 'Update Password', class: 'btn btn-success'
+          = link_to 'Cancel', profiles_path, class: 'btn btn-danger'
+    
+
+
+

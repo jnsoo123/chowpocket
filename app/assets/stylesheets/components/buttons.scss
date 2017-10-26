@@ -1,0 +1,84 @@
+.btn.btn-google {
+  background-color: #DB4D28;
+  color: white;
+  border-radius: 50%;
+  &:hover {
+   background-color: #c54524;
+  }
+}
+
+.btn.btn-facebook-small {
+  background-color: #3b5988;
+  color: white;
+  border-radius: 50%;
+  padding: 10px 17px;
+  &:hover {
+   background-color: #35507a;
+  }
+}
+
+.btn-max-width {
+  width: 100%;
+}
+
+.btn.btn-google2 {
+  width: 100%;
+  background-color: #fff;
+  border-color: #dcdcda;
+  color: #333;
+
+  &:hover, &:active {
+    background-color: #fff;
+    border-color: #dcdcda;
+    color: #333;
+  }
+
+  .google-icon {
+    background: asset-url('g-logo.png');
+    background-size: 42px 42px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+  }
+
+  .google-text {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 21px;
+    padding-right: 21px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+.btn.btn-facebook {
+  width: 100%;
+  background-color: #3b5988;
+  border-color: #3b5988;
+  color: #fff;
+
+  &:hover, &:active {
+    background-color: #35507a;
+    border-color: #35507a;
+    color: #fff;
+  }
+
+  .facebook-icon {
+    background: asset-url('facebook-logo.png');
+    background-size: 42px 42px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+  }
+
+  .facebook-text {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 21px;
+    padding-right: 21px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}

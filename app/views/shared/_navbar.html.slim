@@ -1,0 +1,41 @@
+nav.nav.navbar-default
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle.collapsed data-target="#navbar-collapse-1" data-toggle="collapse" type="button" 
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      = link_to root_path, class: 'navbar-brand', style: 'padding: 0; height: 100px;' do
+        = image_tag('navbarlogo.png', style: 'width: 280px; height: 100px;')
+    #navbar-collapse-1.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right.navbar__links
+        li
+          = link_to icon('cutlery', ' Schedule a FoodPartner Demo', style: 'margin-right: 8px;'), 'https://trychowpocket.typeform.com/to/PWjYyk', target: '_blank'
+        - if not user_signed_in?
+          li
+            = link_to icon('user', ' Log In', style: 'margin-right: 8px;'), '#', data: { toggle: 'modal', target: '#signup-modal' }
+        - else
+          li
+            = link_to notifications_path do
+              = icon('bell', ' Notifications')
+              span.badge
+                = current_user.unread_notifications_count
+
+          li.dropdown
+            a.dropdown-toggle href='#' data-toggle='dropdown' role='button' aria-expanded='false'
+              = icon('user', " #{current_user.name} ", style: 'margin-right: 8px;')
+              span.caret
+            ul.dropdown-menu role='menu'
+              - if current_user.is_admin?
+               li
+                  = link_to icon('cogs', ' Administrator'), admin_root_path
+              li
+                = link_to icon('user', ' My Profile'), profiles_path
+              li
+                = link_to icon('list-ul', ' Order History'), orders_path
+              li.divider
+              li
+                = link_to icon('sign-out', ' Logout'), destroy_user_session_path, method: :delete
+
+= render partial: 'shared/modals'

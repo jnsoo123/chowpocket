@@ -1,0 +1,15 @@
+@import 'bootstrap-sprockets';
+@import 'bootswatch/variables';
+@import 'bootstrap';
+@import 'bootswatch/bootswatch';
+@import 'sweetalert/sweetalert';
+@import 'components/*';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import 'select2';
+@import 'select2-bootstrap';
+
+.brand-small {
+  color: gray;
+  font-size: 10px;
+}
