@@ -13,6 +13,8 @@ class User < ApplicationRecord
 
   validate :check_phone_number
 
+  after_create :send_welcome_email
+
   def unread_notifications_count
     unread_count = self.notifications.where(status: NotificationStatuses::UNREAD).count
     unread_count > 0 ? unread_count : nil
@@ -50,6 +52,10 @@ class User < ApplicationRecord
   end
 
   private
+  def send_welcome_email
+    SendWelcomeEmailJob.perform_now(self)
+  end
+
   def check_phone_number
     if self.phone_number.present?
       errors.add(:phone_number, 'must be valid. Eg. 09051234567') if self.phone_number.length != 11
