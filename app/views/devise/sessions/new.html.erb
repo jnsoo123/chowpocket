@@ -12,7 +12,7 @@
           <div class='form-group'>
             <div class='input-group'>
               <span class='input-group-addon ' style='color: #ccc;'>E</span>
-              <%= f.email_field :email, autofocus: true, class: 'form-control ', placeholder: 'Email', required: true %>
+              <%= f.email_field :email, autofocus: true, class: 'form-control ', placeholder: 'Email (eg. you@example.com)', required: true, pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$' %>
             </div>
           </div>
           <div class='form-group'>
@@ -38,14 +38,14 @@
           <div class="field form-group">
             <div class='input-group'>
               <span class='input-group-addon ' style='color: #ccc;'>E</span>
-              <%= f.email_field :email, autofocus: true, class: 'form-control ', placeholder: 'Email', required: true %>
+              <%= f.email_field :email, autofocus: true, class: 'form-control ', placeholder: 'Email (eg. you@example.com)', required: true, pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$' %>
             </div>
           </div>
 
           <div class="field form-group">
             <div class='input-group'>
               <span class='input-group-addon ' style='color: #ccc;'>N</span>
-              <%= f.text_field :name, class: 'form-control ', placeholder: 'Name', required: true %>
+              <%= f.text_field :name, class: 'form-control ', placeholder: 'Full Name', required: true %>
             </div>
           </div>
 
