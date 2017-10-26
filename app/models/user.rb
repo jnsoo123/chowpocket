@@ -13,11 +13,8 @@ class User < ApplicationRecord
 
   validate :check_phone_number
 
-<<<<<<< HEAD
   after_create :send_welcome_email
 
-=======
->>>>>>> d1dd1ac2f750e9ed4b5059546c5352fe2612f8e2
   def unread_notifications_count
     unread_count = self.notifications.where(status: NotificationStatuses::UNREAD).count
     unread_count > 0 ? unread_count : nil
