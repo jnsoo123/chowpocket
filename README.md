@@ -1,7 +1,7 @@
 # Chowpocket Startup
 
 **Description**
-Basic food delivery app.
+Community marketplace for foods and provisions.
 
 **Link**
 [Access deployment website here](https://www.chowpocket.com/)
