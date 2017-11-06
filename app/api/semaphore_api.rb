@@ -5,12 +5,13 @@ class SemaphoreApi
     @sendername = ENV['SEMAPHORE_SENDERNAME']
   end
 
-  def send_message(message)
+  def send_message
+    message = create_message
     uri = Addressable::URI.new
 
     options = {
       apikey:     @apikey,
-      number:     @number,
+      number:     @object.number,
       message:    message,
       sendername: @sendername
     }
@@ -48,7 +49,7 @@ class SemaphoreApi
               "#{@object.quantity} X #{@object.menu.name}\n" +
               "@ #{@object.building}\n" +
               "has been confirmed!\n" +
-              "Delivery Window: 10AM-11AM"
+              "Delivery Window: 9AM-11AM"
           
     message
   end
