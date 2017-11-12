@@ -11,4 +11,7 @@ class FooterController < ApplicationController
 
   def contact_us
   end
+
+  def terms_of_use
+  end
 end
