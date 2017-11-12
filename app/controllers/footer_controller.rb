@@ -14,4 +14,10 @@ class FooterController < ApplicationController
 
   def terms_of_use
   end
+
+  def sms_terms_of_use
+  end
+
+  def chowpartner_faqs
+  end
 end
