@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get '/privacy', to: 'footer#privacy'
   get '/faqs', to: 'footer#faqs'
   get '/contact_us', to: 'footer#contact_us'
+  get '/terms_of_use', to: 'footer#terms_of_use'
   get '/profiles/verify', to: 'profiles#verify'
 
   delete '/clear_notifications', to: 'notifications#destroy_all', as: :clear_notifications
