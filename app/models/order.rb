@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   acts_as_paranoid without_default_scope: true
   belongs_to :cart
   delegate :user, to: :cart
-  has_many :menu_clusters
+  has_many :menu_clusters, dependent: :destroy
 
   validates_inclusion_of :status, in: OrderStatuses::ALL
 

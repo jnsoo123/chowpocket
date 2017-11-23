@@ -15,7 +15,10 @@ table.table.table-hover
         td= order.id
         td
           - order.cart.line_items.each do |item|
-            = "#{item.menu.name} x#{item.quantity} - P#{item.menu.price * item.quantity}"
+            - if item.menu.nil?
+              = '[menu removed]'
+            - else
+              = "#{item.menu.name} x#{item.quantity} - P#{item.menu.price * item.quantity}"
             br
         td= order.total_price
         td
