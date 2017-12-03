@@ -6,7 +6,8 @@ class Page extends Component {
     super()
     this.state = {
       items: props.cart,
-      totalPrice: props.totalPrice
+      totalPrice: props.totalPrice,
+      modeOfPayment: props.modeOfPayment ? 'bank' : 'cod'
     }
   }
 
@@ -114,14 +115,31 @@ class Page extends Component {
     return 'https://api-uat.unionbankph.com/partners/sb/convergent/v1/oauth2/authorize?' + urlParams
   }
 
+  switchPayment(type, e){
+    e.preventDefault()
+    this.setState({
+      modeOfPayment: type 
+    }, function(){
+      if(type == 'bank'){
+        window.location.href = this.unionbankUrl()
+      }
+    }.bind(this)) 
+  }
+
   render(){
     return(<div>
       <h2>
         Checkout Page
       </h2>
       <hr />
-      <p className='text-danger'><small>* Mode of payment: Cash on Delivery</small></p>
-      <a href={this.unionbankUrl()}>Pay with Unionbank</a>
+      <div className='btn-group' data-toggle='buttons'>
+        <label className={'btn btn-'+(this.state.modeOfPayment == 'cod' ? 'success' : 'default')} onClick={this.switchPayment.bind(this, 'cod')}>
+          <input type='checkbox' checked='' /> Cash on Delivery 
+        </label>
+        <label className={'btn btn-'+(this.state.modeOfPayment != 'cod' ? 'success' : 'default')} onClick={this.switchPayment.bind(this, 'bank')}>
+          <input type='checkbox' checked='' /> Pay with unionbank 
+        </label>
+      </div>
       {this.renderCheckoutInfo()}
     </div>) 
   }
@@ -135,6 +153,7 @@ const main = {
         <Page
           cart={rootElem.data('cart')}
           totalPrice={rootElem.data('total-price')}
+          modeOfPayment={rootElem.data('mode-of-payment').length > 0}
         />, rootElem[0]
       )
     }

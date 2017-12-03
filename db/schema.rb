@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123114201) do
+ActiveRecord::Schema.define(version: 20171203005734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 20171123114201) do
     t.string "floor"
     t.string "company_name"
     t.string "otp_secret_key"
+    t.text "unionbank_code"
     t.index ["building_id"], name: "index_users_on_building_id"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
