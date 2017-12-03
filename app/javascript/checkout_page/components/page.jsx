@@ -103,7 +103,7 @@ class Page extends Component {
       'client_id': '20d8bb49-59e1-406f-8b34-3d53d1cbe66b',
       'response_type': 'code',
       'scope': 'payments',
-      'redirect_uri': 'localhost:3000/checkouts',
+      'redirect_uri': 'https://www.chowpocket.com/checkouts',
       'state': 'authorization_complete'
     }
 
