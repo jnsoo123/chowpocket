@@ -1,4 +1,7 @@
 class Menu < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
-  has_many :menu_clusters
+  acts_as_paranoid
+
+  has_many :menu_clusters, dependent: :destroy
+  has_many :clusters, dependent: :destroy
 end

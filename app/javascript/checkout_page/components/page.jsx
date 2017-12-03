@@ -98,6 +98,22 @@ class Page extends Component {
     }
   }
 
+  unionbankUrl(){
+    let clientObject = {
+      'client_id': '20d8bb49-59e1-406f-8b34-3d53d1cbe66b',
+      'response_type': 'code',
+      'scope': 'payments',
+      'redirect_uri': 'localhost:3000/checkouts',
+      'state': 'authorization_complete'
+    }
+
+    var urlParams = Object.keys(clientObject).map(function(key){
+      return encodeURIComponent(key) + '=' + encodeURIComponent(clientObject[key])
+    }).join('&')
+
+    return 'https://api-uat.unionbankph.com/partners/sb/convergent/v1/oauth2/authorize?' + urlParams
+  }
+
   render(){
     return(<div>
       <h2>
@@ -105,6 +121,7 @@ class Page extends Component {
       </h2>
       <hr />
       <p className='text-danger'><small>* Mode of payment: Cash on Delivery</small></p>
+      <a href={this.unionbankUrl()}>Pay with Unionbank</a>
       {this.renderCheckoutInfo()}
     </div>) 
   }

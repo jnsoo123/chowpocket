@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171014053132) do
+ActiveRecord::Schema.define(version: 20171123114201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20171014053132) do
     t.datetime "updated_at", null: false
     t.date "date_created"
     t.bigint "menu_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_clusters_on_deleted_at"
     t.index ["menu_id"], name: "index_clusters_on_menu_id"
   end
 
@@ -80,7 +82,9 @@ ActiveRecord::Schema.define(version: 20171014053132) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["cluster_id"], name: "index_menu_clusters_on_cluster_id"
+    t.index ["deleted_at"], name: "index_menu_clusters_on_deleted_at"
     t.index ["menu_id"], name: "index_menu_clusters_on_menu_id"
     t.index ["order_id"], name: "index_menu_clusters_on_order_id"
   end
@@ -93,6 +97,8 @@ ActiveRecord::Schema.define(version: 20171014053132) do
     t.string "avatar"
     t.string "description"
     t.string "schedule"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_menus_on_deleted_at"
   end
 
   create_table "notifications", force: :cascade do |t|

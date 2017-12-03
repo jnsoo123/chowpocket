@@ -1,4 +1,5 @@
 class MenuCluster < ApplicationRecord
+  acts_as_paranoid
   belongs_to :menu
   belongs_to :order
   belongs_to :cluster
@@ -13,6 +14,10 @@ class MenuCluster < ApplicationRecord
 
   after_update do
     update_cluster_discount
+  end
+
+  before_destroy do
+    self.order.delete
   end
 
   def discounted_price

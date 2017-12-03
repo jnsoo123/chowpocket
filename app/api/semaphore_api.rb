@@ -49,7 +49,7 @@ class SemaphoreApi
               "#{@object.quantity} X #{@object.menu.name}\n" +
               "@ #{@object.building}\n" +
               "has been confirmed!\n" +
-              "Delivery Window: 9AM-11AM"
+              "Delivery Window: 10AM - 12NN"
           
     message
   end
