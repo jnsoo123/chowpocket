@@ -31,6 +31,6 @@ module Chowpocket
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     
-    config.assets.version = '10.1'
+    config.assets.version = '1.0'
   end
 end
