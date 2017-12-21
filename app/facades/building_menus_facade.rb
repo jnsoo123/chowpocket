@@ -12,6 +12,7 @@ class BuildingMenusFacade
     menus = []
 
     Menu.all.each do |menu|
+      return false if menu.schedule.blank?
       if @date.send("#{menu.schedule.downcase}?")
         hash = {
           id:             menu.id,

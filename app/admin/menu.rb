@@ -30,7 +30,7 @@ ActiveAdmin.register Menu do
       f.input :name
       f.input :description
       f.input :price
-      f.input :schedule, as: :select, collection: ScheduleDays::ALL, include_blank: false
+      f.input :schedule, as: :select, collection: ScheduleDays::ALL
       f.input :avatar, as: :file
     end
     f.actions

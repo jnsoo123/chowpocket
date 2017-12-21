@@ -167,8 +167,12 @@ class Page extends Component{
         ) 
       }, this)
     } else {
-      views.push(<div className='well' style={{padding: '200px 0'}}>
-        <h3 className='text-center'>There is no food for today!</h3> 
+      views.push(<div className='well' style={{padding: '100px 50px'}}>
+        <h3 className='text-center'>Thank you for being an early Chowpocketeer!
+          Your support and feedback has helped us understand how we can better create that epic lunch experience!
+          We are closed for the Holidays starting <b className='text-danger'>December 23</b> and will be back on 
+          <b className='text-success'> January 8</b> with more chefs, new items, and an even better way of ordering. 
+          So Stay Tuned, and Happy Holidays!</h3> 
       </div>)
     }
 
