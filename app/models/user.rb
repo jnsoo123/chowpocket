@@ -53,6 +53,7 @@ class User < ApplicationRecord
 
   private
   def send_welcome_email
+    return false
     SendWelcomeEmailJob.perform_now(self)
   end
 

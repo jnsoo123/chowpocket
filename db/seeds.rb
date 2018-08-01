@@ -40,7 +40,7 @@ if Rails.env.development?
   5.times do |iteration|
     iterator = (iteration % 5) + 1  
     File.open(Rails.root.join("app/assets/images/food#{iterator}.jpg")) do |file|
-      Menu.create do |menu|
+      Menu.create! do |menu|
         menu.name         = "Silog ##{iteration + 1}"
         menu.price        = 52 * (iteration + 1) 
         menu.avatar       = file

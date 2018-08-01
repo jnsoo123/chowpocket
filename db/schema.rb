@@ -117,7 +117,6 @@ ActiveRecord::Schema.define(version: 20171221112742) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.string "status", default: "pending"
-    t.string "mode_of_payment"
     t.index ["cart_id"], name: "index_orders_on_cart_id"
     t.index ["deleted_at"], name: "index_orders_on_deleted_at"
   end
