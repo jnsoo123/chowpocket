@@ -1,5 +1,7 @@
 $(document).on('turbolinks:load', function(){
   if( $('form.edit-user').length != 0 ) {
+    // removing number verificaiton
+    return false
     setUserVerification()
   }
 })

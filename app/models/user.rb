@@ -11,7 +11,8 @@ class User < ApplicationRecord
   has_many :orders, through: :carts
   has_many :notifications, dependent: :destroy
 
-  validate :check_phone_number
+  # removed since semaphore api is not getting paid anymore
+  # validate :check_phone_number
 
   after_create :send_welcome_email
 
@@ -53,13 +54,14 @@ class User < ApplicationRecord
 
   private
   def send_welcome_email
+    # Turn this off 
     return false
     SendWelcomeEmailJob.perform_now(self)
   end
 
-  def check_phone_number
-    if self.phone_number.present?
-      errors.add(:phone_number, 'must be valid. Eg. 09051234567') if self.phone_number.length != 11
-    end
-  end
+#  def check_phone_number
+#    if self.phone_number.present?
+#      errors.add(:phone_number, 'must be valid. Eg. 09051234567') if self.phone_number.length != 11
+#    end
+#  end
 end
