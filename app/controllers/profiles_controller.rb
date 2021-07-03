@@ -35,6 +35,9 @@ class ProfilesController < ApplicationController
   end
   
   def verify_number
+    # Removing number verification
+    return true
+
     verification_code = params[:verification_code]
     @user.authenticate_otp(verification_code, drift: 60)
   end
